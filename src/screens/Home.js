@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/coffee-cup-splash.png')}
+        source={require('../../assets/sport-development-splash.png')}
         style={styles.image}
       />
       <Text style={styles.title}>Bienvenid@</Text>

@@ -16,15 +16,15 @@ const styles = StyleSheet.create({
 
     button: {
         borderWidth: 1,
-        borderColor: "#AF8260",
+        borderColor: "#000000",
         width: 200,
         borderRadius: 10,
-        backgroundColor: "#AF8260",
+        backgroundColor: "#000000",
         padding: 10,
         marginVertical: 5
     },
     buttonText: {
         textAlign: 'center',
-        color: "#FFF", fontWeight: '800', textTransform: 'uppercase'
+        color: "#FFFFFF", fontWeight: '800', textTransform: 'uppercase'
     }
 });

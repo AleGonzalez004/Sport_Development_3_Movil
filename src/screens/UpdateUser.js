@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginVertical: 10,
-    color: '#5C3D2E', // Brown color for the subtitle
+    color: '#4D4D4D', // Brown color for the subtitle
   },
   button: {
-    backgroundColor: '#AF8260', // Brown color for the button
+    backgroundColor: '#000000', // Brown color for the button
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,

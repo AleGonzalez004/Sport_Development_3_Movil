@@ -88,7 +88,7 @@ export default function Sesion({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../img/coffee-cup.png')}
+        source={require('../img/sport-development-icon.png')}
         style={styles.image}
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
