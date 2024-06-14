@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "cliente-app-coffeeshop",
-    "slug": "cliente-app-coffeeshop",
+    "name": "cliente-app-sport-development",
+    "slug": "cliente-app-sport-development",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/coffeeshop-splash.png",
+      "image": "./assets/sport-development-splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#EAD8C0"
+      "backgroundColor": "#FFFFFF"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/sport-development-splash.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/sport-development-splash.png"
     }
   }
 }
