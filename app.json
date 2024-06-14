@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "cliente-app-coffeeshop",
-    "slug": "cliente-app-coffeeshop",
+    "name": "cliente-app-sport_development",
+    "slug": "cliente-app-sport_development",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/coffee-cup.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/coffeeshop-splash.png",
+      "image": "./assets/sport_development-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#EAD8C0"
     },
