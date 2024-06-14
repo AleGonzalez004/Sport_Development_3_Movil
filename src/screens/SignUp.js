@@ -223,7 +223,7 @@ return (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EAD8C0',
+        backgroundColor: '#EEEEEE',
         paddingTop: Constants.statusBarHeight + 5, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
       },
     scrollViewStyle: {
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     contenedorFecha: {
-        backgroundColor: '#A79277',
+        backgroundColor: '#EEEEEE',
         color: "#fff", fontWeight: '800',
         width: 250,
         borderRadius: 5,
