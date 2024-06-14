@@ -1,11 +1,5 @@
-// Importaciones necesarias
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList, Alert } from 'react-native';
-
-import { useFocusEffect } from '@react-navigation/native';
-// Importa la función useFocusEffect de @react-navigation/native, 
-// que permite ejecutar un efecto cada vez que la pantalla se enfoca.
-
+import { Text, TouchableOpacity, View, StyleSheet, FlatList, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import * as Constantes from '../utils/constantes';
 import Buttons from '../components/Buttons/Button';
@@ -13,43 +7,33 @@ import CarritoCard from '../components/CarritoCard/CarritoCard';
 import ModalEditarCantidad from '../components/Modales/ModalEditarCantidad';
 
 const Carrito = ({ navigation }) => {
-  // Estado para almacenar los detalles del carrito
   const [dataDetalleCarrito, setDataDetalleCarrito] = useState([]);
-  // Estado para el id del detalle seleccionado para modificar
-  const [idDetalle, setIdDetalle] = useState(null);
-  // Estado para la cantidad del producto seleccionado en el carrito
-  const [cantidadProductoCarrito, setCantidadProductoCarrito] = useState(0);
-  // Estado para controlar la visibilidad del modal de edición de cantidad
-  const [modalVisible, setModalVisible] = useState(false);
-  // IP del servidor
+  const [idDetalle, setIdDetalle]=useState(null)
+  const [cantidadProductoCarrito, setCantidadProductoCarrito]=useState(0)
+  const [modalVisible, setModalVisible] = useState(false)
   const ip = Constantes.IP;
 
-  // Función para navegar hacia atrás a la pantalla de productos
   const backProducts = () => {
     navigation.navigate('Productos');
   };
 
-  // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
-  useFocusEffect(
-    // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
-    React.useCallback(() => {
-      getDetalleCarrito(); // Llama a la función getDetalleCarrito.
-    }, [])
-  );
+  useEffect(() => {
+    getDetalleCarrito();
+  }, []);
 
-  // Función para obtener los detalles del carrito desde el servidor
   const getDetalleCarrito = async () => {
     try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=readDetail`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=readDetail`, {
         method: 'GET',
       });
+
       const data = await response.json();
-      console.log(data, "Data desde getDetalleCarrito")
+      console.log("data al obtener detalle carrito  \n", data);
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        console.log("No hay detalles del carrito disponibles")
-        //Alert.alert('ADVERTENCIA', data.error);
+        console.log(data);
+        Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
@@ -57,18 +41,19 @@ const Carrito = ({ navigation }) => {
     }
   };
 
-  // Función para finalizar el pedido
   const finalizarPedido = async () => {
     try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=finishOrder`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=finishOrder`, {
         method: 'GET',
       });
+
       const data = await response.json();
+      //console.log("data al obtener detalle carrito  \n", data);
       if (data.status) {
-        Alert.alert("Se finalizó la compra correctamente")
-        setDataDetalleCarrito([]); // Limpia la lista de detalles del carrito
-        navigation.navigate('TabNavigator', { screen: 'Productos' });
+        Alert.alert("Se finalizo la compra correctamente")
+        navigation.navigate('Productos');
       } else {
+        //console.log(data);
         Alert.alert('Error', data.error);
       }
     } catch (error) {
@@ -76,47 +61,41 @@ const Carrito = ({ navigation }) => {
     }
   };
 
-  // Función para manejar la modificación de un detalle del carrito
   const handleEditarDetalle = (idDetalle, cantidadDetalle) => {
-    setModalVisible(true);
-    setIdDetalle(idDetalle);
-    setCantidadProductoCarrito(cantidadDetalle);
-  };
-
-  // Función para renderizar cada elemento del carrito
+    console.log("Valor que viene de carrito CarritoCard", cantidadDetalle)
+    setModalVisible(true)
+    setIdDetalle(idDetalle)
+    setCantidadProductoCarrito(cantidadDetalle)
+  }
+  
   const renderItem = ({ item }) => (
-    <CarritoCard
-      item={item}
-      cargarCategorias={getDetalleCarrito}
-      modalVisible={modalVisible}
-      setModalVisible={setModalVisible}
-      setCantidadProductoCarrito={setCantidadProductoCarrito}
-      cantidadProductoCarrito={cantidadProductoCarrito}
-      idDetalle={idDetalle}
-      setIdDetalle={setIdDetalle}
-      accionBotonDetalle={handleEditarDetalle}
-      getDetalleCarrito={getDetalleCarrito}
-      updateDataDetalleCarrito={setDataDetalleCarrito} // Nueva prop para actualizar la lista
+    <CarritoCard item={item} 
+    cargarCategorias={getDetalleCarrito} 
+    modalVisible={modalVisible}
+    setModalVisible={setModalVisible}
+    setCantidadProductoCarrito={setCantidadProductoCarrito}
+    cantidadProductoCarrito={cantidadProductoCarrito}
+    idDetalle={idDetalle}
+    setIdDetalle={setIdDetalle}
+    accionBotonDetalle={handleEditarDetalle}
+    getDetalleCarrito={getDetalleCarrito}
     />
   );
 
   return (
     <View style={styles.container}>
-      {/* Componente de modal para editar cantidad */}
+      
       <ModalEditarCantidad
-        setModalVisible={setModalVisible}
-        modalVisible={modalVisible}
-        idDetalle={idDetalle}
-        setIdDetalle={setIdDetalle}
-        setCantidadProductoCarrito={setCantidadProductoCarrito}
-        cantidadProductoCarrito={cantidadProductoCarrito}
-        getDetalleCarrito={getDetalleCarrito}
+      setModalVisible={setModalVisible}
+      modalVisible={modalVisible}
+      idDetalle={idDetalle}
+      setIdDetalle={setIdDetalle}
+      setCantidadProductoCarrito={setCantidadProductoCarrito}
+      cantidadProductoCarrito={cantidadProductoCarrito}
+      getDetalleCarrito={getDetalleCarrito}
       />
 
-      {/* Título de la pantalla */}
-      <Text style={styles.title}>Carrito de Compras</Text>
-
-      {/* Lista de detalles del carrito */}
+    <Text style={styles.title}>Carrito de Compras</Text>
       {dataDetalleCarrito.length > 0 ? (
         <FlatList
           data={dataDetalleCarrito}
@@ -124,29 +103,28 @@ const Carrito = ({ navigation }) => {
           keyExtractor={(item) => item.id_detalle.toString()}
         />
       ) : (
-        <Text style={styles.titleDetalle}>No hay detalles del carrito disponibles.</Text>
+        <Text>No hay detalles del carrito disponibles.</Text>
       )}
-
-      {/* Botones de finalizar pedido y regresar a productos */}
       <View style={styles.containerButtons}>
-        {dataDetalleCarrito.length > 0 && (
-          <Buttons
-            textoBoton='Finalizar Pedido'
-            accionBoton={finalizarPedido}
-          />
-        )}
+        
+      {
+      //carga condicional del boton de finalizar pedido
+      dataDetalleCarrito.length > 0 &&         <Buttons
+          textoBoton='Finalizar Pedido'
+          accionBoton={finalizarPedido} />
+      }
+
         <Buttons
           textoBoton='Regresar a productos'
-          accionBoton={backProducts}
-        />
+          accionBoton={backProducts} />
       </View>
+
     </View>
   );
 };
 
 export default Carrito;
 
-// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -159,14 +137,58 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E',
+    color: '#5C3D2E', // Brown color for the title
   },
-  titleDetalle: {
-    fontSize: 20,
-    fontWeight: '600',
+  itemContainer: {
+    padding: 16,
+    marginVertical: 8,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  itemText: {
+    fontSize: 16,
+    marginBottom: 4,
+    color: '#333',
+  },
+  modifyButton: {
+    borderWidth: 1,
+    borderColor: '#8F6B58',
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: '#8F6B58', // Light brown color for modify button
+    marginVertical: 4,
+  },
+  deleteButton: {
+    borderWidth: 1,
+    borderColor: '#D2691E',
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: '#D2691E', // Darker orange color for delete button
+    marginVertical: 4,
+  },
+  buttonText: {
     textAlign: 'center',
-    marginVertical: 16,
-    color: '#5C3D2E',
+    color: '#fff',
+    fontSize: 16,
+  },
+  finalButton: {
+    backgroundColor: '#A0522D', // Sienna color for final action buttons
+    padding: 16,
+    borderRadius: 8,
+    marginVertical: 8,
+  },
+  finalButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   containerButtons: {
     justifyContent: 'center',

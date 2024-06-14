@@ -18,7 +18,7 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
       formData.append('idDetalle', idDetalle);
       formData.append('cantidadProducto', cantidadProductoCarrito);
 
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=updateDetail`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=updateDetail`, {
         method: 'POST',
         body: formData
       });

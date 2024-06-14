@@ -10,70 +10,33 @@ const CarritoCard = ({item, cargarCategorias,
   setCantidadProductoCarrito, 
   accionBotonDetalle,
   idDetalle,
-  setIdDetalle, getDetalleCarrito, updateDataDetalleCarrito}) => {
+  setIdDetalle, getDetalleCarrito}) => {
 
     const ip = Constantes.IP;
     //asignar el valor a cantidadproducto carrito que viene 
   
-/*
+
     const handleDeleteDetalleCarrito = async (idDetalle) => {
-      try {
-        const formData = new FormData();
-        formData.append('idDetalle', idDetalle);
-        const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=deleteDetail`, {
-          method: 'POST',
-          body: formData
+        // Lógica para agregar al carrito con la cantidad ingresada
+        try {
+          const formData = new FormData();
+          formData.append('idDetalle', idDetalle);
+          const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=deleteDetail`, {
+            method: 'POST',
+            body: formData
         });
         const data = await response.json();
         if (data.status) {
-          Alert.alert('Datos eliminados correctamente del carrito');
-          // Llamar a la función de actualización para actualizar la lista
-          updateDataDetalleCarrito(prevData => prevData.filter(item => item.id_detalle !== idDetalle));
+            Alert.alert('Datos elimnados correctamente del carrito');
+            cargarCategorias();
         } else {
-          Alert.alert('Error al eliminar del carrito', data.error);
+            Alert.alert('Error al agregar al carrito', data.error);
         }
-      } catch (error) {
-        Alert.alert("Error al eliminar del carrito")
-      }
-    };*/
+        } catch (error) {
+        Alert.alert("Error en agregar al carrito")
+        }
+      };
     
-    const handleDeleteDetalleCarrito = async (idDetalle) => {
-      try {
-        // Mostrar un mensaje de confirmación antes de eliminar
-        Alert.alert(
-          'Confirmación',
-          '¿Estás seguro de que deseas eliminar este elemento del carrito?',
-          [
-            {
-              text: 'Cancelar',
-              style: 'cancel'
-            },
-            {
-              text: 'Eliminar',
-              onPress: async () => {
-                const formData = new FormData();
-                formData.append('idDetalle', idDetalle);
-                const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=deleteDetail`, {
-                  method: 'POST',
-                  body: formData
-                });
-                const data = await response.json();
-                if (data.status) {
-                  Alert.alert('Datos eliminados correctamente del carrito');
-                  // Llamar a la función de actualización para actualizar la lista
-                  updateDataDetalleCarrito(prevData => prevData.filter(item => item.id_detalle !== idDetalle));
-                } else {
-                  Alert.alert('Error al eliminar del carrito', data.error);
-                }
-              }
-            }
-          ]
-        );
-      } catch (error) {
-        Alert.alert("Error al eliminar del carrito")
-      }
-    };
-     
 
   return (
     <View style={styles.itemContainer}>

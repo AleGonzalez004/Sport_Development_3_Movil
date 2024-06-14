@@ -20,28 +20,11 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState('')
   const [nombreProductoModal, setNombreProductoModal] = useState('')
 
-  /*
-  Ahorita no se ocupa este codigo
   const volverLogin = async () => {
-    try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
-        method: 'GET'
-      });
 
-      const data = await response.json();
+    navigation.navigate('Sesion');
 
-      if (data.status) {
-        Alert.alert("Sesion Finalizada")
-      } else {
-        console.log(data);
-        // Alert the user about the error
-        Alert.alert('Error', data.error);
-      }
-    } catch (error) {
-      console.error(error, "Error desde Catch");
-      Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
-    }
-  }*/
+  };
 
   const volverInicio = async () => {
 
@@ -65,7 +48,7 @@ export default function Productos({ navigation }) {
       const formData = new FormData();
       formData.append('idCategoria', idCategoriaSelect);
       //utilizar la direccion IP del servidor y no localhost
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/producto.php?action=readProductosCategoria`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/producto.php?action=readProductosCategoria`, {
         method: 'POST',
         body: formData
       });
@@ -90,7 +73,7 @@ export default function Productos({ navigation }) {
     try {
 
       //utilizar la direccion IP del servidor y no localhost
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/categoria.php?action=readAll`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/categoria.php?action=readAll`, {
         method: 'GET',
       });
 
@@ -126,6 +109,10 @@ export default function Productos({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Catalogo de Productos</Text>
+      <Buttons
+        textoBoton='Cerrar Sesión'
+        accionBoton={volverLogin}
+      />
 
       <Buttons
         textoBoton='Volver a Home'
