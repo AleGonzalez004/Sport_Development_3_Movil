@@ -23,7 +23,7 @@ const Carrito = ({ navigation }) => {
 
   const getDetalleCarrito = async () => {
     try {
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=readDetail`, {
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=readDetail`, {
         method: 'GET',
       });
 
@@ -43,7 +43,7 @@ const Carrito = ({ navigation }) => {
 
   const finalizarPedido = async () => {
     try {
-      const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=finishOrder`, {
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=finishOrder`, {
         method: 'GET',
       });
 

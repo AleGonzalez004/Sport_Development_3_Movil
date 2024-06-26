@@ -113,16 +113,16 @@ export default function Sesion({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#245C9D',
     alignItems: 'center',
     justifyContent: 'center',
   },
   texto: {
-    color: '#000000', fontWeight: '900',
+    color: '#FFF', fontWeight: '900',
     fontSize: 20
   },
   textRegistrar: {
-    color: '#000000', fontWeight: '700',
+    color: '#FFF', fontWeight: '700',
     fontSize: 18,
     marginTop: 10
   },
