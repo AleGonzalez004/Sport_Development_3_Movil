@@ -85,7 +85,7 @@ export default function Home({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#EAD8C0',
+      backgroundColor: '#245C9D',
       alignItems: 'center',
       justifyContent: 'center'
     },
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'center',
       marginVertical: 5,
-      color: '#5C3D2E', // Brown color for the title
+      color: '#FFF', // Brown color for the title
     },
     subtitle: {
       fontSize: 20,
       fontWeight: '600',
       textAlign: 'center',
       marginVertical: 5,
-      color: '#5C3D2E', // Brown color for the title
+      color: '#FFF', // Brown color for the title
     },
   });

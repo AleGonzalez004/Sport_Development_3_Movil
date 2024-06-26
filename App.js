@@ -17,7 +17,7 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Sesion'
+        initialRouteName='Home'
 
         screenOptions={{
           headerShown: false
