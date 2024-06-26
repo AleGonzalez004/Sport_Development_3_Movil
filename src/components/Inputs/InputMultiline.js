@@ -10,7 +10,7 @@ export default function InputMultiline({placeHolder, setValor, contra, valor}) {
     placeholder={placeHolder}
     value={valor}
     onChangeText={setValor}
-    placeholderTextColor={'#FFF'}
+    placeholderTextColor={'#245C9D'}
     secureTextEntry={contra} 
     multiline={true}
     numberOfLines={4}
@@ -21,8 +21,8 @@ export default function InputMultiline({placeHolder, setValor, contra, valor}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'#A79277',
-    color: "#fff", fontWeight:'800',
+    backgroundColor:'#FFF',
+    color: "#245C9D", fontWeight:'800',
     width:250,
     borderRadius:5,
     padding: 5,

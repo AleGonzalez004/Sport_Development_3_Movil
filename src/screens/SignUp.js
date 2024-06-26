@@ -220,7 +220,7 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#245C9D',
         paddingTop: 20
 
     },
@@ -229,26 +229,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     texto: {
-        color: '#322C2B', fontWeight: '900',
+        color: '#FFF', fontWeight: '900',
         fontSize: 20
     },
     textRegistrar: {
-        color: '#322C2B', fontWeight: '700',
+        color: '#FFF', fontWeight: '700',
         fontSize: 18
     },
 
     fecha: {
         fontWeight: '600',
-        color: '#FFF'
+        color: '#245C9D'
     },
     fechaSeleccionar: {
         fontWeight: '700',
-        color: '#322C2B', 
+        color: '#245C9D', 
         textDecorationLine:'underline'
     },
     contenedorFecha: {
         backgroundColor: '#FFFFFF',
-        color: "#fff", fontWeight: '800',
+        color: "#245C9D", fontWeight: '800',
         width: 250,
         borderRadius: 5,
         padding: 5,
