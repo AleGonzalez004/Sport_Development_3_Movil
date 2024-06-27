@@ -14,13 +14,10 @@ export default function ProductoCard({ip, imagenProducto, idProducto, nombreProd
     return(
 
         <View style={styles.card}>
-        <View style={styles.imageContainer}>
          <Image
-           source={{uri: `${ip}/Sport_Development_3/api/images/productos/${imagenProducto}`}}
+           source={require('../../img/img1.png')}
            style={styles.imagen}
-           resizeMode="contain" // Ajustar la imagen al contenedor
-         />
-       </View>
+           resizeMode="contain"/>
        <Text style={styles.text}>{idProducto}</Text>
        <Text style={styles.textTitle}>{nombreProducto}</Text>
        <Text style={styles.text}>{descripcionProducto}</Text>
@@ -99,8 +96,8 @@ const styles = StyleSheet.create({
         fontWeight:'600'
       },
       image: {
-        width: '65%',
-        height: 150,
+        width: 15,
+        height: 15,
         borderRadius: 8,
         marginBottom: 12,
       }, 

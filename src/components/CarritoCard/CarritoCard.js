@@ -21,7 +21,7 @@ const CarritoCard = ({item, cargarCategorias,
         try {
           const formData = new FormData();
           formData.append('idDetalle', idDetalle);
-          const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=deleteDetail`, {
+          const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=deleteDetail`, {
             method: 'POST',
             body: formData
         });
