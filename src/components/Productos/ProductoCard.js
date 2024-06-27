@@ -16,8 +16,8 @@ export default function ProductoCard({ip, imagenProducto, idProducto, nombreProd
         <View style={styles.card}>
         <View style={styles.imageContainer}>
          <Image
-           source={{uri: `${ip}/coffeeshop/api/images/productos/${imagenProducto}`}}
-           style={styles.image}
+           source={{uri: `${ip}/Sport_Development_3/api/images/productos/${imagenProducto}`}}
+           style={styles.imagen}
            resizeMode="contain" // Ajustar la imagen al contenedor
          />
        </View>

@@ -109,7 +109,7 @@ export default function Productos({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Catalogo de Productos</Text>
-      <Buttons
+      <Buttons 
         textoBoton='Cerrar Sesión'
         accionBoton={volverLogin}
       />
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#245C9D',
+    backgroundColor: '#FFF',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
