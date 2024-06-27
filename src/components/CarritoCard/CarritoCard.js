@@ -68,7 +68,7 @@ export default CarritoCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#245C9D',
     paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 16,
   },
@@ -97,20 +97,20 @@ const styles = StyleSheet.create({
   },
   modifyButton: {
     borderWidth: 1,
-    borderColor: '#8F6B58',
+    borderColor: '#245C9D',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#8F6B58', // Light brown color for modify button
+    backgroundColor: '#245C9D', // Light brown color for modify button
     marginVertical: 4,
   },
   deleteButton: {
     borderWidth: 1,
-    borderColor: '#D2691E',
+    borderColor: '#245C9D',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#D2691E', // Darker orange color for delete button
+    backgroundColor: '#245C9D', // Darker orange color for delete button
     marginVertical: 4,
   },
   buttonText: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   finalButton: {
-    backgroundColor: '#A0522D', // Sienna color for final action buttons
+    backgroundColor: '#245C9D', // Sienna color for final action buttons
     padding: 16,
     borderRadius: 8,
     marginVertical: 8,

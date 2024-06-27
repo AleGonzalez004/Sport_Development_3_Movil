@@ -139,7 +139,7 @@ export default function Productos({ navigation }) {
             onValueChange={(value) => getProductos(value)}
             placeholder={{ label: 'Selecciona una categoría...', value: null }}
             items={dataCategorias.map(categoria => ({
-              label: categoria.nombre_categoria,
+              label: categoria.nombre,
               value: categoria.id_categoria,
             }))}
           />
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFF',
     borderRadius: 8,
     padding: 16,
     marginVertical: 1,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#AF8260',
+    backgroundColor: '#245C9D',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -260,14 +260,14 @@ const styles = StyleSheet.create({
   cartButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#AF8260',
+    backgroundColor: '#245C9D',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginVertical: 10,
   },
   cartButtonText: {
-    color: '#245C9D',
+    color: '#FFF',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 10,

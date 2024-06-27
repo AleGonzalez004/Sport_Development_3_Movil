@@ -128,7 +128,7 @@ export default Carrito;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#FFF',
     paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 16,
   },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E', // Brown color for the title
+    color: '#245C9D', // Brown color for the title
   },
   itemContainer: {
     padding: 16,
