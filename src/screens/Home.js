@@ -63,17 +63,16 @@ export default function Home({ navigation }) {
         {nombre ? nombre : 'No hay Nombre para mostrar'}
       </Text>
       <Buttons
-        textoBoton='Cerrar Sesión'
-        accionBoton={handleLogout}
-      />
-
-      <Buttons
         textoBoton='Ver Productos'
         accionBoton={irActualizar}
       />
       <Buttons
         textoBoton='Editar Usuario'
         accionBoton={EditUser}
+      />
+      <Buttons
+        textoBoton='Cerrar Sesión'
+        accionBoton={handleLogout}
       />
     </View>
   );

@@ -26,7 +26,7 @@ const TabNavigator = () => {
               if (route.name === 'Home') {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'Productos') {
-                iconName = focused ? 'cafe' : 'cafe-outline';
+                iconName = focused ? 'football-outline' : 'football-outline';
               } else if (route.name === 'Carrito') {
                 iconName = focused ? 'cart' : 'cart-outline';
               }
