@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
-import { useEffect, useState } from 'react';
 import Input from '../components/Inputs/Input'
+import InputEmail from '../components/Inputs/InputEmail'
 import Buttons from '../components/Buttons/Button';
 import * as Constantes from '../utils/constantes'
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Sesion({ navigation }) {
   const ip = Constantes.IP;
@@ -12,17 +14,25 @@ export default function Sesion({ navigation }) {
   const [usuario, setUsuario] = useState('')
   const [contrasenia, setContrasenia] = useState('')
 
+  // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
+  useFocusEffect(
+    // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
+    React.useCallback(() => {
+      validarSesion(); // Llama a la función getDetalleCarrito.
+    }, [])
+  );
+
   const validarSesion = async () => {
     try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=getUser`, {
         method: 'GET'
       });
   
       const data = await response.json();
   
       if (data.status === 1) {
-        cerrarSesion();
-        console.log("Se eliminó la sesión")
+        navigation.navigate('TabNavigator');
+        console.log("Se ingresa con la sesión activa")
       } else {
         console.log("No hay sesión activa")
         return
@@ -35,7 +45,7 @@ export default function Sesion({ navigation }) {
 
   const cerrarSesion = async () => {
     try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
         method: 'GET'
       });
 
@@ -53,12 +63,17 @@ export default function Sesion({ navigation }) {
   }
 
   const handlerLogin = async () => {
+    if (!usuario || !contrasenia) {
+      Alert.alert('Error', 'Por favor ingrese su correo y contraseña');
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('correo', usuario);
       formData.append('clave', contrasenia);
 
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logIn`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
         body: formData
       });
@@ -88,11 +103,11 @@ export default function Sesion({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../img/sport-development-icon.png')}
+        source={require('../img/coffee-cup.png')}
         style={styles.image}
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
-      <Input
+      <InputEmail
         placeHolder='Usuario'
         setValor={usuario}
         setTextChange={setUsuario}
@@ -113,16 +128,16 @@ export default function Sesion({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#245C9D',
+    backgroundColor: '#EAD8C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
   texto: {
-    color: '#FFF', fontWeight: '900',
+    color: '#322C2B', fontWeight: '900',
     fontSize: 20
   },
   textRegistrar: {
-    color: '#FFF', fontWeight: '700',
+    color: '#322C2B', fontWeight: '700',
     fontSize: 18,
     marginTop: 10
   },

@@ -10,33 +10,70 @@ const CarritoCard = ({item, cargarCategorias,
   setCantidadProductoCarrito, 
   accionBotonDetalle,
   idDetalle,
-  setIdDetalle, getDetalleCarrito}) => {
+  setIdDetalle, getDetalleCarrito, updateDataDetalleCarrito}) => {
 
     const ip = Constantes.IP;
     //asignar el valor a cantidadproducto carrito que viene 
   
-
+/*
     const handleDeleteDetalleCarrito = async (idDetalle) => {
-        // Lógica para agregar al carrito con la cantidad ingresada
-        try {
-          const formData = new FormData();
-          formData.append('idDetalle', idDetalle);
-          const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=deleteDetail`, {
-            method: 'POST',
-            body: formData
+      try {
+        const formData = new FormData();
+        formData.append('idDetalle', idDetalle);
+        const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=deleteDetail`, {
+          method: 'POST',
+          body: formData
         });
         const data = await response.json();
         if (data.status) {
-            Alert.alert('Datos elimnados correctamente del carrito');
-            cargarCategorias();
+          Alert.alert('Datos eliminados correctamente del carrito');
+          // Llamar a la función de actualización para actualizar la lista
+          updateDataDetalleCarrito(prevData => prevData.filter(item => item.id_detalle !== idDetalle));
         } else {
-            Alert.alert('Error al agregar al carrito', data.error);
+          Alert.alert('Error al eliminar del carrito', data.error);
         }
-        } catch (error) {
-        Alert.alert("Error en agregar al carrito")
-        }
-      };
+      } catch (error) {
+        Alert.alert("Error al eliminar del carrito")
+      }
+    };*/
     
+    const handleDeleteDetalleCarrito = async (idDetalle) => {
+      try {
+        // Mostrar un mensaje de confirmación antes de eliminar
+        Alert.alert(
+          'Confirmación',
+          '¿Estás seguro de que deseas eliminar este elemento del carrito?',
+          [
+            {
+              text: 'Cancelar',
+              style: 'cancel'
+            },
+            {
+              text: 'Eliminar',
+              onPress: async () => {
+                const formData = new FormData();
+                formData.append('idDetalle', idDetalle);
+                const response = await fetch(`${ip}/coffeeshop/api/services/public/pedido.php?action=deleteDetail`, {
+                  method: 'POST',
+                  body: formData
+                });
+                const data = await response.json();
+                if (data.status) {
+                  Alert.alert('Datos eliminados correctamente del carrito');
+                  // Llamar a la función de actualización para actualizar la lista
+                  updateDataDetalleCarrito(prevData => prevData.filter(item => item.id_detalle !== idDetalle));
+                } else {
+                  Alert.alert('Error al eliminar del carrito', data.error);
+                }
+              }
+            }
+          ]
+        );
+      } catch (error) {
+        Alert.alert("Error al eliminar del carrito")
+      }
+    };
+     
 
   return (
     <View style={styles.itemContainer}>
@@ -68,7 +105,7 @@ export default CarritoCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#245C9D',
+    backgroundColor: '#EAD8C0',
     paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 16,
   },
@@ -97,20 +134,20 @@ const styles = StyleSheet.create({
   },
   modifyButton: {
     borderWidth: 1,
-    borderColor: '#245C9D',
+    borderColor: '#8F6B58',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#245C9D', // Light brown color for modify button
+    backgroundColor: '#8F6B58', // Light brown color for modify button
     marginVertical: 4,
   },
   deleteButton: {
     borderWidth: 1,
-    borderColor: '#245C9D',
+    borderColor: '#D2691E',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#245C9D', // Darker orange color for delete button
+    backgroundColor: '#D2691E', // Darker orange color for delete button
     marginVertical: 4,
   },
   buttonText: {
@@ -119,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   finalButton: {
-    backgroundColor: '#245C9D', // Sienna color for final action buttons
+    backgroundColor: '#A0522D', // Sienna color for final action buttons
     padding: 16,
     borderRadius: 8,
     marginVertical: 8,

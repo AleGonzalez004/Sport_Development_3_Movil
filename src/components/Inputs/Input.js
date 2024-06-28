@@ -1,5 +1,6 @@
 
-import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert, Platform} from 'react-native';
+
 
 export default function Input({placeHolder, setValor, contra, setTextChange}) {
 
@@ -9,7 +10,7 @@ export default function Input({placeHolder, setValor, contra, setTextChange}) {
     style={styles.Input}
     placeholder={placeHolder}
     value={setValor}
-    placeholderTextColor={'#245C9D'}
+    placeholderTextColor={'#FFF'}
     secureTextEntry={contra} 
     onChangeText={setTextChange}
     />
@@ -19,9 +20,10 @@ export default function Input({placeHolder, setValor, contra, setTextChange}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'#FFF',
-    color: "#245C9D", fontWeight:'800',
+    backgroundColor:'#A79277',
+    color: "#fff", fontWeight:'800',
     width:250,
+    height: Platform.OS === 'ios' ? 50 : 50, // Estilo de la barra de pestañas, altura diferente para iOS y Android
     borderRadius:5,
     padding: 5,
     marginVertical:10

@@ -1,19 +1,17 @@
 
-import { StyleSheet, Platform, TextInput} from 'react-native';
+import { StyleSheet, TextInput, Platform} from 'react-native';
 
-export default function InputMultiline({placeHolder, setValor, contra, valor}) {
+export default function InputEmail({placeHolder, setValor, setTextChange}) {
 
   return (
 
     <TextInput
     style={styles.Input}
     placeholder={placeHolder}
-    value={valor}
-    onChangeText={setValor}
+    value={setValor}
     placeholderTextColor={'#FFF'}
-    secureTextEntry={contra} 
-    multiline={true}
-    numberOfLines={4}
+    onChangeText={setTextChange}
+    keyboardType="email-address"
     />
 
   );

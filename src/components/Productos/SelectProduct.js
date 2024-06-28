@@ -11,7 +11,7 @@ export default function SelectProduct({ip, imagenProducto, idProducto, nombrePro
         <View style={styles.card}>
         <View style={styles.imageContainer}>
          <Image
-           source={{uri: `${ip}/../Sport_Development_3/api/images/productos/${imagenProducto}`}}
+           source={{uri: `${ip}/coffeeshop/api/images/productos/${imagenProducto}`}}
            style={styles.image}
            resizeMode="contain" // Ajustar la imagen al contenedor
          />
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       },
     container: {
       flex: 1,
-      backgroundColor: '#245C9D',
+      backgroundColor: '#EAD8C0',
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: StatusBar.currentHeight || 0,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
       },
       button: {
-        backgroundColor: '#245C9D',
+        backgroundColor: '#AF8260',
         borderRadius: 5,
         paddingVertical: 10,
         paddingHorizontal: 20,

@@ -20,12 +20,6 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState('')
   const [nombreProductoModal, setNombreProductoModal] = useState('')
 
-  const volverLogin = async () => {
-
-    navigation.navigate('Sesion');
-
-  };
-
   const volverInicio = async () => {
 
     navigation.navigate('Home');
@@ -48,7 +42,7 @@ export default function Productos({ navigation }) {
       const formData = new FormData();
       formData.append('idCategoria', idCategoriaSelect);
       //utilizar la direccion IP del servidor y no localhost
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/producto.php?action=readProductosCategoria`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/producto.php?action=readProductosCategoria`, {
         method: 'POST',
         body: formData
       });
@@ -73,7 +67,7 @@ export default function Productos({ navigation }) {
     try {
 
       //utilizar la direccion IP del servidor y no localhost
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/categoria.php?action=readAll`, {
+      const response = await fetch(`${ip}/coffeeshop/api/services/public/categoria.php?action=readAll`, {
         method: 'GET',
       });
 
@@ -109,16 +103,10 @@ export default function Productos({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Catalogo de Productos</Text>
-      <Buttons 
-        textoBoton='Cerrar Sesión'
-        accionBoton={volverLogin}
-      />
-
       <Buttons
         textoBoton='Volver a Home'
         accionBoton={volverInicio}
       />
-
       <ModalCompra
         visible={modalVisible}
         cerrarModal={setModalVisible}
@@ -127,32 +115,27 @@ export default function Productos({ navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
-
       <View>
         <Text style={styles.subtitle}>
           Selecciona una categoria para filtar productos
         </Text>
-
         <View style={styles.pickerContainer}>
           <RNPickerSelect
             style={{ inputAndroid: styles.picker }}
             onValueChange={(value) => getProductos(value)}
             placeholder={{ label: 'Selecciona una categoría...', value: null }}
             items={dataCategorias.map(categoria => ({
-              label: categoria.nombre,
+              label: categoria.nombre_categoria,
               value: categoria.id_categoria,
             }))}
           />
         </View>
-
       </View>
-
       <SafeAreaView style={styles.containerFlat}>
         <FlatList
           data={dataProductos}
           keyExtractor={(item) => item.id_producto}
           renderItem={({ item }) => ( // Util izamos destructuración para obtener directamente el item
-
             <ProductoCard ip={ip}
               imagenProducto={item.imagen_producto}
               idProducto={item.id_producto}
@@ -184,13 +167,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#EAD8C0',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
   },
   card: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#ffffff',
     borderRadius: 8,
     padding: 16,
     marginVertical: 1,
@@ -227,14 +210,14 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#AF8260',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#245C9D',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: '600'
   },
@@ -255,19 +238,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#245C9D',
+    color: '#5C3D2E',
   },
   cartButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#245C9D',
+    backgroundColor: '#AF8260',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginVertical: 10,
   },
   cartButtonText: {
-    color: '#FFF',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 10,
@@ -277,16 +260,16 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginVertical: 5,
     marginHorizontal: 5,
-    color: '#245C9D', // Brown color for the title
+    color: '#5C3D2E', // Brown color for the title
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: '#FFF', // Color del borde
+    borderColor: '#AF8260', // Color del borde
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginBottom: 10,
-    backgroundColor: '#245C9D', // Color de fondo
+    backgroundColor: '#AF8260', // Color de fondo
   },
   picker: {
     color: '#ffffff'
