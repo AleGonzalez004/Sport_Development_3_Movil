@@ -62,11 +62,7 @@ if (isset($_GET['action'])) {
                 if (!$captcha['success']) {
                     $result['recaptcha'] = 1;
                     $result['error'] = 'No eres humano';
-<<<<<<< HEAD
-                } elseif(false) {
-=======
                 } elseif(!isset($_POST['condicion'])) {
->>>>>>> 3ae0e6c003b94c836b0ad702f41153f9aed8c00a
                     $result['error'] = 'Debe marcar la aceptación de términos y condiciones';
                 } elseif (
                     !$cliente->setNombre($_POST['nombreCliente']) or
