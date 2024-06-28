@@ -130,24 +130,24 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     marginBottom: 4,
-    color: '#333',
+    color: '#000000',
   },
   modifyButton: {
     borderWidth: 1,
-    borderColor: '#8F6B58',
+    borderColor: '#4092CE',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#8F6B58', // Light brown color for modify button
+    backgroundColor: '#4092CE', // Light brown color for modify button
     marginVertical: 4,
   },
   deleteButton: {
     borderWidth: 1,
-    borderColor: '#D2691E',
+    borderColor: '#000000',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#D2691E', // Darker orange color for delete button
+    backgroundColor: '#000000', // Darker orange color for delete button
     marginVertical: 4,
   },
   buttonText: {
