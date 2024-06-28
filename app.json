@@ -4,12 +4,12 @@
     "slug": "cliente-app-sport-development",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/coffee-cup.png",
+    "icon": "./assets/logo_azul.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/coffeeshop-splash.png",
+      "image": "./assets/logo_azul.png",
       "resizeMode": "contain",
-      "backgroundColor": "#EAD8C0"
+      "backgroundColor": "#FFF"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/coffee-cup-splash.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/logo_azul.png",
+        "backgroundColor": "#FFF"
       }
     },
     "web": {
-      "favicon": "./assets/coffee-cup.png"
+      "favicon": "./assets/logo_azul.png"
     }
   }
 }
