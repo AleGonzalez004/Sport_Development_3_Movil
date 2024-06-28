@@ -69,7 +69,7 @@ export default function SignUp({ navigation }) {
     const handleLogout = async () => {
         /*
                 try {
-                    const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=logOut`, {
+                    const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
                         method: 'GET'
                     });
         
@@ -126,7 +126,7 @@ export default function SignUp({ navigation }) {
             formData.append('claveCliente', clave);
             formData.append('confirmarClave', confirmarClave);
 
-            const response = await fetch(`${ip}/coffeeshop/api/services/public/cliente.php?action=signUpMovil`, {
+            const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=signUpMovil`, {
                 method: 'POST',
                 body: formData
             });
