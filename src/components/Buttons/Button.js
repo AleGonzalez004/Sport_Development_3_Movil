@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         borderColor: "#AF8260",
         width: Platform.OS === 'ios' ? 200 : 200,
         borderRadius: 10,
-        backgroundColor: "#AF8260",
+        backgroundColor: "#4092CE",
         padding: Platform.OS === 'ios' ? 15 : 10,
         marginVertical: 5
     },

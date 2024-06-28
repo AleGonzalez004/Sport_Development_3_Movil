@@ -82,7 +82,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -96,8 +96,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     width: 100,
     borderRadius: 10,
-    backgroundColor: "darkblue"
+    backgroundColor: "#245C9D"
   },
+
   buttonText: {
     textAlign: 'center',
     color: "white"

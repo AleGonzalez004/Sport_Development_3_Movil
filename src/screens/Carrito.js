@@ -150,7 +150,7 @@ export default Carrito;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#FFFFFF',
     paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 16,
   },
@@ -159,14 +159,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E',
+    color: '#000000',
   },
   titleDetalle: {
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E',
+    color: '#000000',
   },
   containerButtons: {
     justifyContent: 'center',
