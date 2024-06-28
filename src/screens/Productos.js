@@ -167,13 +167,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFF',
     borderRadius: 8,
     padding: 16,
     marginVertical: 1,
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#AF8260',
+    backgroundColor: '#4092CE',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -238,19 +238,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E',
+    color: '#000000',
   },
   cartButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#AF8260',
+    backgroundColor: '#4092CE',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginVertical: 10,
   },
   cartButtonText: {
-    color: '#ffffff',
+    color: '#FFF',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 10,
@@ -260,18 +260,18 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginVertical: 5,
     marginHorizontal: 5,
-    color: '#5C3D2E', // Brown color for the title
+    color: '#000', // Brown color for the title
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: '#AF8260', // Color del borde
+    borderColor: '#4092CE', // Color del borde
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginBottom: 10,
-    backgroundColor: '#AF8260', // Color de fondo
+    backgroundColor: '#4092CE', // Color de fondo
   },
   picker: {
-    color: '#ffffff'
+    color: '#4092CE'
   },
 });

@@ -19,7 +19,7 @@ export default function InputEmail({placeHolder, setValor, setTextChange}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'#A79277',
+    backgroundColor:'#4092CE',
     color: "#fff", fontWeight:'800',
     width:250,
     borderRadius:5,

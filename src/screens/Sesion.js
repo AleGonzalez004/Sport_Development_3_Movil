@@ -103,7 +103,7 @@ export default function Sesion({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../img/coffee-cup.png')}
+        source={require('../img/logo_azul.png')}
         style={styles.image}
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
@@ -128,16 +128,16 @@ export default function Sesion({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   texto: {
-    color: '#322C2B', fontWeight: '900',
+    color: '#000000', fontWeight: '900',
     fontSize: 20
   },
   textRegistrar: {
-    color: '#322C2B', fontWeight: '700',
+    color: '#000000', fontWeight: '700',
     fontSize: 18,
     marginTop: 10
   },

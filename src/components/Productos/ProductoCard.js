@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#4092CE',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: StatusBar.currentHeight || 0,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#AF8260',
+    backgroundColor: '#4092CE',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#AF8260',
+    backgroundColor: '#4092CE',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,

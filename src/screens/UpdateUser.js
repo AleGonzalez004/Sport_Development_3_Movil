@@ -21,7 +21,7 @@ export default function UpdateUser({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAD8C0',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -30,17 +30,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 10,
-    color: '#5C3D2E', // Brown color for the title
+    color: '#000000', // Brown color for the title
   },
   subtitle: {
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
     marginVertical: 10,
-    color: '#5C3D2E', // Brown color for the subtitle
+    color: '#000000', // Brown color for the subtitle
   },
   button: {
-    backgroundColor: '#AF8260', // Brown color for the button
+    backgroundColor: '#4092CE', // Brown color for the button
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,

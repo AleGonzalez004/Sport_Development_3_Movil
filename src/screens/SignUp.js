@@ -223,7 +223,7 @@ return (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EAD8C0',
+        backgroundColor: '#FFF',
         paddingTop: Constants.statusBarHeight + 5, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
       },
     scrollViewStyle: {
@@ -245,11 +245,11 @@ const styles = StyleSheet.create({
     },
     fechaSeleccionar: {
         fontWeight: '700',
-        color: '#322C2B',
+        color: '#FFF',
         textDecorationLine: 'underline'
     },
     contenedorFecha: {
-        backgroundColor: '#A79277',
+        backgroundColor: '#4092CE',
         color: "#fff", fontWeight: '800',
         width: 250,
         borderRadius: 5,

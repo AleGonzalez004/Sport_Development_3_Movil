@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/coffee-cup-splash.png')}
+        source={require('../../assets/logo_azul.png')}
         style={styles.image}
       />
       <Text style={styles.title}>Bienvenid@</Text>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     width: 100,
     borderRadius: 10,
-    backgroundColor: "#245C9D"
+    backgroundColor: "#FFF"
   },
 
   buttonText: {
@@ -108,13 +108,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#5C3D2E', // Brown color for the title
+    color: '#4092CE', // Brown color for the title
   },
   subtitle: {
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#5C3D2E', // Brown color for the title
+    color: '#4092CE', // Brown color for the title
   },
 });
