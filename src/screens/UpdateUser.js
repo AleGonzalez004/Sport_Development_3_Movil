@@ -29,43 +29,47 @@ export default function SignUp({ navigation }) {
         
         <Input
           placeHolder='Nombre Cliente'
-          setValor={nombre}
-          setTextChange={setNombre}
+          value={nombre}
+          onChangeText={setNombre}
+          style={styles.input}
         />
         
         <Input
           placeHolder='Apellido Cliente'
-          setValor={apellido}
-          setTextChange={setApellido}
+          value={apellido}
+          onChangeText={setApellido}
+          style={styles.input}
         />
         
         <InputEmail
           placeHolder='Email Cliente'
-          setValor={email}
-          setTextChange={setEmail}
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
         />
         
         <InputMultiline
           placeHolder='Dirección Cliente'
-          setValor={setDireccion}
-          valor={direccion}
-          setTextChange={setDireccion}
+          value={direccion}
+          onChangeText={setDireccion}
+          style={styles.inputMultiline}
         />
         
         <MaskedInputDui
           dui={dui}
           setDui={setDui}
+          style={styles.input}
         />
         
         <MaskedInputTelefono
           telefono={telefono}
           setTelefono={setTelefono}
+          style={styles.input}
         />
         
-        <Buttons
-          textoBoton='Editar Datos'
-          accionBoton={() => { /* Función para editar datos */ }}
-        />
+        <TouchableOpacity style={styles.button} onPress={volverInicio}>
+          <Text style={styles.buttonText}>Editar Datos</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={volverInicio}>
           <Text style={styles.buttonText}>Ir a inicio</Text>
@@ -79,29 +83,46 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF',
-    paddingTop: Constants.statusBarHeight + 5, // Ajustar según sea necesario
+    paddingTop: 55, // Ajustar según sea necesario
   },
   scrollViewStyle: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   texto: {
     color: '#322C2B',
     fontWeight: '900',
-    fontSize: 20,
+    fontSize: 24,
     marginBottom: 20,
+    textAlign: 'center',
   },
   button: {
     backgroundColor: '#4092CE',
     borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
     marginTop: 20,
-    alignSelf: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    width: '55%',
+    alignItems: 'center',
   },
   buttonText: {
     color: 'white',
     fontSize: 18,
     textAlign: 'center',
+    fontWeight: '600', // Aplicar el mismo peso de fuente para coherencia
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    width: '100%',
+    fontSize: 16,
+    fontWeight: '600', // Aplicar el mismo peso de fuente que los botones
+    color: '#333', // Color de texto oscuro
+    minHeight: 100, // Altura mínima para InputMultiline
   },
 });
