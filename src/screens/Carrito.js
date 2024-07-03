@@ -48,7 +48,7 @@ const Carrito = ({ navigation }) => {
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        console.log("No hay detalles del carrito disponibles")
+        console.log("No hay productos en el carrito :(")
         //Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {

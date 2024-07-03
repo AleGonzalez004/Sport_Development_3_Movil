@@ -129,7 +129,7 @@ export default function Productos({ navigation }) {
       />
       <View>
         <Text style={styles.subtitle}>
-          //////////////////////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////////////////
         </Text>
         <View style={styles.pickerContainer}>
           <RNPickerSelect
@@ -183,13 +183,13 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#FFF",
-    borderRadius: 8,
-    padding: 16,
-    marginVertical: 1,
-    marginHorizontal: 16,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 5,
+    marginHorizontal: 15,
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
+      width: 2,
       height: 2,
     },
     shadowOpacity: 0.25,
@@ -260,11 +260,11 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 320,
+    marginRight: 350,
     marginTop: 20,
     backgroundColor: "#4092CE",
     borderRadius: 5,
-    paddingVertical: 15,
+    paddingVertical: 12,
     paddingHorizontal: 15,
   },
   cartButtonText: {
