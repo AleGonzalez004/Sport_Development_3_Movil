@@ -1,7 +1,7 @@
 // SplashScreen.js
 
 import React, { useEffect } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, Image, ActivityIndicator, StyleSheet } from 'react-native';
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
@@ -16,6 +16,10 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+        <Image
+        source={require('../img/logo.png')}
+        style={styles.image}
+      />
       <Text style={styles.text}>Espere un momento</Text>
       <ActivityIndicator size="large" color="#FFF" />
     </View>
@@ -33,6 +37,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     color: '#FFF',
+  },
+  image: {
+    width: 75,
+    height: 75,
+    marginBottom: 10
   },
 });
 

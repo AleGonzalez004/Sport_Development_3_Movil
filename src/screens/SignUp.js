@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF',
-        paddingTop: Constants.statusBarHeight + 5, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
+        paddingTop: 55, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
       },
     scrollViewStyle: {
         alignItems: 'center',
