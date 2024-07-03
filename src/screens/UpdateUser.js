@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 15,
     textAlign: 'center',
     fontWeight: '500', // Aplicar el mismo peso de fuente para coherencia
   },
