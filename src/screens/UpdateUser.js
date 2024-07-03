@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     color: '#322C2B',
-    fontWeight: '900',
+    fontWeight: '500',
     fontSize: 24,
     marginBottom: 20,
     textAlign: 'center',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     textAlign: 'center',
-    fontWeight: '600', // Aplicar el mismo peso de fuente para coherencia
+    fontWeight: '500', // Aplicar el mismo peso de fuente para coherencia
   },
   input: {
     borderWidth: 1,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
     fontSize: 16,
-    fontWeight: '600', // Aplicar el mismo peso de fuente que los botones
+    fontWeight: '500', // Aplicar el mismo peso de fuente que los botones
     color: '#333', // Color de texto oscuro
     minHeight: 100, // Altura mínima para InputMultiline
   },

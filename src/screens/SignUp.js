@@ -231,26 +231,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     texto: {
-        color: '#322C2B', fontWeight: '900',
+        color: '#322C2B', fontWeight: '500',
         fontSize: 20
     },
     textRegistrar: {
-        color: '#322C2B', fontWeight: '700',
+        color: '#322C2B', fontWeight: '500',
         fontSize: 18
     },
 
     fecha: {
-        fontWeight: '600',
+        fontWeight: '500',
         color: '#FFF'
     },
     fechaSeleccionar: {
-        fontWeight: '700',
+        fontWeight: '500',
         color: '#FFF',
         textDecorationLine: 'underline'
     },
     contenedorFecha: {
         backgroundColor: '#4092CE',
-        color: "#fff", fontWeight: '800',
+        color: "#fff", fontWeight: '500',
         width: 250,
         borderRadius: 5,
         padding: 5,

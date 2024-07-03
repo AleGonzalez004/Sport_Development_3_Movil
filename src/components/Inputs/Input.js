@@ -21,7 +21,7 @@ export default function Input({placeHolder, setValor, contra, setTextChange}) {
 const styles = StyleSheet.create({
   Input: {
     backgroundColor:'#4092CE',
-    color: "#fff", fontWeight:'800',
+    color: "#fff", fontWeight:'500',
     width:250,
     height: Platform.OS === 'ios' ? 50 : 50, // Estilo de la barra de pestañas, altura diferente para iOS y Android
     borderRadius:5,

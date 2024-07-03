@@ -7,9 +7,10 @@
     "icon": "./assets/logo_azul.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo_azul.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FFF"
+      "backgroundColor": "#4092CE",
+      "imageResizeMode": "contain"
     },
     "assetBundlePatterns": [
       "**/*"

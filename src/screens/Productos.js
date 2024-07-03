@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 16,
     marginBottom: 8,
-    fontWeight: "700",
+    fontWeight: "500",
   },
   inputContainer: {
     flexDirection: "row",
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#ffffff",
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   image: {
     width: "65%",
@@ -270,12 +270,12 @@ const styles = StyleSheet.create({
   cartButtonText: {
     color: "#FFF",
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "500",
     marginLeft: 10,
   },
   subtitle: {
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: "500",
     marginVertical: 5,
     marginHorizontal: 5,
     color: "#FFF", // Brown color for the title

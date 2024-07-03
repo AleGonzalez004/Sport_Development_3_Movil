@@ -137,11 +137,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   texto: {
-    color: '#000000', fontWeight: '900',
+    color: '#000000', fontWeight: '500',
     fontSize: 20
   },
   textRegistrar: {
-    color: '#000000', fontWeight: '700',
+    color: '#000000', fontWeight: '500',
     fontSize: 18,
     marginTop: 10
   },

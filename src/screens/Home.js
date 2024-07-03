@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: '500',
     textAlign: 'center',
     marginVertical: 5,
     color: '#4092CE', // Brown color for the title
