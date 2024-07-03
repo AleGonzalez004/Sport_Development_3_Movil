@@ -48,7 +48,7 @@ const Carrito = ({ navigation }) => {
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        console.log("No hay productos en el carrito :(")
+        console.log("No hay detalles del carrito disponibles.")
         //Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
@@ -124,7 +124,7 @@ const Carrito = ({ navigation }) => {
           keyExtractor={(item) => item.id_detalle.toString()}
         />
       ) : (
-        <Text style={styles.titleDetalle}>No hay detalles del carrito disponibles.</Text>
+        <Text style={styles.titleDetalle}>No hay productos en el carrito :(</Text>
       )}
 
       {/* Botones de finalizar pedido y regresar a productos */}
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    paddingTop: 55,
+    paddingTop: 120,
     paddingHorizontal: 16,
   },
   title: {

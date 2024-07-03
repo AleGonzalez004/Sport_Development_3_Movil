@@ -1,28 +1,51 @@
-import { NavigationContainer } from '@react-navigation/native'; // Importa el contenedor de navegación
-import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Importa el creador de stack navigator
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Sesion from './src/screens/Sesion.js'; // Importa la pantalla de Sesión
-import SignUp from './src/screens/SignUp.js'; // Importa la pantalla de Registro
-import UpdateUser from './src/screens/UpdateUser.js'; // Importa la pantalla de Actualización de Usuario
-import TabNavigator from './src/tabNavigator/TabNavigator.js'; // Importa el navegador de pestañas
-import Recuperacion from './src/screens/Recuperacion.js'; // Importa el navegador de pestañas
+// Importa las pantallas necesarias
+import SplashScreen from './src/screens/SplashScreen';
+import Sesion from './src/screens/Sesion';
+import SignUp from './src/screens/SignUp';
+import UpdateUser from './src/screens/UpdateUser';
+import TabNavigator from './src/tabNavigator/TabNavigator';
+import Recuperacion from './src/screens/Recuperacion';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  const Stack = createNativeStackNavigator(); // Crea una instancia del stack navigator
-
   return (
-    <NavigationContainer> 
-      <Stack.Navigator
-        initialRouteName='Sesion' // Establece 'Sesion' como la ruta inicial
-        screenOptions={{
-          headerShown: false // Oculta el header por defecto
-        }}>
-        <Stack.Screen name="Sesion" component={Sesion} /> 
-        <Stack.Screen name="SignUp" component={SignUp} /> 
-        <Stack.Screen name="UpdateUser" component={UpdateUser} />
-        <Stack.Screen name="TabNavigator" component={TabNavigator} /> 
-        <Stack.Screen name="Recuperacion" component={Recuperacion} />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='SplashScreen'>
+        <Stack.Screen
+          name='SplashScreen'
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='Sesion'
+          component={Sesion}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='SignUp'
+          component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='UpdateUser'
+          component={UpdateUser}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='TabNavigator'
+          component={TabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='Recuperacion'
+          component={Recuperacion}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -129,7 +129,7 @@ export default function Productos({ navigation }) {
       />
       <View>
         <Text style={styles.subtitle}>
-          //////////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////
         </Text>
         <View style={styles.pickerContainer}>
           <RNPickerSelect
@@ -260,12 +260,12 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 350,
+    marginRight: 320,
     marginTop: 20,
     backgroundColor: "#4092CE",
-    borderRadius: 5,
+    borderRadius: 8,
     paddingVertical: 12,
-    paddingHorizontal: 15,
+    paddingHorizontal: 12,
   },
   cartButtonText: {
     color: "#FFF",
