@@ -16,10 +16,12 @@ import InputEmail from '../components/Inputs/InputEmail';
 export default function SignUp({ navigation }) {
     const ip = Constantes.IP;
 
+    // Estado para el DateTimePicker
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
+    // Estados de los campos de entrada
     const [nombre, setNombre] = useState('')
     const [apellido, setApellido] = useState('')
     const [email, setEmail] = useState('')
@@ -30,9 +32,9 @@ export default function SignUp({ navigation }) {
     const [clave, setClave] = useState('')
     const [confirmarClave, setConfirmarClave] = useState('')
 
-     // Expresiones regulares para validar DUI y teléfono
-     const duiRegex = /^\d{8}-\d$/;
-     const telefonoRegex = /^\d{4}-\d{4}$/;
+    // Expresiones regulares para validar DUI y teléfono
+    const duiRegex = /^\d{8}-\d$/;
+    const telefonoRegex = /^\d{4}-\d{4}$/;
 
     /*
     Codigo para mostrar el datetimepicker
@@ -92,13 +94,10 @@ export default function SignUp({ navigation }) {
     //props que recibe input
     //placeHolder, setValor, contra, setTextChange
 
+ // Función para crear un nuevo usuario
     const handleCreate = async () => {
         try {
-
-    // Calcular la fecha mínima permitida (18 años atrás desde la fecha actual)
-      const fechaMinima = new Date();
-      fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
-            // Validar los campos
+            // Validación de los campos de entrada
             if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
                 !dui.trim() || !fechaNacimiento.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim()) {
                 Alert.alert("Debes llenar todos los campos");
@@ -110,22 +109,13 @@ export default function SignUp({ navigation }) {
                 Alert.alert("El teléfono debe tener el formato correcto (####-####)");
                 return;
             } else if (date > fechaMinima) {
-        Alert.alert('Error', 'Debes tener al menos 18 años para registrarte.');
-        return;
-      }
+                Alert.alert('Error', 'Debes tener al menos 18 años para registrarte.');
+                return;
+            }
 
             // Si todos los campos son válidos, proceder con la creación del usuario
             const formData = new FormData();
-            formData.append('nombreCliente', nombre);
-            formData.append('apellidoCliente', apellido);
-            formData.append('correoCliente', email);
-            formData.append('direccionCliente', direccion);
-            formData.append('duiCliente', dui);
-            formData.append('nacimientoCliente', fechaNacimiento);
-            formData.append('telefonoCliente', telefono);
-            formData.append('claveCliente', clave);
-            formData.append('confirmarClave', confirmarClave);
-
+            // Agregar datos al formData
             const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=signUpMovil`, {
                 method: 'POST',
                 body: formData
@@ -143,7 +133,7 @@ export default function SignUp({ navigation }) {
         }
     };
 
-
+    
 return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>

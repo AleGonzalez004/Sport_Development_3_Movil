@@ -10,27 +10,30 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Sesion({ navigation }) {
   const ip = Constantes.IP;
 
+  // Estado para controlar la visibilidad de la contraseña
   const [isContra, setIsContra] = useState(true)
+  // Estados para almacenar el usuario y la contraseña
   const [usuario, setUsuario] = useState('')
   const [contrasenia, setContrasenia] = useState('')
 
-  // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
+  // Efecto para validar la sesión al cargar la pantalla o al enfocarse en ella
   useFocusEffect(
-    // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
     React.useCallback(() => {
-      validarSesion(); // Llama a la función getDetalleCarrito.
+      validarSesion(); // Llama a la función validarSesion
     }, [])
   );
 
+  // Función para validar la sesión del usuario
   const validarSesion = async () => {
     try {
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`, {
         method: 'GET'
       });
-  
+
       const data = await response.json();
-  
+
       if (data.status === 1) {
+        // Si hay una sesión activa, navegar a la pantalla TabNavigator
         navigation.navigate('TabNavigator');
         console.log("Se ingresa con la sesión activa")
       } else {
@@ -43,6 +46,7 @@ export default function Sesion({ navigation }) {
     }
   }
 
+  // Función para cerrar la sesión del usuario
   const cerrarSesion = async () => {
     try {
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
@@ -62,17 +66,21 @@ export default function Sesion({ navigation }) {
     }
   }
 
+  // Función para manejar el inicio de sesión
   const handlerLogin = async () => {
+    // Validar que se hayan ingresado el usuario y la contraseña
     if (!usuario || !contrasenia) {
       Alert.alert('Error', 'Por favor ingrese su correo y contraseña');
       return;
     }
 
     try {
+      // Crear un FormData con los datos de inicio de sesión
       const formData = new FormData();
       formData.append('correo', usuario);
       formData.append('clave', contrasenia);
 
+      // Enviar la solicitud de inicio de sesión al servidor
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
         body: formData
@@ -81,6 +89,7 @@ export default function Sesion({ navigation }) {
       const data = await response.json();
 
       if (data.status) {
+        // Si el inicio de sesión es exitoso, limpiar los campos y navegar a la pantalla TabNavigator
         setContrasenia('')
         setUsuario('')
         navigation.navigate('TabNavigator');
@@ -94,6 +103,7 @@ export default function Sesion({ navigation }) {
     }
   };
 
+  // Funciones para navegar a las pantallas de Registro y Recuperación de contraseña
   const irRegistrar = async () => {
     navigation.navigate('SignUp');
   };
@@ -101,6 +111,7 @@ export default function Sesion({ navigation }) {
     navigation.navigate('Recuperacion');
   };
 
+  // Efecto para validar la sesión al cargar la pantalla
   useEffect(() => { validarSesion() }, [])
 
   return (

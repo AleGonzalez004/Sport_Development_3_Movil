@@ -11,6 +11,7 @@ import InputEmail from '../components/Inputs/InputEmail';
 import Buttons from '../components/Buttons/Button';
 
 export default function SignUp({ navigation }) {
+  // Estado de los campos de entrada
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
@@ -18,55 +19,58 @@ export default function SignUp({ navigation }) {
   const [dui, setDui] = useState('');
   const [telefono, setTelefono] = useState('');
 
+  // Función para navegar de vuelta a la pantalla 'Home'
   const volverInicio = async () => {
-    navigation.navigate('Home'); // Navegar de vuelta a la pantalla 'Home'
+    navigation.navigate('Home');
   };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <Text style={styles.texto}>Editar Perfil</Text>
-        
+
+        {/* Campos de entrada */}
         <Input
           placeHolder='Nombre Cliente'
           value={nombre}
           onChangeText={setNombre}
           style={styles.input}
         />
-        
+
         <Input
           placeHolder='Apellido Cliente'
           value={apellido}
           onChangeText={setApellido}
           style={styles.input}
         />
-        
+
         <InputEmail
           placeHolder='Email Cliente'
           value={email}
           onChangeText={setEmail}
           style={styles.input}
         />
-        
+
         <InputMultiline
           placeHolder='Dirección Cliente'
           value={direccion}
           onChangeText={setDireccion}
           style={styles.inputMultiline}
         />
-        
+
         <MaskedInputDui
           dui={dui}
           setDui={setDui}
           style={styles.input}
         />
-        
+
         <MaskedInputTelefono
           telefono={telefono}
           setTelefono={setTelefono}
           style={styles.input}
         />
-        
+
+        {/* Botones de acción */}
         <TouchableOpacity style={styles.button} onPress={volverInicio}>
           <Text style={styles.buttonText}>Editar Datos</Text>
         </TouchableOpacity>
