@@ -91,8 +91,8 @@ export default function SignUp({ navigation }) {
     //props que recibe input
     //placeHolder, setValor, contra, setTextChange
 
-     // Función para crear un nuevo usuario
-     const handleCreate = async () => {
+    // Función para crear un nuevo usuario
+    const handleCreate = async () => {
         try {
             // Validación de los campos de entrada
             if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
@@ -140,17 +140,17 @@ export default function SignUp({ navigation }) {
     };
 
 
-return (
+    return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
                 <Text style={styles.texto}>Recuperar Contraseña</Text>
-                
+
 
                 <InputEmail
                     placeHolder='Email Cliente'
                     setValor={email}
                     setTextChange={setEmail} />
-                
+
                 <Buttons
                     textoBoton='Enviar correo'
                     accionBoton={handleCreate}
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundImage: '#FFF',
         paddingTop: Constants.statusBarHeight + 250, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
-      },
+    },
     scrollViewStyle: {
         alignItems: 'center',
         justifyContent: 'center'

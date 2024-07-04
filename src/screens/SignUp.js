@@ -94,7 +94,7 @@ export default function SignUp({ navigation }) {
     //props que recibe input
     //placeHolder, setValor, contra, setTextChange
 
- // Función para crear un nuevo usuario
+    // Función para crear un nuevo usuario
     const handleCreate = async () => {
         try {
             // Validación de los campos de entrada
@@ -133,8 +133,8 @@ export default function SignUp({ navigation }) {
         }
     };
 
-    
-return (
+
+    return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
                 <Text style={styles.texto}>Registrar Usuario</Text>
@@ -167,15 +167,15 @@ return (
                     <Text style={styles.fecha}>Seleccion: {fechaNacimiento}</Text>
 
                     {show && (
-         <DateTimePicker
-         testID="dateTimePicker"
-         value={date}
-         mode={mode}
-         is24Hour={true}
-         minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
-         maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
-         onChange={onChange}
-       />
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode={mode}
+                            is24Hour={true}
+                            minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
+                            maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
+                            onChange={onChange}
+                        />
                     )}
                 </View>
 
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         paddingTop: 55, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
-      },
+    },
     scrollViewStyle: {
         alignItems: 'center',
         justifyContent: 'center'
