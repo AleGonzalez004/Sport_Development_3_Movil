@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Constantes from '../utils/constantes'
@@ -36,10 +36,7 @@ export default function SignUp({ navigation }) {
     const duiRegex = /^\d{8}-\d$/;
     const telefonoRegex = /^\d{4}-\d{4}$/;
 
-    /*
-    Codigo para mostrar el datetimepicker
-    */
-
+    // Funciones para mostrar y manejar el DateTimePicker
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
         setShow(false);
@@ -115,7 +112,16 @@ export default function SignUp({ navigation }) {
 
             // Si todos los campos son válidos, proceder con la creación del usuario
             const formData = new FormData();
-            // Agregar datos al formData
+            formData.append('nombreCliente', nombre);
+            formData.append('apellidoCliente', apellido);
+            formData.append('correoCliente', email);
+            formData.append('direccionCliente', direccion);
+            formData.append('duiCliente', dui);
+            formData.append('nacimientoCliente', fechaNacimiento);
+            formData.append('telefonoCliente', telefono);
+            formData.append('claveCliente', clave);
+            formData.append('confirmarClave', confirmarClave);
+
             const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=signUpMovil`, {
                 method: 'POST',
                 body: formData
@@ -137,71 +143,21 @@ export default function SignUp({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-                <Text style={styles.texto}>Registrar Usuario</Text>
-                <Image
-                source={require('../img/logo_azul.png')}
-                style={styles.image}
-                />
-                <Input
-                    placeHolder='Nombre Cliente'
-                    setValor={nombre}
-                    setTextChange={setNombre}
-                />
-                <Input
-                    placeHolder='Apellido Cliente'
-                    setValor={apellido}
-                    setTextChange={setApellido}
-                />
+                <Text style={styles.texto}>Enviamos un codigo</Text>
+
+
                 <InputEmail
-                    placeHolder='Email Cliente'
+                    placeHolder='Ingresa el codigo'
                     setValor={email}
                     setTextChange={setEmail} />
-                <InputMultiline
-                    placeHolder='Dirección Cliente'
-                    setValor={setDireccion}
-                    valor={direccion}
-                    setTextChange={setDireccion} />
-                <MaskedInputDui
-                    dui={dui}
-                    setDui={setDui} />
-                <View style={styles.contenedorFecha}>
-                    <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento:</Text></TouchableOpacity>
-                    <Text style={styles.fecha}>Seleccion: {fechaNacimiento}</Text>
-
-                    {show && (
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={date}
-                            mode={mode}
-                            is24Hour={true}
-                            minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
-                            maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
-                            onChange={onChange}
-                        />
-                    )}
-                </View>
-
-                <MaskedInputTelefono
-                    telefono={telefono}
-                    setTelefono={setTelefono} />
-                <Input
-                    placeHolder='Clave'
-                    contra={true}
-                    setValor={clave}
-                    setTextChange={setClave} />
-                <Input
-                    placeHolder='Confirmar Clave'
-                    contra={true}
-                    setValor={confirmarClave}
-                    setTextChange={setConfirmarClave} />
 
                 <Buttons
-                    textoBoton='Registrar Usuario'
+                    textoBoton='Confirmar'
                     accionBoton={handleCreate}
                 />
 
                 <Buttons
-                    textoBoton='Ir al Login'
+                    textoBoton='Regresar'
                     accionBoton={handleLogout}
                 />
 
@@ -215,8 +171,8 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        paddingTop: 55, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
+        backgroundImage: '#FFF',
+        paddingTop: Constants.statusBarHeight + 250, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
     },
     scrollViewStyle: {
         alignItems: 'center',
@@ -224,12 +180,11 @@ const styles = StyleSheet.create({
     },
     texto: {
         color: '#322C2B', fontWeight: '500',
-        fontSize: 25,
-        padding: 15,
+        fontSize: 20
     },
     textRegistrar: {
         color: '#322C2B', fontWeight: '500',
-        fontSize: 25
+        fontSize: 18
     },
 
     fecha: {
@@ -244,16 +199,10 @@ const styles = StyleSheet.create({
     contenedorFecha: {
         backgroundColor: '#4092CE',
         color: "#fff", fontWeight: '500',
-        width: 350,
-        height: 55,
+        width: 250,
         borderRadius: 5,
-        padding: 10,
+        padding: 5,
         marginVertical: 10
-    },
-    image: {
-        width: 75,
-        height: 75,
-        marginBottom: 1
-      },
+    }
 });
 
