@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 
-// Componentes importados (sin lógica)
+// Componentes importados
 import Input from '../components/Inputs/Input';
 import InputMultiline from '../components/Inputs/InputMultiline';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
