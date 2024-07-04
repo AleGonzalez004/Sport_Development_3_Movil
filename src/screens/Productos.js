@@ -24,6 +24,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Productos({ navigation }) {
   const ip = Constantes.IP;
+  // Estados para almacenar los datos de los productos y categorías
   const [dataProductos, setDataProductos] = useState([]);
   const [dataCategorias, setDataCategorias] = useState([]);
   const [selectedValue, setSelectedValue] = useState(null);
@@ -32,21 +33,23 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState("");
   const [nombreProductoModal, setNombreProductoModal] = useState("");
 
+  // Función para navegar a la pantalla de inicio
   const volverInicio = async () => {
     navigation.navigate("Home");
   };
 
+  // Función para manejar la apertura del modal de compra
   const handleCompra = (nombre, id) => {
     setModalVisible(true);
     setIdProductoModal(id);
     setNombreProductoModal(nombre);
   };
 
-  //getCategorias Funcion para consultar por medio de una peticion GET los datos de la tabla categoria que se encuentran en la base de datos
+  // Función para obtener los productos por categoría
   const getProductos = async (idCategoriaSelect = 1) => {
     try {
       if (idCategoriaSelect <= 0) {
-        //validar que vaya seleccionada una categoria de productos
+        // Validar que se haya seleccionado una categoría
         return;
       }
       const formData = new FormData();
@@ -76,9 +79,10 @@ export default function Productos({ navigation }) {
     }
   };
 
+  // Función para obtener las categorías
   const getCategorias = async () => {
     try {
-      //utilizar la direccion IP del servidor y no localhost
+
       const response = await fetch(
         `${ip}/Sport_Development_3/api/services/public/categoria.php?action=readAll`,
         {
@@ -99,17 +103,13 @@ export default function Productos({ navigation }) {
     }
   };
 
-  const handleCategoriaChange = (itemValue, itemIndex) => {
-    setSelectedCategoria(itemValue);
-  };
-
-  //Uso del React Hook UseEffect para que cada vez que se cargue la vista por primera vez
-  //se ejecute la funcion getCategorias
+  // Uso del React Hook useEffect para cargar los productos y categorías al montar el componente
   useEffect(() => {
     getProductos();
     getCategorias();
   }, []);
 
+  // Función para navegar a la pantalla de Carrito
   const irCarrito = () => {
     navigation.navigate("Carrito");
   };
