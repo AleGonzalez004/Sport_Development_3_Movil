@@ -165,9 +165,7 @@ export default function SignUp({ navigation }) {
                     dui={dui}
                     setDui={setDui} />
                 <View style={styles.contenedorFecha}>
-                    <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento:</Text></TouchableOpacity>
-                    <Text style={styles.fecha}>Seleccion: {fechaNacimiento}</Text>
-
+                    <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento:  <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
                     {show && (
                         <DateTimePicker
                             testID="dateTimePicker"
@@ -245,7 +243,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#4092CE',
         color: "#fff", fontWeight: '500',
         width: 350,
-        height: 55,
+        height: 45,
         borderRadius: 5,
         padding: 10,
         marginVertical: 10
