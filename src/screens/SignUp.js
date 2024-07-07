@@ -137,11 +137,11 @@ export default function SignUp({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-            <View style={styles.offscroll}></View>
-        <Text style={styles.texto}>Registrar Usuario</Text>
-        <Image source={require('../img/logo.png')}style={styles.image}/>
-            
-            
+                <View style={styles.offscroll}></View>
+                <Text style={styles.texto}>Registrar Usuario</Text>
+                <Image source={require('../img/logo.png')} style={styles.image} />
+
+
                 <Input
                     placeHolder='Nombre Cliente'
                     setValor={nombre}
@@ -192,8 +192,8 @@ export default function SignUp({ navigation }) {
                     contra={true}
                     setValor={confirmarClave}
                     setTextChange={setConfirmarClave} />
-                    
-                    <Buttons
+
+                <Buttons
                     textoBoton='Registrar Usuario'
                     accionBoton={handleCreate}
                 />
@@ -204,7 +204,7 @@ export default function SignUp({ navigation }) {
                 />
 
             </ScrollView>
-    
+
         </View>
 
     );
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         marginBottom: 1
-      },
-      
+    },
+
 });
 

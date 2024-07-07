@@ -1,18 +1,15 @@
-
+// Importaciones necesarias desde React y React Native
 import { StatusBar, StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, FlatList, ScrollView, SafeAreaView, Image } from 'react-native';
 import { useState, useEffect } from 'react';
-import { FontAwesome } from '@expo/vector-icons'; // Importamos el ícono
+import { FontAwesome } from '@expo/vector-icons';
 
-//recibimos por props la imagen del producto, nombre, precio y otras propiedades de productos para mostrarlas en el componente de 
-//productoCard
-
-
+// Componente ProductoCard para mostrar la información de un producto
 export default function ProductoCard({ ip, imagenProducto, idProducto, nombreProducto, descripcionProducto
   , precioProducto, existenciasProducto, accionBotonProducto
 }) {
 
+  // Mostrar el componente
   return (
-
     <View style={styles.card}>
       <View style={styles.imageContainer}>
         <Image
@@ -33,11 +30,11 @@ export default function ProductoCard({ ip, imagenProducto, idProducto, nombrePro
         <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
       </TouchableOpacity>
     </View>
-
   );
 }
 
 
+// Estilos para el componente ProductoCard
 const styles = StyleSheet.create({
   containerFlat: {
     flex: 1,
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   imageContainer: {
-    alignItems: 'center', // Centrar imagen horizontalmente
+    alignItems: 'center',
   }, textDentro: {
     fontWeight: '400'
   },
@@ -127,4 +124,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
 });
-

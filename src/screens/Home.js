@@ -90,7 +90,7 @@ export default function Home({ navigation }) {
     </View>
   );
 }
-
+//Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -127,6 +127,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#4092CE', 
+    color: '#4092CE',
   },
 });

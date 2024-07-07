@@ -1,12 +1,15 @@
+// Importaciones necesarias desde React y React Native
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes';
 
-const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCantidadProductoCarrito, cantidadProductoCarrito, getDetalleCarrito}) => {
+// Componente ModalEditarCantidad para editar la cantidad de un producto en el carrito
+const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCantidadProductoCarrito, cantidadProductoCarrito, getDetalleCarrito }) => {
 
   const ip = Constantes.IP;
 
+  // Función para manejar la actualización del detalle del carrito
   const handleUpdateDetalleCarrito = async () => {
     try {
       if (cantidadProductoCarrito <= 0) {
@@ -25,7 +28,7 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
 
       const data = await response.json();
       if (data.status) {
-        Alert.alert('Se actualizo el detalle del producto');
+        Alert.alert('Se actualizó el detalle del producto');
         getDetalleCarrito();
       } else {
         Alert.alert('Error al editar detalle carrito', data.error);
@@ -37,11 +40,13 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
     }
   };
 
+  // Función para cancelar la edición de la cantidad del carrito
   const handleCancelEditarCarrito = () => {
     setModalVisible(false);
   };
 
   return (
+    // Modal para mostrar la ventana emergente de edición de cantidad
     <Modal
       visible={modalVisible}
       animationType="slide"
@@ -50,9 +55,10 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
         setModalVisible(!modalVisible);
       }}
     >
+      {/* Vista centralizada para el modal */}
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <Text style={styles.modalText}>Cantidad actual: {cantidadProductoCarrito}</Text>
+          <Text style={styles.modalText}>Cantidad actual: {cantidadProductoCarrito}</Text>
           <Text style={styles.modalText}>Nueva cantidad:</Text>
           <TextInput
             style={styles.input}
@@ -61,10 +67,12 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
             keyboardType="numeric"
             placeholder="Ingrese la cantidad"
           />
+          {/* Botón para editar la cantidad */}
           <Buttons
             textoBoton='Editar cantidad'
             accionBoton={handleUpdateDetalleCarrito}
           />
+          {/* Botón para cancelar */}
           <Buttons
             textoBoton='Cancelar'
             accionBoton={handleCancelEditarCarrito}
@@ -75,8 +83,7 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
   );
 };
 
-export default ModalEditarCantidad;
-
+// Estilos para el componente ModalEditarCantidad
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
@@ -124,3 +131,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default ModalEditarCantidad;

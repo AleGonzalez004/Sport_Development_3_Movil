@@ -122,17 +122,17 @@ export default function Sesion({ navigation }) {
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
       <View style={styles.containerlog}>
-      <InputEmail
-        placeHolder='Usuario'
-        setValor={usuario}
-        setTextChange={setUsuario}
-      />
-      <Input
-        placeHolder='Contraseña'
-        setValor={contrasenia}
-        setTextChange={setContrasenia}
-        contra={isContra} />
-        </View>
+        <InputEmail
+          placeHolder='Usuario'
+          setValor={usuario}
+          setTextChange={setUsuario}
+        />
+        <Input
+          placeHolder='Contraseña'
+          setValor={contrasenia}
+          setTextChange={setContrasenia}
+          contra={isContra} />
+      </View>
       <Buttons
         textoBoton='Iniciar Sesión'
         accionBoton={handlerLogin} />

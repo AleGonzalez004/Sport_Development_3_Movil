@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+// Importaciones necesarias desde React y React Native
+import React from 'react';
 import { Platform, TextInput, StyleSheet } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 
-export default function MaskedInputTelefono({telefono, setTelefono}) {
+// Componente MaskedInputTelefono que muestra un campo de entrada con máscara para el teléfono
+export default function MaskedInputTelefono({ telefono, setTelefono }) {
     return (
-            <TextInputMask
-                style={styles.Input}
-                placeholder="Teléfono"
-                placeholderTextColor="#4092CE"
-                type={'custom'}
-                options={{
-                    mask: '9999-9999'
-                }}
-                value={telefono}
-                onChangeText={setTelefono}
-            />
+        <TextInputMask
+            style={styles.Input}
+            placeholder="Teléfono"
+            placeholderTextColor="#4092CE"
+            type={'custom'}
+            options={{
+                mask: '9999-9999'
+            }}
+            value={telefono}
+            onChangeText={setTelefono}
+        />
     );
 }
 
+// Estilos para el componente MaskedInputTelefono
 const styles = StyleSheet.create({
     Input: {
-      backgroundColor:'#FFF',
-      color: "#4092CE",
-      fontWeight:'500',
-      width:350,
-      height: 45,
-      borderRadius:5,
-      padding: 10, // Estilo de la barra de pestañas, altura diferente para iOS y Android,
-      marginVertical:10
+        backgroundColor: '#FFF',
+        color: "#4092CE",
+        fontWeight: '500',
+        width: 350,
+        height: 45,
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 10
     },
-  
-  });
+});

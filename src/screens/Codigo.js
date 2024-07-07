@@ -65,32 +65,6 @@ export default function SignUp({ navigation }) {
         Fin Codigo para mostrar el datetimepicker
         */
 
-    const handleLogout = async () => {
-        /*
-                try {
-                    const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
-                        method: 'GET'
-                    });
-        
-                    const data = await response.json();
-        
-                    if (data.status) {
-                        navigation.navigate('Sesion');
-                    } else {
-                        console.log(data);
-                        // Alert the user about the error
-                        Alert.alert('Error', data.error);
-                    }
-                } catch (error) {
-                    console.error(error, "Error desde Catch");
-                    Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
-                } */
-        navigation.navigate('Sesion');
-    };
-
-    //props que recibe input
-    //placeHolder, setValor, contra, setTextChange
-
     // Función para crear un nuevo usuario
     const handleCreate = async () => {
         try {
@@ -167,12 +141,12 @@ export default function SignUp({ navigation }) {
 
     );
 }
-
+//Estilos
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundImage: '#FFF',
-        paddingTop: Constants.statusBarHeight + 250, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
+        paddingTop: Constants.statusBarHeight + 250,
     },
     scrollViewStyle: {
         alignItems: 'center',
