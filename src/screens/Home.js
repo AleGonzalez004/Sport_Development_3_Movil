@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#4092CE', // Brown color for the title
+    color: '#4092CE',
   },
   subtitle: {
     fontSize: 20,
     fontWeight: '500',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#4092CE', // Brown color for the title
+    color: '#4092CE', 
   },
 });

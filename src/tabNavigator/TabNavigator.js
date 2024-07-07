@@ -16,9 +16,9 @@ const TabNavigator = () => {
 <Tab.Navigator
           screenOptions={({ route }) => ({
             headerShown: false, // Oculta el header
-            tabBarActiveTintColor: '#4092CE', // Color de los íconos activos
-            tabBarInactiveTintColor: '#4092CE', // Color de los íconos inactivos
-            tabBarStyle: { backgroundColor: '#FFF', 
+            tabBarActiveTintColor: '#FFF', // Color de los íconos activos
+            tabBarInactiveTintColor: '#FFF', // Color de los íconos inactivos
+            tabBarStyle: { backgroundColor: '#4092CE', 
               height: Platform.OS === 'ios' ? 80 : 60, // Estilo de la barra de pestañas, altura diferente para iOS y Android
            borderTopWidth: 0 }, // Estilo de la barra de pestañas
             tabBarIcon: ({ focused, color, size }) => { // Función que define el ícono de la pestaña
@@ -26,7 +26,7 @@ const TabNavigator = () => {
               if (route.name === 'Home') {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'Productos') {
-                iconName = focused ? 'football-outline' : 'football-outline';
+                iconName = focused ? 'football' : 'football-outline';
               } else if (route.name === 'Carrito') {
                 iconName = focused ? 'cart' : 'cart-outline';
               }

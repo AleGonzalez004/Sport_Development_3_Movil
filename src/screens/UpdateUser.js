@@ -1,132 +1,270 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import Constants from 'expo-constants';
 
-// Componentes importados
-import Input from '../components/Inputs/Input';
-import InputMultiline from '../components/Inputs/InputMultiline';
+import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { useState } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import * as Constantes from '../utils/constantes'
+import Constants from 'expo-constants';
+//Import de componentes
+import Input from '../components/Inputs/Input'
+import InputMultiline from '../components/Inputs/InputMultiline'
+import Buttons from '../components/Buttons/Button';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 import InputEmail from '../components/Inputs/InputEmail';
-import Buttons from '../components/Buttons/Button';
+import RNPickerSelect from "react-native-picker-select";
+import { FontAwesome } from "@expo/vector-icons"; // Importamos el ícono
+import AntDesign from "@expo/vector-icons/AntDesign";
+
 
 export default function SignUp({ navigation }) {
-  // Estado de los campos de entrada
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [email, setEmail] = useState('');
-  const [direccion, setDireccion] = useState('');
-  const [dui, setDui] = useState('');
-  const [telefono, setTelefono] = useState('');
+    const ip = Constantes.IP;
 
-  // Función para navegar de vuelta a la pantalla 'Home'
-  const volverInicio = async () => {
-    navigation.navigate('Home');
-  };
+    // Estado para el DateTimePicker
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
 
-  return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+    // Estados de los campos de entrada
+    const [nombre, setNombre] = useState('')
+    const [apellido, setApellido] = useState('')
+    const [email, setEmail] = useState('')
+    const [direccion, setDireccion] = useState('')
+    const [dui, setDui] = useState('')
+    const [telefono, setTelefono] = useState('')
+    const [fechaNacimiento, setFechaNacimiento] = useState('')
+    const [clave, setClave] = useState('')
+    const [confirmarClave, setConfirmarClave] = useState('')
+
+    // Expresiones regulares para validar DUI y teléfono
+    const duiRegex = /^\d{8}-\d$/;
+    const telefonoRegex = /^\d{4}-\d{4}$/;
+
+    /*
+    Codigo para mostrar el datetimepicker
+    */
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate;
+        setShow(false);
+        setDate(currentDate);
+        /*
+        Codigo para convertir la fecha al formato año-mes-dia */
+
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+
+        const fechaNueva = `${year}-${month}-${day}`;
+        setFechaNacimiento(fechaNueva)
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const volverInicio = async () => {
+      navigation.navigate("Home");
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const handleLogout = async () => {
+        /*
+                try {
+                    const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
+                        method: 'GET'
+                    });
+        
+                    const data = await response.json();
+        
+                    if (data.status) {
+                        navigation.navigate('Sesion');
+                    } else {
+                        console.log(data);
+                        // Alert the user about the error
+                        Alert.alert('Error', data.error);
+                    }
+                } catch (error) {
+                    console.error(error, "Error desde Catch");
+                    Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
+                } */
+        navigation.navigate('Sesion');
+    };
+
+    //props que recibe input
+    //placeHolder, setValor, contra, setTextChange
+
+    // Función para crear un nuevo usuario
+    const handleCreate = async () => {
+        try {
+            // Validación de los campos de entrada
+            if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
+                !dui.trim() || !fechaNacimiento.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim()) {
+                Alert.alert("Debes llenar todos los campos");
+                return;
+            } else if (!duiRegex.test(dui)) {
+                Alert.alert("El DUI debe tener el formato correcto (########-#)");
+                return;
+            } else if (!telefonoRegex.test(telefono)) {
+                Alert.alert("El teléfono debe tener el formato correcto (####-####)");
+                return;
+            } else if (date > fechaMinima) {
+                Alert.alert('Error', 'Debes tener al menos 18 años para registrarte.');
+                return;
+            }
+
+            // Si todos los campos son válidos, proceder con la creación del usuario
+            const formData = new FormData();
+            // Agregar datos al formData
+            const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=signUpMovil`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.status) {
+                Alert.alert('Datos Guardados correctamente');
+                navigation.navigate('Sesion');
+            } else {
+                Alert.alert('Error', data.error);
+            }
+        } catch (error) {
+            Alert.alert('Ocurrió un error al intentar crear el usuario');
+        }
+    };
+
+
+    return (
+        <View style={styles.container}>
+          
+            <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+            <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
+        <AntDesign name="arrowleft" size={20} color="white" />
+      </TouchableOpacity>
         <Text style={styles.texto}>Editar Perfil</Text>
+        <Image source={require('../img/user.png')}style={styles.image}/>
+        <Buttons textoBoton='Cambiar foto de perfil' accionBoton={handleLogout}/>
+            
+            
+                <Input
+                    placeHolder='Nombre Cliente'
+                    setValor={nombre}
+                    setTextChange={setNombre}
+                />
+                <Input
+                    placeHolder='Apellido Cliente'
+                    setValor={apellido}
+                    setTextChange={setApellido}
+                />
+                <InputEmail
+                    placeHolder='Email Cliente'
+                    setValor={email}
+                    setTextChange={setEmail} />
+                <InputMultiline
+                    placeHolder='Dirección Cliente'
+                    setValor={setDireccion}
+                    valor={direccion}
+                    setTextChange={setDireccion} />
+                <MaskedInputDui
+                    dui={dui}
+                    setDui={setDui} />
+                <View style={styles.contenedorFecha}>
+                    <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento:  <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
+                    {show && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode={mode}
+                            is24Hour={true}
+                            minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
+                            maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
+                            onChange={onChange}
+                        />
+                    )}
+                </View>
 
-        {/* Campos de entrada */}
-        <Input
-          placeHolder='Nombre Cliente'
-          value={nombre}
-          onChangeText={setNombre}
-          style={styles.input}
-        />
+                <MaskedInputTelefono
+                    telefono={telefono}
+                    setTelefono={setTelefono} />
+  
+                    
+                    <Buttons
+                    textoBoton='Editar perfil'
+                    accionBoton={handleCreate}
+                />
 
-        <Input
-          placeHolder='Apellido Cliente'
-          value={apellido}
-          onChangeText={setApellido}
-          style={styles.input}
-        />
+                <Buttons
+                    textoBoton='Cambiar contraseña'
+                    accionBoton={handleLogout}
+                />
 
-        <InputEmail
-          placeHolder='Email Cliente'
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-        />
+            </ScrollView>
+    
+        </View>
 
-        <InputMultiline
-          placeHolder='Dirección Cliente'
-          value={direccion}
-          onChangeText={setDireccion}
-          style={styles.inputMultiline}
-        />
-
-        <MaskedInputDui
-          dui={dui}
-          setDui={setDui}
-          style={styles.input}
-        />
-
-        <MaskedInputTelefono
-          telefono={telefono}
-          setTelefono={setTelefono}
-          style={styles.input}
-        />
-
-        {/* Botones de acción */}
-        <TouchableOpacity style={styles.button} onPress={volverInicio}>
-          <Text style={styles.buttonText}>Editar Datos</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={volverInicio}>
-          <Text style={styles.buttonText}>Ir a inicio</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-    paddingTop: 55, // Ajustar según sea necesario
-  },
-  scrollViewStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  texto: {
-    color: '#322C2B',
-    fontWeight: '500',
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#4092CE',
-    borderRadius: 10,
-    marginTop: 20,
-    paddingVertical: 15,
-    paddingHorizontal: 24,
-    marginBottom: 10,
-    width: '55%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 15,
-    textAlign: 'center',
-    fontWeight: '500', // Aplicar el mismo peso de fuente para coherencia
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    width: '100%',
-    fontSize: 16,
-    fontWeight: '500', // Aplicar el mismo peso de fuente que los botones
-    color: '#333', // Color de texto oscuro
-    minHeight: 100, // Altura mínima para InputMultiline
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#FFF',
+        paddingTop: 55,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    ButtonVolver: {
+      flexDirection: "row",
+      marginRight: 310,
+      marginTop: 10,
+      backgroundColor: "#4092CE",
+      borderRadius: 8,
+      paddingHorizontal: 15,
+    },
+    scrollViewStyle: {
+        backgroundColor: '#4092CE',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        padding: 15,
+    },
+    texto: {
+        color: '#FFF', fontWeight: '500',
+        fontSize: 25,
+    },
+    textRegistrar: {
+        color: '#FFF', fontWeight: '500',
+        fontSize: 25
+    },
+
+    fecha: {
+        fontWeight: '500',
+        color: '#4092CE'
+    },
+    fechaSeleccionar: {
+        fontWeight: '500',
+        color: '#4092CE',
+        textDecorationLine: 'underline'
+    },
+    contenedorFecha: {
+        backgroundColor: '#FFF',
+        color: "#4092CE", fontWeight: '500',
+        width: 350,
+        height: 45,
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 10
+    },
+    image: {
+        width: 75,
+        height: 75,
+        marginBottom: 5,
+        backgroundColor: '#FFF',
+        borderRadius: 50,
+      },
+      
 });
+

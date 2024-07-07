@@ -9,7 +9,7 @@ export default function InputEmail({placeHolder, setValor, setTextChange}) {
     style={styles.Input}
     placeholder={placeHolder}
     value={setValor}
-    placeholderTextColor={'#FFF'}
+    placeholderTextColor={'#4092CE'}
     onChangeText={setTextChange}
     keyboardType="email-address"
     />
@@ -19,8 +19,8 @@ export default function InputEmail({placeHolder, setValor, setTextChange}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'#4092CE',
-    color: "#fff", fontWeight:'500',
+    backgroundColor:'#FFF',
+    color: "#4092CE", fontWeight:'500',
     width:350,
     height: 45,
     borderRadius:5,

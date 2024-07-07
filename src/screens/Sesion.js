@@ -121,6 +121,7 @@ export default function Sesion({ navigation }) {
         style={styles.image}
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
+      <View style={styles.containerlog}>
       <InputEmail
         placeHolder='Usuario'
         setValor={usuario}
@@ -131,6 +132,7 @@ export default function Sesion({ navigation }) {
         setValor={contrasenia}
         setTextChange={setContrasenia}
         contra={isContra} />
+        </View>
       <Buttons
         textoBoton='Iniciar Sesión'
         accionBoton={handlerLogin} />
@@ -147,12 +149,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  containerlog: {
+    backgroundColor: '#4092CE',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    padding: 10,
+    marginTop: 5,
+  },
   texto: {
-    color: '#000000', fontWeight: '500',
+    color: '#16537E', fontWeight: '500',
     fontSize: 20
   },
   textRegistrar: {
-    color: '#000000', fontWeight: '500',
+    color: '#16537E', fontWeight: '500',
     fontSize: 18,
     marginTop: 10
   },

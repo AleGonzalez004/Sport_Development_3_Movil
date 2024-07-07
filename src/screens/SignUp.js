@@ -137,11 +137,11 @@ export default function SignUp({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-                <Text style={styles.texto}>Registrar Usuario</Text>
-                <Image
-                source={require('../img/logo_azul.png')}
-                style={styles.image}
-                />
+            <View style={styles.offscroll}></View>
+        <Text style={styles.texto}>Registrar Usuario</Text>
+        <Image source={require('../img/logo.png')}style={styles.image}/>
+            
+            
                 <Input
                     placeHolder='Nombre Cliente'
                     setValor={nombre}
@@ -192,8 +192,8 @@ export default function SignUp({ navigation }) {
                     contra={true}
                     setValor={confirmarClave}
                     setTextChange={setConfirmarClave} />
-
-                <Buttons
+                    
+                    <Buttons
                     textoBoton='Registrar Usuario'
                     accionBoton={handleCreate}
                 />
@@ -203,8 +203,8 @@ export default function SignUp({ navigation }) {
                     accionBoton={handleLogout}
                 />
 
-
             </ScrollView>
+    
         </View>
 
     );
@@ -214,34 +214,39 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF',
-        paddingTop: 55, // el 5 es para darle un pequeño margen cuando hay una camara en el centro de la pantalla
-    },
-    scrollViewStyle: {
+        paddingTop: 55,
         alignItems: 'center',
         justifyContent: 'center'
     },
+    scrollViewStyle: {
+        backgroundColor: '#4092CE',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        padding: 15,
+    },
     texto: {
-        color: '#322C2B', fontWeight: '500',
+        color: '#FFF', fontWeight: '500',
         fontSize: 25,
         padding: 15,
     },
     textRegistrar: {
-        color: '#322C2B', fontWeight: '500',
+        color: '#FFF', fontWeight: '500',
         fontSize: 25
     },
 
     fecha: {
         fontWeight: '500',
-        color: '#FFF'
+        color: '#4092CE'
     },
     fechaSeleccionar: {
         fontWeight: '500',
-        color: '#FFF',
+        color: '#4092CE',
         textDecorationLine: 'underline'
     },
     contenedorFecha: {
-        backgroundColor: '#4092CE',
-        color: "#fff", fontWeight: '500',
+        backgroundColor: '#FFF',
+        color: "#4092CE", fontWeight: '500',
         width: 350,
         height: 45,
         borderRadius: 5,
@@ -253,5 +258,6 @@ const styles = StyleSheet.create({
         height: 75,
         marginBottom: 1
       },
+      
 });
 

@@ -10,7 +10,7 @@ export default function Input({placeHolder, setValor, contra, setTextChange}) {
     style={styles.Input}
     placeholder={placeHolder}
     value={setValor}
-    placeholderTextColor={'#FFF'}
+    placeholderTextColor={'#4092CE'}
     secureTextEntry={contra} 
     onChangeText={setTextChange}
     />
@@ -20,8 +20,8 @@ export default function Input({placeHolder, setValor, contra, setTextChange}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'#4092CE',
-    color: "#fff", fontWeight:'500',
+    backgroundColor:'#FFF',
+    color: "#4092CE", fontWeight:'500',
     width:350,
     height: 45, // Estilo de la barra de pestañas, altura diferente para iOS y Android
     borderRadius:5,

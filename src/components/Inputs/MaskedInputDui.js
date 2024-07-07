@@ -7,10 +7,10 @@ export default function MaskedInputDui({dui, setDui}) {
             <TextInputMask
                 style={styles.Input}
                 placeholder="Dui"
-                placeholderTextColor="#fff"
+                placeholderTextColor="#4092CE"
                 type={'custom'}
                 options={{
-                    mask: '99999999-9' // Formato para el número de teléfono
+                    mask: '99999999-9'
                 }}
                 value={dui}
                 onChangeText={setDui}
@@ -20,8 +20,8 @@ export default function MaskedInputDui({dui, setDui}) {
 
 const styles = StyleSheet.create({
     Input: {
-      backgroundColor:'#4092CE',
-      color: "#fff",
+      backgroundColor:'#FFF',
+      color: "#4092CE",
       fontWeight:'500',
       width:350,
       height: 45,

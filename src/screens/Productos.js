@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 320,
+    marginRight: 310,
     marginTop: 20,
     backgroundColor: "#4092CE",
     borderRadius: 8,
