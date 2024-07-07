@@ -112,21 +112,28 @@ export default function SignUp({ navigation }) {
             Alert.alert('Ocurrió un error al intentar crear el usuario');
         }
     };
+
     const handleLogout = async () => {
-        navigation.navigate('Sesion');
+        navigation.navigate('UpdateUser');
       };
 
 
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-                <Text style={styles.texto}>Enviamos un codigo</Text>
+                <Text style={styles.texto}>Cambiar contraseña</Text>
 
 
                 <InputEmail
-                    placeHolder='Ingresa el codigo'
+                    placeHolder='Ingresa la contraseña actual'
                     setValor={email}
                     setTextChange={setEmail} />
+
+                <InputEmail
+                    placeHolder='Ingresa la nueva contraseña'
+                    setValor={email}
+                    setTextChange={setEmail} />
+
 
                 <Buttons
                     textoBoton='Confirmar'

@@ -9,6 +9,8 @@ import SignUp from './src/screens/SignUp';
 import UpdateUser from './src/screens/UpdateUser';
 import TabNavigator from './src/tabNavigator/TabNavigator';
 import Recuperacion from './src/screens/Recuperacion';
+import Codigo from './src/screens/Codigo';
+import Cambio from './src/screens/Cambio';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +46,16 @@ export default function App() {
         <Stack.Screen
           name='Recuperacion'
           component={Recuperacion}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='Codigo'
+          component={Codigo}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='Cambio'
+          component={Cambio}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

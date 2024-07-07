@@ -72,30 +72,12 @@ export default function SignUp({ navigation }) {
   };
 
   const handleLogout = async () => {
-    /*
-            try {
-                const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=logOut`, {
-                    method: 'GET'
-                });
-    
-                const data = await response.json();
-    
-                if (data.status) {
-                    navigation.navigate('Sesion');
-                } else {
-                    console.log(data);
-                    // Alert the user about the error
-                    Alert.alert('Error', data.error);
-                }
-            } catch (error) {
-                console.error(error, "Error desde Catch");
-                Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
-            } */
     navigation.navigate('Sesion');
   };
 
-  //props que recibe input
-  //placeHolder, setValor, contra, setTextChange
+  const Cambio = async () => {
+    navigation.navigate('Cambio');
+  };
 
   // Función para crear un nuevo usuario
   const handleCreate = async () => {
@@ -198,7 +180,7 @@ export default function SignUp({ navigation }) {
 
         <Buttons
           textoBoton='Cambiar contraseña'
-          accionBoton={handleLogout}
+          accionBoton={Cambio}
         />
 
       </ScrollView>
