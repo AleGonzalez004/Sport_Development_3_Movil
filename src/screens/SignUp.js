@@ -1,9 +1,7 @@
-
 import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Constantes from '../utils/constantes'
-import Constants from 'expo-constants';
 //Import de componentes
 import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
@@ -16,12 +14,10 @@ import InputEmail from '../components/Inputs/InputEmail';
 export default function SignUp({ navigation }) {
     const ip = Constantes.IP;
 
-    // Estado para el DateTimePicker
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    // Estados de los campos de entrada
     const [nombre, setNombre] = useState('')
     const [apellido, setApellido] = useState('')
     const [email, setEmail] = useState('')
@@ -69,13 +65,38 @@ export default function SignUp({ navigation }) {
         */
 
     const handleLogout = async () => {
+        /*
+                try {
+                    const response = await fetch(${ip}/coffeeshop/api/services/public/cliente.php?action=logOut, {
+                        method: 'GET'
+                    });
+        
+                    const data = await response.json();
+        
+                    if (data.status) {
+                        navigation.navigate('Sesion');
+                    } else {
+                        console.log(data);
+                        // Alert the user about the error
+                        Alert.alert('Error', data.error);
+                    }
+                } catch (error) {
+                    console.error(error, "Error desde Catch");
+                    Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
+                } */
         navigation.navigate('Sesion');
     };
 
-    // Función para crear un nuevo usuario
+    //props que recibe input
+    //placeHolder, setValor, contra, setTextChange
+
     const handleCreate = async () => {
         try {
-            // Validación de los campos de entrada
+
+            // Calcular la fecha mínima permitida (18 años atrás desde la fecha actual)
+            const fechaMinima = new Date();
+            fechaMinima.setFullYear(fechaMinima.getFullYear() - 18);
+            // Validar los campos
             if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
                 !dui.trim() || !fechaNacimiento.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim()) {
                 Alert.alert("Debes llenar todos los campos");
@@ -93,6 +114,16 @@ export default function SignUp({ navigation }) {
 
             // Si todos los campos son válidos, proceder con la creación del usuario
             const formData = new FormData();
+            formData.append('nombreCliente', nombre);
+            formData.append('apellidoCliente', apellido);
+            formData.append('correoCliente', email);
+            formData.append('direccionCliente', direccion);
+            formData.append('duiCliente', dui);
+            formData.append('nacimientoCliente', fechaNacimiento);
+            formData.append('telefonoCliente', telefono);
+            formData.append('claveCliente', clave);
+            formData.append('confirmarClave', confirmarClave);
+
             // Agregar datos al formData
             const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=signUpMovil`, {
                 method: 'POST',
@@ -238,4 +269,3 @@ const styles = StyleSheet.create({
     },
 
 });
-

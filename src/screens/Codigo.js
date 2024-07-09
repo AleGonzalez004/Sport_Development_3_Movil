@@ -113,7 +113,7 @@ export default function SignUp({ navigation }) {
         }
     };
     const handleLogout = async () => {
-        navigation.navigate('Sesion');
+        navigation.navigate('Recuperacion');
       };
 
 
