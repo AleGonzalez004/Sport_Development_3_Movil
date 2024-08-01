@@ -3,7 +3,6 @@ import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity, Alert, Scro
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Constantes from '../utils/constantes'
-import Constants from 'expo-constants';
 //Import de componentes
 import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
@@ -11,12 +10,10 @@ import Buttons from '../components/Buttons/Button';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 import InputEmail from '../components/Inputs/InputEmail';
-import RNPickerSelect from "react-native-picker-select";
-import { FontAwesome } from "@expo/vector-icons"; // Importamos el ícono
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 
-export default function SignUp({ navigation }) {
+export default function readProfile({ navigation }) {
   const ip = Constantes.IP;
 
   // Estado para el DateTimePicker
@@ -80,11 +77,11 @@ export default function SignUp({ navigation }) {
   };
 
   // Función para crear un nuevo usuario
-  const handleCreate = async () => {
+  const handleEdit = async () => {
     try {
       // Validación de los campos de entrada
       if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
-        !dui.trim() || !fechaNacimiento.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim()) {
+        !dui.trim() || !fechaNacimiento.trim() || !telefono.trim()) {
         Alert.alert("Debes llenar todos los campos");
         return;
       } else if (!duiRegex.test(dui)) {
@@ -98,25 +95,33 @@ export default function SignUp({ navigation }) {
         return;
       }
 
-      // Si todos los campos son válidos, proceder con la creación del usuario
+      // Si todos los campos son válidos, proceder con la edición del perfil
       const formData = new FormData();
-      // Agregar datos al formData
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=signUpMovil`, {
+      formData.append('nombre_cliente', nombre);
+      formData.append('apellido_cliente', apellido);
+      formData.append('correo_cliente', email);
+      formData.append('dui_cliente', dui);
+      formData.append('telefono_cliente', telefono);
+      formData.append('direccion_cliente', direccion);
+      formData.append('nacimiento_cliente', fechaNacimiento);
+
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=readProfile`, {
         method: 'POST',
         body: formData
       });
 
       const data = await response.json();
       if (data.status) {
-        Alert.alert('Datos Guardados correctamente');
-        navigation.navigate('Sesion');
+        Alert.alert('Perfil actualizado correctamente');
+        navigation.navigate('Home');
       } else {
         Alert.alert('Error', data.error);
       }
     } catch (error) {
-      Alert.alert('Ocurrió un error al intentar crear el usuario');
+      Alert.alert('Ocurrió un error al intentar actualizar el perfil');
     }
   };
+
 
 
   return (
@@ -175,7 +180,7 @@ export default function SignUp({ navigation }) {
 
         <Buttons
           textoBoton='Editar perfil'
-          accionBoton={handleCreate}
+          accionBoton={handleEdit}
         />
 
         <Buttons
@@ -216,6 +221,7 @@ const styles = StyleSheet.create({
   texto: {
     color: '#FFF', fontWeight: '500',
     fontSize: 25,
+    marginVertical: 10
   },
   textRegistrar: {
     color: '#FFF', fontWeight: '500',
@@ -229,7 +235,6 @@ const styles = StyleSheet.create({
   fechaSeleccionar: {
     fontWeight: '500',
     color: '#16537E',
-    textDecorationLine: 'underline'
   },
   contenedorFecha: {
     backgroundColor: '#FFF',

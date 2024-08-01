@@ -211,9 +211,7 @@ export default function SignUp({ navigation }) {
                     textoBoton='Ir al Login'
                     accionBoton={handleLogout}
                 />
-
             </ScrollView>
-
         </View>
 
     );
@@ -251,7 +249,6 @@ const styles = StyleSheet.create({
     fechaSeleccionar: {
         fontWeight: '500',
         color: '#16537E',
-        textDecorationLine: 'underline'
     },
     contenedorFecha: {
         backgroundColor: '#FFF',
