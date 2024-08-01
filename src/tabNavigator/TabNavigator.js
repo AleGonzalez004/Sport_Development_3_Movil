@@ -18,7 +18,7 @@ const TabNavigator = () => {
             headerShown: false, // Oculta el header
             tabBarActiveTintColor: '#FFF', // Color de los íconos activos
             tabBarInactiveTintColor: '#FFF', // Color de los íconos inactivos
-            tabBarStyle: { backgroundColor: '#4092CE', 
+            tabBarStyle: { backgroundColor: '#16537E', 
               height: Platform.OS === 'ios' ? 80 : 60, // Estilo de la barra de pestañas, altura diferente para iOS y Android
            borderTopWidth: 0 }, // Estilo de la barra de pestañas
             tabBarIcon: ({ focused, color, size }) => { // Función que define el ícono de la pestaña

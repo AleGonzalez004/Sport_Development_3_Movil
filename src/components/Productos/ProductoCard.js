@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#4092CE',
+    backgroundColor: '#16537E',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: StatusBar.currentHeight || 0,
@@ -84,14 +84,14 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#4092CE',
+    backgroundColor: '#16537E',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#ffffff',
+    color: '#FFF',
     fontSize: 16,
     fontWeight: '500'
   },
@@ -110,14 +110,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4092CE',
+    backgroundColor: '#16537E',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginVertical: 10,
   },
   cartButtonText: {
-    color: '#ffffff',
+    color: '#FFF',
     fontSize: 16,
     fontWeight: '500',
     marginLeft: 10,

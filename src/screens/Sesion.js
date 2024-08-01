@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containerlog: {
-    backgroundColor: '#4092CE',
+    backgroundColor: '#16537E',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,

@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     contenedorFecha: {
-        backgroundColor: '#4092CE',
+        backgroundColor: '#16537E',
         color: "#fff", fontWeight: '500',
         width: 250,
         borderRadius: 5,

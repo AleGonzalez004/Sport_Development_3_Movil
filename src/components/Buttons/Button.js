@@ -16,10 +16,10 @@ export default function Buttons({ textoBoton, accionBoton }) {
 const styles = StyleSheet.create({
     button: {
         borderWidth: 1,
-        borderColor: "#4092CE",
+        borderColor: "#16537E",
         width: Platform.OS === 'ios' ? 200 : 200,
         borderRadius: 10,
-        backgroundColor: "#4092CE",
+        backgroundColor: "#16537E",
         padding: Platform.OS === 'ios' ? 15 : 10,
         marginVertical: 5,
     },

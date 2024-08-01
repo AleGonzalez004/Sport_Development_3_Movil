@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     scrollViewStyle: {
-        backgroundColor: '#4092CE',
+        backgroundColor: '#16537E',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
@@ -246,16 +246,16 @@ const styles = StyleSheet.create({
 
     fecha: {
         fontWeight: '500',
-        color: '#4092CE'
+        color: '#v'
     },
     fechaSeleccionar: {
         fontWeight: '500',
-        color: '#4092CE',
+        color: '#16537E',
         textDecorationLine: 'underline'
     },
     contenedorFecha: {
         backgroundColor: '#FFF',
-        color: "#4092CE", fontWeight: '500',
+        color: "#16537E", fontWeight: '500',
         width: 350,
         height: 45,
         borderRadius: 5,

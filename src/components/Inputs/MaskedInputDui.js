@@ -9,7 +9,7 @@ export default function MaskedInputDui({ dui, setDui }) {
         <TextInputMask
             style={styles.Input}
             placeholder="Dui"
-            placeholderTextColor="#4092CE"
+            placeholderTextColor="#16537E"
             type={'custom'}
             options={{
                 mask: '99999999-9'
@@ -24,7 +24,7 @@ export default function MaskedInputDui({ dui, setDui }) {
 const styles = StyleSheet.create({
     Input: {
         backgroundColor: '#FFF',
-        color: "#4092CE",
+        color: "#16537E",
         fontWeight: '500',
         width: 350,
         height: 45,

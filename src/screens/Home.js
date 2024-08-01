@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#4092CE',
+    color: '#16537E',
   },
   subtitle: {
     fontSize: 20,
     fontWeight: '500',
     textAlign: 'center',
     marginVertical: 5,
-    color: '#4092CE',
+    color: '#16537E',
   },
 });
