@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
 
     fecha: {
         fontWeight: '500',
-        color: '#v'
+        color: '#16537E'
     },
     fechaSeleccionar: {
         fontWeight: '500',
