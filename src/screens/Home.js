@@ -38,6 +38,10 @@ export default function Home({ navigation }) {
     navigation.navigate('UpdateUser');
   };
 
+  const Historial = () => {
+    navigation.navigate('Historial');
+  };
+
   // Función para obtener los datos del usuario
   const getUser = async () => {
     try {
@@ -81,6 +85,10 @@ export default function Home({ navigation }) {
       <Buttons
         textoBoton='Editar Usuario'
         accionBoton={EditUser}
+      />
+       <Buttons
+        textoBoton='Historial de compras'
+        accionBoton={Historial}
       />
       <Buttons
         textoBoton='Cerrar Sesión'

@@ -11,6 +11,7 @@ import TabNavigator from './src/tabNavigator/TabNavigator';
 import Recuperacion from './src/screens/Recuperacion';
 import Codigo from './src/screens/Codigo';
 import Cambio from './src/screens/Cambio';
+import Historial from './src/screens/Historial';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,11 @@ export default function App() {
          <Stack.Screen
           name='Cambio'
           component={Cambio}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='Historial'
+          component={Historial}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
