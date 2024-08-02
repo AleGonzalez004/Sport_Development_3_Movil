@@ -180,7 +180,7 @@ export default function getUser({ navigation }) {
           dui={dui}
           setDui={setDui} />
         <View style={styles.contenedorFecha}>
-          <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento:  <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
+          <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento: <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
           {show && (
             <DateTimePicker
               testID="dateTimePicker"
