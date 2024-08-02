@@ -1,8 +1,9 @@
 
-import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, Image, View, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Constantes from '../utils/constantes'
+import React, { useEffect } from 'react';
 //Import de componentes
 import Input from '../components/Inputs/Input'
 import InputMultiline from '../components/Inputs/InputMultiline'
@@ -13,14 +14,13 @@ import InputEmail from '../components/Inputs/InputEmail';
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 
-export default function readProfile({ navigation }) {
+export default function getUser({ navigation }) {
   const ip = Constantes.IP;
 
   // Estado para el DateTimePicker
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-
   // Estados de los campos de entrada
   const [nombre, setNombre] = useState('')
   const [apellido, setApellido] = useState('')
@@ -29,8 +29,6 @@ export default function readProfile({ navigation }) {
   const [dui, setDui] = useState('')
   const [telefono, setTelefono] = useState('')
   const [fechaNacimiento, setFechaNacimiento] = useState('')
-  const [clave, setClave] = useState('')
-  const [confirmarClave, setConfirmarClave] = useState('')
 
   // Expresiones regulares para validar DUI y teléfono
   const duiRegex = /^\d{8}-\d$/;
@@ -39,7 +37,6 @@ export default function readProfile({ navigation }) {
   /*
   Codigo para mostrar el datetimepicker
   */
-
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
@@ -76,6 +73,38 @@ export default function readProfile({ navigation }) {
     navigation.navigate('Cambio');
   };
 
+    // Función para obtener los datos del usuario
+    const getUser = async () => {
+      try {
+        // Enviar una solicitud HTTP al servidor para obtener los datos del usuario
+        const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`, {
+          method: 'GET'
+        });
+        const data = await response.json();
+        if (data.status) {
+          // Si la solicitud es exitosa, actualizar el estado con el nombre del usuario
+          setNombre(data.name.nombre_cliente);
+          setApellido(data.name.apellido_cliente);
+          setEmail(data.name.correo_cliente);
+          setDui(data.name.dui_cliente);
+          setTelefono(data.name.telefono_cliente);
+          setDireccion(data.name.direccion_cliente);
+          setFechaNacimiento(data.name.nacimiento_cliente);
+        } else {
+          // Si hay un error, mostrar una alerta
+          Alert.alert('Error', data.error);
+        }
+      } catch (error) {
+        // Si hay un error de red, mostrar una alerta
+        Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
+      }
+    };
+  
+    // Uso del React Hook useEffect para cargar los datos del usuario al montar el componente
+    useEffect(() => {
+      getUser();
+    }, []);
+
   // Función para crear un nuevo usuario
   const handleEdit = async () => {
     try {
@@ -105,7 +134,7 @@ export default function readProfile({ navigation }) {
       formData.append('direccion_cliente', direccion);
       formData.append('nacimiento_cliente', fechaNacimiento);
 
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=readProfile`, {
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=editProfile`, {
         method: 'POST',
         body: formData
       });
@@ -118,7 +147,7 @@ export default function readProfile({ navigation }) {
         Alert.alert('Error', data.error);
       }
     } catch (error) {
-      Alert.alert('Ocurrió un error al intentar actualizar el perfil');
+      Alert.alert('Ocurrió un error al intentar editar el perfil');
     }
   };
 
@@ -139,25 +168,25 @@ export default function readProfile({ navigation }) {
         <Input
           placeHolder='Nombre Cliente'
           setValor={nombre}
-          setTextChange={setNombre}
+          setTextChange={nombre}
         />
         <Input
           placeHolder='Apellido Cliente'
           setValor={apellido}
-          setTextChange={setApellido}
+          setTextChange={apellido}
         />
         <InputEmail
           placeHolder='Email Cliente'
           setValor={email}
-          setTextChange={setEmail} />
+          setTextChange={email} />
         <InputMultiline
           placeHolder='Dirección Cliente'
-          setValor={setDireccion}
+          setValor={direccion}
           valor={direccion}
-          setTextChange={setDireccion} />
+          setTextChange={direccion} />
         <MaskedInputDui
           dui={dui}
-          setDui={setDui} />
+          setDui={dui} />
         <View style={styles.contenedorFecha}>
           <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento:  <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
           {show && (
@@ -175,7 +204,7 @@ export default function readProfile({ navigation }) {
 
         <MaskedInputTelefono
           telefono={telefono}
-          setTelefono={setTelefono} />
+          setTelefono={telefono} />
 
 
         <Buttons
