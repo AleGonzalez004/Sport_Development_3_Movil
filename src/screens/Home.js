@@ -72,7 +72,6 @@ export default function Home({ navigation }) {
       />
       <Text style={styles.title}>Bienvenid@</Text>
       <Text style={styles.subtitle}>
-        { /*correo ? correo : 'No hay correo para mostrar'*/}
         {nombre ? nombre : 'No hay Nombre para mostrar'}
       </Text>
       <Buttons
