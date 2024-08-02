@@ -220,7 +220,7 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#16537E',
         paddingTop: 55,
         alignItems: 'center',
         justifyContent: 'center'

@@ -215,7 +215,7 @@ export default function getUser({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#16537E',
     paddingTop: 55,
     alignItems: 'center',
     justifyContent: 'center'
@@ -244,7 +244,6 @@ const styles = StyleSheet.create({
     color: '#FFF', fontWeight: '500',
     fontSize: 25
   },
-  
   contenedorFecha: {
     backgroundColor: '#FFF',
     flexDirection: 'row',
@@ -272,6 +271,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 50,
   },
-
 });
 
