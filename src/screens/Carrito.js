@@ -87,6 +87,7 @@ const Carrito = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <CarritoCard
       item={item}
+      imagenProducto={item.imagen_producto}
       cargarCategorias={getDetalleCarrito}
       modalVisible={modalVisible}
       setModalVisible={setModalVisible}
@@ -135,10 +136,6 @@ const Carrito = ({ navigation }) => {
             accionBoton={finalizarPedido}
           />
         )}
-        <Buttons
-          textoBoton='Regresar a productos'
-          accionBoton={backProducts}
-        />
       </View>
     </View>
   );
@@ -169,6 +166,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   containerButtons: {
+    marginVertical: 16,
     justifyContent: 'center',
     alignItems: 'center',
   }

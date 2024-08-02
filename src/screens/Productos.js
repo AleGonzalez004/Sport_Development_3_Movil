@@ -129,7 +129,7 @@ export default function Productos({ navigation }) {
       />
       <View>
         <Text style={styles.subtitle}>
-          /////////////////////////////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////////////////////
         </Text>
         <View style={styles.pickerContainer}>
           <RNPickerSelect
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
   ButtonVolver: {
     flexDirection: "row",
     marginRight: 310,
-    marginTop: 20,
+    marginTop: 10,
     backgroundColor: "#16537E",
     borderRadius: 8,
     paddingVertical: 12,
@@ -281,12 +281,9 @@ const styles = StyleSheet.create({
     color: "#FFF", // Brown color for the title
   },
   pickerContainer: {
-    borderWidth: 0,
+    alignItems: "left",
     borderColor: "#16537E", // Color del borde
     borderRadius: 5,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    marginBottom: 5,
     backgroundColor: "#16537E", // Color de fondo
     color: "#FFF",
   },

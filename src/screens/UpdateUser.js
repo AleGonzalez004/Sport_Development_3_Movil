@@ -155,7 +155,6 @@ export default function getUser({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.texto}>Editar Perfil</Text>
         <Image source={require('../img/user.png')} style={styles.image} />
-        <Buttons textoBoton='Cambiar foto de perfil' accionBoton={handleLogout} />
 
         <Input
           placeHolder='Nombre Cliente'
