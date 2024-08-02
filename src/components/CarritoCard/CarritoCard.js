@@ -1,6 +1,6 @@
 // Importaciones necesarias desde React y React Native
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, FlatList, Alert } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, FlatList, Alert, Image } from 'react-native';
 import Constants from 'expo-constants';
 import * as Constantes from '../../utils/constantes';
 
@@ -60,6 +60,13 @@ const CarritoCard = ({
 
   return (
     <View style={styles.itemContainer}>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${item.imagen_producto}` }}
+          style={styles.image}
+          resizeMode="contain" // Ajustar la imagen al contenedor
+        />
+      </View>
       <Text style={styles.itemText}>ID: {item.id_detalle}</Text>
       <Text style={styles.itemText}>Nombre: {item.nombre_producto}</Text>
       <Text style={styles.itemText}>Precio: ${item.precio_producto}</Text>
@@ -154,5 +161,14 @@ const styles = StyleSheet.create({
   containerButtons: {
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  image: {
+    width: '65%',
+    height: 150,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+  imageContainer: {
+    alignItems: 'center',
+  },
 });
