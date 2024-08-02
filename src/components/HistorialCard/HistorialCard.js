@@ -21,6 +21,7 @@ const CarritoCard = ({
   updateDataDetalleCarrito
 }) => {
   const ip = Constantes.IP;
+  
 
   // Función para manejar la eliminación de un detalle del carrito
   const handleDeleteDetalleCarrito = async (idDetalle) => {
@@ -59,13 +60,12 @@ const CarritoCard = ({
       Alert.alert("Error al eliminar del carrito")
     }
   };
-  
 
   return (
     <View style={styles.itemContainer}>
-    <View style={styles.imageContainer}>
+      <View style={styles.imageContainer}>
         <Image
-          source={{ url: `${ip}/Sport_Development_3/api/images/productos/${imagenProducto}` }}
+          source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${imagenProducto}` }}
           style={styles.image}
           resizeMode="contain" // Ajustar la imagen al contenedor
         />
@@ -73,6 +73,8 @@ const CarritoCard = ({
       <Text style={styles.itemText}>Nombre: {item.nombre_producto}</Text>
       <Text style={styles.itemText}>Precio: ${item.precio_producto}</Text>
       <Text style={styles.itemText}>Cantidad: {item.cantidad_producto}</Text>
+      <Text style={styles.itemText}>Fecha de compra: {item.fecha_registro}</Text>
+      <Text style={styles.itemText}>Direccion: {item.direccion_pedido}</Text>
       <Text style={styles.itemText}>SubTotal: ${(parseFloat(item.cantidad_producto) * parseFloat(item.precio_producto)).toFixed(2)}</Text>
     </View>
   );

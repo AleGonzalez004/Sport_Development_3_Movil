@@ -1,6 +1,7 @@
 // Importaciones necesarias
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList, Alert } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Alert, TouchableOpacity,} from 'react-native';
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 import { useFocusEffect } from '@react-navigation/native';
 // Importa la función useFocusEffect de @react-navigation/native, 
@@ -27,6 +28,10 @@ const Carrito = ({ navigation }) => {
   // Función para navegar hacia atrás a la pantalla de productos
   const backProducts = () => {
     navigation.navigate('Productos');
+  };
+
+  const volverInicio = async () => {
+    navigation.navigate("Home");
   };
 
   // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
@@ -85,6 +90,9 @@ const Carrito = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+        <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
+        <AntDesign name="arrowleft" size={20} color="white" />
+      </TouchableOpacity>
       {/* Componente de modal para editar cantidad */}
       <ModalEditarCantidad
         setModalVisible={setModalVisible}
@@ -142,5 +150,14 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  ButtonVolver: {
+    flexDirection: "row",
+    marginRight: 310,
+    marginTop: 10,
+    backgroundColor: "#16537E",
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+  },
 });
