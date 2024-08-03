@@ -151,7 +151,7 @@ export default function UserProfile({ navigation }) {
       });
   
       const responseText = await response.text();
-      console.log('Change Password Response:', responseText);  // Verifica la respuesta del cambio de contraseña
+      console.log('Change Password Response:', responseText);
   
       let data;
       try {
