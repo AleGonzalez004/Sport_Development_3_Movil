@@ -35,6 +35,17 @@ export default function UserProfile({ navigation }) {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
+    
+    // Calcula la fecha mínima permitida (hace 18 años desde hoy)
+    const eighteenYearsAgo = new Date();
+    eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+  
+    // Verifica si la fecha seleccionada es menor a la fecha mínima
+    if (currentDate > eighteenYearsAgo) {
+      Alert.alert('Error', 'Debes tener al menos 18 años.');
+      return;
+    }
+  
     setDate(currentDate);
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -173,31 +184,37 @@ export default function UserProfile({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.texto}>Editar Perfil</Text>
         <Image source={require('../img/user.png')} style={styles.image} />
+        <Text style={styles.label}>Nombre:</Text>
         <Input
           placeHolder='Nombre Cliente'
           valor={nombre}
           setTextChange={setNombre}
         />
+        <Text style={styles.label}>Apellido:</Text>
         <Input
           placeHolder='Apellido Cliente'
           valor={apellido}
           setTextChange={setApellido}
         />
+        <Text style={styles.label}>Email:</Text>
         <InputEmail
           placeHolder='Email Cliente'
           valor={email}
           setTextChange={setEmail} />
+        <Text style={styles.label}>Dirección:</Text>
         <InputMultiline
           placeHolder='Dirección Cliente'
           valor={direccion}
           setTextChange={setDireccion} />
+        <Text style={styles.label}>DUI:</Text>
         <MaskedInputDui
           dui={dui}
           setDui={setDui} />
+        <Text style={styles.label}>Fecha de nacimiento:</Text>
         <View style={styles.contenedorFecha}>
           <TouchableOpacity onPress={showDatepicker}>
             <Text style={styles.fechaSeleccionar}>
-              Seleccionar Fecha de Nacimiento: <Text style={styles.fecha}> {fechaNacimiento}</Text>
+            <Text style={styles.fecha}> {fechaNacimiento || 'Selecciona tu fecha de nacimiento'}</Text>
             </Text>
           </TouchableOpacity>
           {show && (
@@ -213,6 +230,7 @@ export default function UserProfile({ navigation }) {
           )}
         </View>
 
+        <Text style={styles.label}>Teléfono:</Text>
         <MaskedInputTelefono
           telefono={telefono}
           setTelefono={setTelefono} />
@@ -327,12 +345,12 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   fechaSeleccionar: {
-    fontSize: 13,
+    fontSize: 14,
     color: '#16537E',
     fontWeight: '500'
   },
   fecha: {
-    fontSize: 13,
+    fontSize: 14,
     color: '#16537E',
     fontWeight: '500'
   },
@@ -381,6 +399,13 @@ const styles = StyleSheet.create({
   modalButtonText: {
     color: 'white',
     fontWeight: 'bold'
+  },
+  label: {
+    fontSize: 14,
+    color: '#FFF',
+    marginBottom: 5,
+    alignSelf: 'flex-start',
+    marginLeft: 10,
   },
 });
 
