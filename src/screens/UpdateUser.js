@@ -30,8 +30,9 @@ export default function getUser({ navigation }) {
 
   // Estado para el Modal de cambiar contraseña
   const [modalVisible, setModalVisible] = useState(false);
-  const [nuevaContraseña, setNuevaContraseña] = useState('');
-  const [confirmarContraseña, setConfirmarContraseña] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   // Expresiones regulares para validar DUI y teléfono
   const duiRegex = /^\d{8}-\d$/;
@@ -148,16 +149,39 @@ export default function getUser({ navigation }) {
         Alert.alert('Ocurrió un error al intentar editar el perfil');
     }
 };
+const ChangePasswordModal = ({ modalVisible, setModalVisible }) => {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+};
 
  
-const handleChangePassword = () => {
-  if (nuevaContraseña !== confirmarContraseña) {
-    Alert.alert("Las contraseñas no coinciden");
+const handleChangePassword = async () => {
+  if (newPassword !== confirmPassword) {
+    Alert.alert("Las contraseñas nuevas no coinciden");
     return;
   }
-  // Aquí puedes agregar la lógica para cambiar la contraseña
-  Alert.alert("Contraseña cambiada con éxito");
-  setModalVisible(false);
+
+  try {
+    const formData = new FormData();
+    formData.append('currentPassword', currentPassword);
+    formData.append('newPassword', newPassword);
+
+    const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=changePassword`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (data.status) {
+      Alert.alert("Contraseña cambiada con éxito");
+      setModalVisible(false);
+    } else {
+      Alert.alert('Error', data.error);
+    }
+  } catch (error) {
+    Alert.alert('Ocurrió un error al intentar cambiar la contraseña');
+  }
 };
 
 return (
@@ -220,49 +244,43 @@ return (
 
       {/* Modal para cambiar la contraseña */}
       <Modal
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Cambiar Contraseña</Text>
-            <TextInput
-              style={styles.modalInput}
-              placeholder="Contraseña actual"
-              secureTextEntry={true}
-              value={nuevaContraseña}
-              onChangeText={setNuevaContraseña}
-            />
-            <TextInput
-              style={styles.modalInput}
-              placeholder="Nueva Contraseña"
-              secureTextEntry={true}
-              value={nuevaContraseña}
-              onChangeText={setNuevaContraseña}
-            />
-            <TextInput
-              style={styles.modalInput}
-              placeholder="Confirmar Contraseña"
-              secureTextEntry={true}
-              value={confirmarContraseña}
-              onChangeText={setConfirmarContraseña}
-            />
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={handleChangePassword}
-            >
-              <Text style={styles.modalButtonText}>Cambiar Contraseña</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.modalButtonText}>Cancelar</Text>
-            </TouchableOpacity>
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Cambiar Contraseña</Text>
+              <TextInput
+                style={styles.modalInput}
+                placeholder='Contraseña Actual'
+                secureTextEntry
+                value={currentPassword}
+                onChangeText={setCurrentPassword}
+              />
+              <TextInput
+                style={styles.modalInput}
+                placeholder='Nueva Contraseña'
+                secureTextEntry
+                value={newPassword}
+                onChangeText={setNewPassword}
+              />
+              <TextInput
+                style={styles.modalInput}
+                placeholder='Confirmar Nueva Contraseña'
+                secureTextEntry
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+              />
+              <TouchableOpacity onPress={handleChangePassword} style={styles.modalButton}>
+                <Text style={styles.modalButtonText}>Guardar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalButton}>
+                <Text style={styles.modalButtonText}>Cancelar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
     </ScrollView>
   </View>
 );
