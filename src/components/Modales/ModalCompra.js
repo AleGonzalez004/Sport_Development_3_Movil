@@ -1,5 +1,5 @@
 // Importaciones necesarias desde React y React Native
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes';
@@ -12,7 +12,7 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
   // Función para manejar la creación del detalle de compra
   const handleCreateDetail = async () => {
     try {
-      if (cantidad < 0) {
+      if (cantidad <= 0) {  // Cambié la validación para permitir sólo cantidades positivas
         Alert.alert("Debes llenar todos los campos");
         return;
       } else {
@@ -30,6 +30,7 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
         if (data.status) {
           Alert.alert('Datos Guardados correctamente');
           cerrarModal(false);
+          setCantidad('');  // Limpiar el campo de cantidad
         } else {
           Alert.alert('Error', data.error);
         }
@@ -42,6 +43,7 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
   // Función para cancelar la acción de agregar al carrito
   const handleCancelCarrito = () => {
     cerrarModal(false);
+    setCantidad('');  // Limpiar el campo de cantidad
   };
 
   return (
@@ -51,7 +53,8 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
       animationType="slide"
       transparent={true}
       onRequestClose={() => {
-        cerrarModal(!visible);
+        cerrarModal(false);
+        setCantidad('');  // Limpiar el campo de cantidad
       }}
     >
       {/* Vista centralizada para el modal */}
