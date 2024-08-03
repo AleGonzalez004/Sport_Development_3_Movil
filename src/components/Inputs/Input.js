@@ -5,15 +5,13 @@ import React from 'react';
 export default function Input({ placeHolder, valor, contra, setTextChange }) {
   return (
     <TextInput
-      style={styles.Input}
-      placeholder={placeHolder}
-      value={valor}
-      onChangeText={setTextChange}
-      placeholderTextColor={'#16537E'}
-      secureTextEntry={contra}
-      multiline={true}
-      numberOfLines={4}
-    />
+    style={styles.Input}
+    placeholder={placeHolder}
+    value={valor}
+    onChangeText={setTextChange}
+    secureTextEntry={contra} // Controla si se debe ocultar el texto
+    placeholderTextColor="#16537E"
+/>
   );
 }
 

@@ -114,7 +114,8 @@ export default function Sesion({ navigation }) {
           placeHolder='Contraseña'
           valor={contrasenia}
           setTextChange={setContrasenia}
-          contra={isContra} />
+          contra={isContra} // Pasa el estado isContra para ocultar la contraseña
+        />
       </View>
       <Buttons
         textoBoton='Iniciar Sesión'
