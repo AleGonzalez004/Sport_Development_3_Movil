@@ -128,33 +128,40 @@ export default function UserProfile({ navigation }) {
   };
 
   const handleChangePassword = async () => {
+    // Validar si las contraseñas coinciden
     if (claveNueva !== confirmarClave) {
       Alert.alert("Las contraseñas nuevas no coinciden");
       return;
     }
-
+  
     try {
+      // Preparar los datos para enviar
       const formData = new FormData();
       formData.append('claveActual', claveActual);
       formData.append('claveNueva', claveNueva);
-
+  
+      // Hacer la petición al servidor
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=changePassword`, {
         method: 'POST',
         body: formData,
       });
-
+  
+      // Analizar la respuesta
       const data = await response.json();
       if (data.status) {
+        // Si la respuesta es positiva
         Alert.alert("Contraseña cambiada con éxito");
         setModalVisible(false);
       } else {
+        // Si la respuesta es negativa
         Alert.alert('Error', data.error);
       }
     } catch (error) {
+      // Manejar errores de red o de servidor
       Alert.alert('Ocurrió un error al intentar cambiar la contraseña');
     }
   };
-
+  
   useEffect(() => {
     getUser();
   }, []);
@@ -225,7 +232,13 @@ export default function UserProfile({ navigation }) {
         <Modal
           transparent={true}
           visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
+          onRequestClose={() => {
+            setModalVisible(false);
+            // Opcionalmente, limpiar los campos de contraseña aquí
+            setClaveActual('');
+            setClaveNueva('');
+            setConfirmarClave('');
+          }}
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
@@ -257,7 +270,13 @@ export default function UserProfile({ navigation }) {
               />
               <Buttons
                 textoBoton='Cancelar'
-                accionBoton={() => setModalVisible(false)}
+                accionBoton={() => {
+                  setModalVisible(false);
+                  // Limpiar campos de contraseña si es necesario
+                  setClaveActual('');
+                  setClaveNueva('');
+                  setConfirmarClave('');
+                }}
               />
             </View>
           </View>
