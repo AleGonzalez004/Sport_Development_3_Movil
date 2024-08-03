@@ -38,6 +38,12 @@ export default function Productos({ navigation }) {
     navigation.navigate("Home");
   };
 
+   // Función para navegar a la pantalla de inicio
+   const Detalle = async () => {
+    navigation.navigate("Detalle");
+  };
+
+
   // Función para manejar la apertura del modal de compra
   const handleCompra = (nombre, id) => {
     setModalVisible(true);
@@ -148,7 +154,7 @@ export default function Productos({ navigation }) {
           data={dataProductos}
           keyExtractor={(item) => item.id_producto}
           renderItem={(
-            { item } // Util izamos destructuración para obtener directamente el item
+            { item }
           ) => (
             <ProductoCard
               ip={ip}
@@ -160,6 +166,9 @@ export default function Productos({ navigation }) {
               existenciasProducto={item.existencias_producto}
               accionBotonProducto={() =>
                 handleCompra(item.nombre_producto, item.id_producto)
+              }
+              Detalle={() =>
+                Detalle(item.nombre_producto, item.id_producto)
               }
             />
           )}

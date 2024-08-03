@@ -15,7 +15,7 @@ export default function Recuperacion({ navigation }) {
             Alert.alert("Por favor, ingresa un correo electrónico.");
             return;
         }
-
+    
         try {
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
                 method: 'POST',
@@ -26,19 +26,22 @@ export default function Recuperacion({ navigation }) {
                     email: email,
                 }),
             });
-
-            const data = await response.json();
-
-            if (data.status) {
+    
+            const textResponse = await response.text(); // Usa .text() para respuestas en texto plano
+    
+            if (textResponse.includes('Código enviado correctamente.')) {
                 Alert.alert('Código enviado', 'Un código de recuperación ha sido enviado a tu correo.');
                 navigation.navigate('Codigo'); // Navegar al siguiente paso
             } else {
-                Alert.alert('Error', data.error || 'No se pudo enviar el código.');
+                Alert.alert('Error', textResponse || 'No se pudo enviar el código.');
             }
         } catch (error) {
+            console.error('Error en la solicitud:', error); // Mostrar el error en la consola
             Alert.alert('Error', 'Ocurrió un error al enviar el código.');
         }
     };
+    
+    
 
     const handleLogout = async () => {
         navigation.navigate('Sesion');

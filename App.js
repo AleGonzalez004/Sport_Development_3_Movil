@@ -11,6 +11,8 @@ import TabNavigator from './src/tabNavigator/TabNavigator';
 import Recuperacion from './src/screens/Recuperacion';
 import Codigo from './src/screens/Codigo';
 import Historial from './src/screens/Historial';
+import Detalle from './src/screens/Detalle';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +58,11 @@ export default function App() {
          <Stack.Screen
           name='Historial'
           component={Historial}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='Detalle'
+          component={Detalle}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

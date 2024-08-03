@@ -29,12 +29,6 @@ export default function ProductoCard({ ip, imagenProducto, idProducto, nombrePro
         <FontAwesome name="plus-circle" size={24} color="white" />
         <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.cartButton}
-        onPress={Detalle}>
-        <FontAwesome name="address-card" size={24} color="white" />
-        <Text style={styles.cartButtonText}>Ver detalle</Text>
-      </TouchableOpacity>
     </View>
   );
 }
