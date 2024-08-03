@@ -85,7 +85,7 @@ export default function Sesion({ navigation }) {
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
-      Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
+      Alert.alert('Correo no encontrado');
     }
   };
 
