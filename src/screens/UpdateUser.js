@@ -55,20 +55,15 @@ export default function UserProfile({ navigation }) {
     showMode('date');
   };
 
-  const handleLogout = () => {
-    navigation.navigate('Sesion');
-  };
-
-  const Cambio = () => {
-    navigation.navigate('Cambio');
-  };
 
   const getUser = async () => {
     try {
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`, {
         method: 'GET'
       });
+      console.log('Fetch response:', response);  // Verifica la respuesta
       const data = await response.json();
+      console.log('Fetch data:', data);  // Verifica los datos recibidos
       if (data.status) {
         setNombre(data.name.nombre_cliente);
         setApellido(data.name.apellido_cliente);
@@ -79,6 +74,7 @@ export default function UserProfile({ navigation }) {
         setFechaNacimiento(data.name.nacimiento_cliente);
         const [year, month, day] = data.name.nacimiento_cliente.split('-');
         setDate(new Date(year, month - 1, day));
+        setClaveActual(data.name.clave_cliente);
       } else {
         Alert.alert('Error', data.error);
       }
@@ -128,37 +124,40 @@ export default function UserProfile({ navigation }) {
   };
 
   const handleChangePassword = async () => {
-    // Validar si las contraseñas coinciden
     if (claveNueva !== confirmarClave) {
       Alert.alert("Las contraseñas nuevas no coinciden");
       return;
     }
   
     try {
-      // Preparar los datos para enviar
       const formData = new FormData();
       formData.append('claveActual', claveActual);
       formData.append('claveNueva', claveNueva);
   
-      // Hacer la petición al servidor
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=changePassword`, {
         method: 'POST',
         body: formData,
       });
   
-      // Analizar la respuesta
-      const data = await response.json();
+      const responseText = await response.text();
+      console.log('Change Password Response:', responseText);  // Verifica la respuesta del cambio de contraseña
+  
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (jsonError) {
+        throw new Error(`Respuesta del servidor no es JSON: ${responseText}`);
+      }
+  
       if (data.status) {
-        // Si la respuesta es positiva
         Alert.alert("Contraseña cambiada con éxito");
         setModalVisible(false);
       } else {
-        // Si la respuesta es negativa
         Alert.alert('Error', data.error);
       }
     } catch (error) {
-      // Manejar errores de red o de servidor
-      Alert.alert('Ocurrió un error al intentar cambiar la contraseña');
+      console.error('Error en el manejo de cambio de contraseña:', error);
+      Alert.alert('Ocurrió un error al intentar cambiar la contraseña', error.message);
     }
   };
   
