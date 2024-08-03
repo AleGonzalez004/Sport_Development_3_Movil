@@ -15,7 +15,7 @@ export default function Recuperacion({ navigation }) {
             Alert.alert("Por favor, ingresa un correo electrónico.");
             return;
         }
-    
+
         try {
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
                 method: 'POST',
@@ -26,9 +26,9 @@ export default function Recuperacion({ navigation }) {
                     email: email,
                 }),
             });
-    
+
             const data = await response.json();
-    
+
             if (data.status) {
                 Alert.alert('Código enviado', 'Un código de recuperación ha sido enviado a tu correo.');
                 navigation.navigate('Codigo'); // Navegar al siguiente paso
@@ -39,7 +39,6 @@ export default function Recuperacion({ navigation }) {
             Alert.alert('Error', 'Ocurrió un error al enviar el código.');
         }
     };
-    
 
     const handleLogout = async () => {
         navigation.navigate('Sesion');
@@ -68,12 +67,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#16537E',
-        paddingTop: Constants.statusBarHeight + 0, 
+        paddingTop: Constants.statusBarHeight + 0,
         alignItems: 'center',
         justifyContent: 'center',
     },
     texto: {
-        color: '#FFF', 
+        color: '#FFF',
         fontWeight: '500',
         fontSize: 20,
         marginVertical: 20,
