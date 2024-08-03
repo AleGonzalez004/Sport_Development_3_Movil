@@ -2,12 +2,12 @@
 import { StyleSheet, TextInput, Platform } from 'react-native';
 
 // Componente InputEmail que recibe varias props para gestionar el valor y los cambios de texto
-export default function InputEmail({ placeHolder, setValor, setTextChange }) {
+export default function InputEmail({ placeHolder, valor, setTextChange }) {
     return (
         <TextInput
             style={styles.Input}
             placeholder={placeHolder}
-            value={setValor}
+            value={valor}
             placeholderTextColor={'#16537E'}
             onChangeText={setTextChange}
             keyboardType="email-address"
