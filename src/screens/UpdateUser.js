@@ -1,9 +1,7 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert, ScrollView, Modal, TextInput } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Constantes from '../utils/constantes';
-import React, { useEffect } from 'react';
-// Import de componentes
 import Input from '../components/Inputs/Input';
 import InputMultiline from '../components/Inputs/InputMultiline';
 import Buttons from '../components/Buttons/Button';
@@ -12,14 +10,12 @@ import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 import InputEmail from '../components/Inputs/InputEmail';
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-export default function getUser({ navigation }) {
+export default function UserProfile({ navigation }) {
   const ip = Constantes.IP;
 
-  // Estado para el DateTimePicker
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  // Estados de los campos de entrada
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
@@ -28,27 +24,22 @@ export default function getUser({ navigation }) {
   const [telefono, setTelefono] = useState('');
   const [fechaNacimiento, setFechaNacimiento] = useState('');
 
-  // Estado para el Modal de cambiar contraseña
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [claveActual, setClaveActual] = useState('');
+  const [claveNueva, setClaveNueva] = useState('');
+  const [confirmarClave, setConfirmarClave] = useState('');
 
-  // Expresiones regulares para validar DUI y teléfono
   const duiRegex = /^\d{8}-\d$/;
   const telefonoRegex = /^\d{4}-\d{4}$/;
 
-  // Código para mostrar el datetimepicker
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(false);
     setDate(currentDate);
-    // Código para convertir la fecha al formato año-mes-día
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
-    const fechaNueva = `${year}-${month}-${day}`;
-    setFechaNacimiento(fechaNueva);
+    setFechaNacimiento(`${year}-${month}-${day}`);
   };
 
   const showMode = (currentMode) => {
@@ -56,7 +47,7 @@ export default function getUser({ navigation }) {
     setMode(currentMode);
   };
 
-  const volverInicio = async () => {
+  const volverInicio = () => {
     navigation.navigate("Home");
   };
 
@@ -64,24 +55,21 @@ export default function getUser({ navigation }) {
     showMode('date');
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     navigation.navigate('Sesion');
   };
 
-  const Cambio = async () => {
+  const Cambio = () => {
     navigation.navigate('Cambio');
   };
 
-  // Función para obtener los datos del usuario
   const getUser = async () => {
     try {
-      // Enviar una solicitud HTTP al servidor para obtener los datos del usuario
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`, {
         method: 'GET'
       });
       const data = await response.json();
       if (data.status) {
-        // Si la solicitud es exitosa, actualizar el estado con el nombre del usuario
         setNombre(data.name.nombre_cliente);
         setApellido(data.name.apellido_cliente);
         setEmail(data.name.correo_cliente);
@@ -89,161 +77,152 @@ export default function getUser({ navigation }) {
         setTelefono(data.name.telefono_cliente);
         setDireccion(data.name.direccion_cliente);
         setFechaNacimiento(data.name.nacimiento_cliente);
-        // Actualizar el estado date con la fecha de nacimiento del usuario
         const [year, month, day] = data.name.nacimiento_cliente.split('-');
         setDate(new Date(year, month - 1, day));
       } else {
-        // Si hay un error, mostrar una alerta
         Alert.alert('Error', data.error);
       }
     } catch (error) {
-      // Si hay un error de red, mostrar una alerta
-      Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
+      Alert.alert('Error', 'Ocurrió un error al obtener los datos del usuario');
     }
   };
 
-  // Uso del React Hook useEffect para cargar los datos del usuario al montar el componente
+  const handleEdit = async () => {
+    try {
+      if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
+          !dui.trim() || !fechaNacimiento.trim() || !telefono.trim()) {
+        Alert.alert("Debes llenar todos los campos");
+        return;
+      } else if (!duiRegex.test(dui)) {
+        Alert.alert("El DUI debe tener el formato correcto (########-#)");
+        return;
+      } else if (!telefonoRegex.test(telefono)) {
+        Alert.alert("El teléfono debe tener el formato correcto (####-####)");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('nombreCliente', nombre);
+      formData.append('apellidoCliente', apellido);
+      formData.append('correoCliente', email);
+      formData.append('duiCliente', dui);
+      formData.append('telefonoCliente', telefono);
+      formData.append('direccionCliente', direccion);
+      formData.append('nacimientoCliente', fechaNacimiento);
+
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=editProfile`, {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      if (data.status) {
+        Alert.alert('Perfil actualizado correctamente');
+        navigation.navigate('Home');
+      } else {
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      Alert.alert('Ocurrió un error al intentar editar el perfil');
+    }
+  };
+
+  const handleChangePassword = async () => {
+    if (claveNueva !== confirmarClave) {
+      Alert.alert("Las contraseñas nuevas no coinciden");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('claveActual', claveActual);
+      formData.append('claveNueva', claveNueva);
+
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=changePassword`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.status) {
+        Alert.alert("Contraseña cambiada con éxito");
+        setModalVisible(false);
+      } else {
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      Alert.alert('Ocurrió un error al intentar cambiar la contraseña');
+    }
+  };
+
   useEffect(() => {
     getUser();
   }, []);
 
-  // Función para crear un nuevo usuario
-  const handleEdit = async () => {
-    try {
-        // Validación de los campos de entrada
-        if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
-            !dui.trim() || !fechaNacimiento.trim() || !telefono.trim()) {
-            Alert.alert("Debes llenar todos los campos");
-            return;
-        } else if (!duiRegex.test(dui)) {
-            Alert.alert("El DUI debe tener el formato correcto (########-#)");
-            return;
-        } else if (!telefonoRegex.test(telefono)) {
-            Alert.alert("El teléfono debe tener el formato correcto (####-####)");
-            return;
-        } 
+  return (
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
+          <AntDesign name="arrowleft" size={20} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.texto}>Editar Perfil</Text>
+        <Image source={require('../img/user.png')} style={styles.image} />
+        <Input
+          placeHolder='Nombre Cliente'
+          valor={nombre}
+          setTextChange={setNombre}
+        />
+        <Input
+          placeHolder='Apellido Cliente'
+          valor={apellido}
+          setTextChange={setApellido}
+        />
+        <InputEmail
+          placeHolder='Email Cliente'
+          valor={email}
+          setTextChange={setEmail} />
+        <InputMultiline
+          placeHolder='Dirección Cliente'
+          valor={direccion}
+          setTextChange={setDireccion} />
+        <MaskedInputDui
+          dui={dui}
+          setDui={setDui} />
+        <View style={styles.contenedorFecha}>
+          <TouchableOpacity onPress={showDatepicker}>
+            <Text style={styles.fechaSeleccionar}>
+              Seleccionar Fecha de Nacimiento: <Text style={styles.fecha}> {fechaNacimiento}</Text>
+            </Text>
+          </TouchableOpacity>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())}
+              maximumDate={new Date()}
+              onChange={onChange}
+            />
+          )}
+        </View>
 
-        // Si todos los campos son válidos, proceder con la edición del perfil
-        const formData = new FormData();
-        formData.append('nombreCliente', nombre);
-        formData.append('apellidoCliente', apellido);
-        formData.append('correoCliente', email);
-        formData.append('duiCliente', dui);
-        formData.append('telefonoCliente', telefono);
-        formData.append('direccionCliente', direccion);
-        formData.append('nacimientoCliente', fechaNacimiento);
+        <MaskedInputTelefono
+          telefono={telefono}
+          setTelefono={setTelefono} />
 
-        const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=editProfile`, {
-            method: 'POST',
-            body: formData
-        });
+        <Buttons
+          textoBoton='Editar perfil'
+          accionBoton={handleEdit}
+        />
 
-        const data = await response.json();
-        if (data.status) {
-            Alert.alert('Perfil actualizado correctamente');
-            navigation.navigate('Home');
-        } else {
-            Alert.alert('Error', data.error);
-        }
-    } catch (error) {
-        Alert.alert('Ocurrió un error al intentar editar el perfil');
-    }
-};
-const ChangePasswordModal = ({ modalVisible, setModalVisible }) => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-};
+        <Buttons
+          textoBoton='Cambiar contraseña'
+          accionBoton={() => setModalVisible(true)}
+        />
 
- 
-const handleChangePassword = async () => {
-  if (newPassword !== confirmPassword) {
-    Alert.alert("Las contraseñas nuevas no coinciden");
-    return;
-  }
-
-  try {
-    const formData = new FormData();
-    formData.append('currentPassword', currentPassword);
-    formData.append('newPassword', newPassword);
-
-    const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=changePassword`, {
-      method: 'POST',
-      body: formData,
-    });
-
-    const data = await response.json();
-    if (data.status) {
-      Alert.alert("Contraseña cambiada con éxito");
-      setModalVisible(false);
-    } else {
-      Alert.alert('Error', data.error);
-    }
-  } catch (error) {
-    Alert.alert('Ocurrió un error al intentar cambiar la contraseña');
-  }
-};
-
-return (
-  <View style={styles.container}>
-    <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-      <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
-        <AntDesign name="arrowleft" size={20} color="white" />
-      </TouchableOpacity>
-      <Text style={styles.texto}>Editar Perfil</Text>
-      <Image source={require('../img/user.png')} style={styles.image} />
-      <Input
-        placeHolder='Nombre Cliente'
-        valor={nombre}
-        setTextChange={setNombre}
-      />
-      <Input
-        placeHolder='Apellido Cliente'
-        valor={apellido}
-        setTextChange={setApellido}
-      />
-      <InputEmail
-        placeHolder='Email Cliente'
-        valor={email}
-        setTextChange={setEmail} />
-      <InputMultiline
-        placeHolder='Dirección Cliente'
-        valor={direccion}
-        setTextChange={setDireccion} />
-      <MaskedInputDui
-        dui={dui}
-        setDui={setDui} />
-      <View style={styles.contenedorFecha}>
-        <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento: <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
-            maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
-            onChange={onChange}
-          />
-        )}
-      </View>
-
-      <MaskedInputTelefono
-        telefono={telefono}
-        setTelefono={setTelefono} />
-
-      <Buttons
-        textoBoton='Editar perfil'
-        accionBoton={handleEdit}
-      />
-
-      <Buttons
-        textoBoton='Cambiar contraseña'
-        accionBoton={() => setModalVisible(true)}  // Muestra el modal
-      />
-
-      {/* Modal para cambiar la contraseña */}
-      <Modal
+        {/* Modal para cambiar la contraseña */}
+        <Modal
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
@@ -255,37 +234,38 @@ return (
                 style={styles.modalInput}
                 placeholder='Contraseña Actual'
                 secureTextEntry
-                value={currentPassword}
-                onChangeText={setCurrentPassword}
+                value={claveActual}
+                onChangeText={setClaveActual}
               />
               <TextInput
                 style={styles.modalInput}
                 placeholder='Nueva Contraseña'
                 secureTextEntry
-                value={newPassword}
-                onChangeText={setNewPassword}
+                value={claveNueva}
+                onChangeText={setClaveNueva}
               />
               <TextInput
                 style={styles.modalInput}
                 placeholder='Confirmar Nueva Contraseña'
                 secureTextEntry
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
+                value={confirmarClave}
+                onChangeText={setConfirmarClave}
               />
-              <TouchableOpacity onPress={handleChangePassword} style={styles.modalButton}>
-                <Text style={styles.modalButtonText}>Guardar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalButton}>
-                <Text style={styles.modalButtonText}>Cancelar</Text>
-              </TouchableOpacity>
+              <Buttons
+                textoBoton='Confirmar'
+                accionBoton={handleChangePassword}
+              />
+              <Buttons
+                textoBoton='Cancelar'
+                accionBoton={() => setModalVisible(false)}
+              />
             </View>
           </View>
         </Modal>
-    </ScrollView>
-  </View>
-);
+      </ScrollView>
+    </View>
+  );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
