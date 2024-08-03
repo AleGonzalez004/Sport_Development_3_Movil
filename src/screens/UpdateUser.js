@@ -1,11 +1,11 @@
-import { StyleSheet, Text, Image, View, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, Image, View, TouchableOpacity, Alert, ScrollView, Modal, TextInput } from 'react-native';
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import * as Constantes from '../utils/constantes'
+import * as Constantes from '../utils/constantes';
 import React, { useEffect } from 'react';
 // Import de componentes
-import Input from '../components/Inputs/Input'
-import InputMultiline from '../components/Inputs/InputMultiline'
+import Input from '../components/Inputs/Input';
+import InputMultiline from '../components/Inputs/InputMultiline';
 import Buttons from '../components/Buttons/Button';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
@@ -27,6 +27,11 @@ export default function getUser({ navigation }) {
   const [dui, setDui] = useState('');
   const [telefono, setTelefono] = useState('');
   const [fechaNacimiento, setFechaNacimiento] = useState('');
+
+  // Estado para el Modal de cambiar contraseña
+  const [modalVisible, setModalVisible] = useState(false);
+  const [nuevaContraseña, setNuevaContraseña] = useState('');
+  const [confirmarContraseña, setConfirmarContraseña] = useState('');
 
   // Expresiones regulares para validar DUI y teléfono
   const duiRegex = /^\d{8}-\d$/;
@@ -144,67 +149,123 @@ export default function getUser({ navigation }) {
     }
 };
 
-  return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-        <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
-          <AntDesign name="arrowleft" size={20} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.texto}>Editar Perfil</Text>
-        <Image source={require('../img/user.png')} style={styles.image} />
-        <Input
-          placeHolder='Nombre Cliente'
-          valor={nombre}
-          setTextChange={setNombre}
-        />
-        <Input
-          placeHolder='Apellido Cliente'
-          valor={apellido}
-          setTextChange={setApellido}
-        />
-        <InputEmail
-          placeHolder='Email Cliente'
-          setValor={email}
-          setTextChange={setEmail} />
-        <InputMultiline
-          placeHolder='Dirección Cliente'
-          setValor={direccion}
-          valor={direccion}
-          setTextChange={setDireccion} />
-        <MaskedInputDui
-          dui={dui}
-          setDui={setDui} />
-        <View style={styles.contenedorFecha}>
-          <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento: <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
-              maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
-              onChange={onChange}
+ 
+const handleChangePassword = () => {
+  if (nuevaContraseña !== confirmarContraseña) {
+    Alert.alert("Las contraseñas no coinciden");
+    return;
+  }
+  // Aquí puedes agregar la lógica para cambiar la contraseña
+  Alert.alert("Contraseña cambiada con éxito");
+  setModalVisible(false);
+};
+
+return (
+  <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
+        <AntDesign name="arrowleft" size={20} color="white" />
+      </TouchableOpacity>
+      <Text style={styles.texto}>Editar Perfil</Text>
+      <Image source={require('../img/user.png')} style={styles.image} />
+      <Input
+        placeHolder='Nombre Cliente'
+        valor={nombre}
+        setTextChange={setNombre}
+      />
+      <Input
+        placeHolder='Apellido Cliente'
+        valor={apellido}
+        setTextChange={setApellido}
+      />
+      <InputEmail
+        placeHolder='Email Cliente'
+        valor={email}
+        setTextChange={setEmail} />
+      <InputMultiline
+        placeHolder='Dirección Cliente'
+        valor={direccion}
+        setTextChange={setDireccion} />
+      <MaskedInputDui
+        dui={dui}
+        setDui={setDui} />
+      <View style={styles.contenedorFecha}>
+        <TouchableOpacity onPress={showDatepicker}><Text style={styles.fechaSeleccionar}>Seleccionar Fecha de Nacimiento: <Text style={styles.fecha}> {fechaNacimiento}</Text></Text></TouchableOpacity>
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            minimumDate={new Date(new Date().getFullYear() - 100, new Date().getMonth(), new Date().getDate())} // Fecha mínima permitida (100 años atrás desde la fecha actual)
+            maximumDate={new Date()} // Fecha máxima permitida (fecha actual)
+            onChange={onChange}
+          />
+        )}
+      </View>
+
+      <MaskedInputTelefono
+        telefono={telefono}
+        setTelefono={setTelefono} />
+
+      <Buttons
+        textoBoton='Editar perfil'
+        accionBoton={handleEdit}
+      />
+
+      <Buttons
+        textoBoton='Cambiar contraseña'
+        accionBoton={() => setModalVisible(true)}  // Muestra el modal
+      />
+
+      {/* Modal para cambiar la contraseña */}
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Cambiar Contraseña</Text>
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Contraseña actual"
+              secureTextEntry={true}
+              value={nuevaContraseña}
+              onChangeText={setNuevaContraseña}
             />
-          )}
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Nueva Contraseña"
+              secureTextEntry={true}
+              value={nuevaContraseña}
+              onChangeText={setNuevaContraseña}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Confirmar Contraseña"
+              secureTextEntry={true}
+              value={confirmarContraseña}
+              onChangeText={setConfirmarContraseña}
+            />
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={handleChangePassword}
+            >
+              <Text style={styles.modalButtonText}>Cambiar Contraseña</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalButtonText}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-
-        <MaskedInputTelefono
-          telefono={telefono}
-          setTelefono={setTelefono} />
-
-        <Buttons
-          textoBoton='Editar perfil'
-          accionBoton={handleEdit}
-        />
-
-        <Buttons
-          textoBoton='Cambiar contraseña'
-          accionBoton={Cambio}
-        />
-      </ScrollView>
-    </View>
-  );
+      </Modal>
+    </ScrollView>
+  </View>
+);
 }
 
 const styles = StyleSheet.create({
@@ -265,6 +326,45 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: '#FFF',
     borderRadius: 50,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15
+  },
+  modalInput: {
+    width: '100%',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 15,
+    paddingHorizontal: 10
+  },
+  modalButton: {
+    width: '100%',
+    backgroundColor: '#16537E',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginVertical: 5
+  },
+  modalButtonText: {
+    color: 'white',
+    fontWeight: 'bold'
   },
 });
 
