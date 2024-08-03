@@ -104,48 +104,45 @@ export default function getUser({ navigation }) {
   // Función para crear un nuevo usuario
   const handleEdit = async () => {
     try {
-      // Validación de los campos de entrada
-      if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
-        !dui.trim() || !fechaNacimiento.trim() || !telefono.trim()) {
-        Alert.alert("Debes llenar todos los campos");
-        return;
-      } else if (!duiRegex.test(dui)) {
-        Alert.alert("El DUI debe tener el formato correcto (########-#)");
-        return;
-      } else if (!telefonoRegex.test(telefono)) {
-        Alert.alert("El teléfono debe tener el formato correcto (####-####)");
-        return;
-      } else if (date > fechaMinima) {
-        Alert.alert('Error', 'Debes tener al menos 18 años para registrarte.');
-        return;
-      }
+        // Validación de los campos de entrada
+        if (!nombre.trim() || !apellido.trim() || !email.trim() || !direccion.trim() ||
+            !dui.trim() || !fechaNacimiento.trim() || !telefono.trim()) {
+            Alert.alert("Debes llenar todos los campos");
+            return;
+        } else if (!duiRegex.test(dui)) {
+            Alert.alert("El DUI debe tener el formato correcto (########-#)");
+            return;
+        } else if (!telefonoRegex.test(telefono)) {
+            Alert.alert("El teléfono debe tener el formato correcto (####-####)");
+            return;
+        } 
 
-      // Si todos los campos son válidos, proceder con la edición del perfil
-      const formData = new FormData();
-      formData.append('nombre_cliente', nombre);
-      formData.append('apellido_cliente', apellido);
-      formData.append('correo_cliente', email);
-      formData.append('dui_cliente', dui);
-      formData.append('telefono_cliente', telefono);
-      formData.append('direccion_cliente', direccion);
-      formData.append('nacimiento_cliente', fechaNacimiento);
+        // Si todos los campos son válidos, proceder con la edición del perfil
+        const formData = new FormData();
+        formData.append('nombreCliente', nombre);
+        formData.append('apellidoCliente', apellido);
+        formData.append('correoCliente', email);
+        formData.append('duiCliente', dui);
+        formData.append('telefonoCliente', telefono);
+        formData.append('direccionCliente', direccion);
+        formData.append('nacimientoCliente', fechaNacimiento);
 
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=editProfile`, {
-        method: 'POST',
-        body: formData
-      });
+        const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=editProfile`, {
+            method: 'POST',
+            body: formData
+        });
 
-      const data = await response.json();
-      if (data.status) {
-        Alert.alert('Perfil actualizado correctamente');
-        navigation.navigate('Home');
-      } else {
-        Alert.alert('Error', data.error);
-      }
+        const data = await response.json();
+        if (data.status) {
+            Alert.alert('Perfil actualizado correctamente');
+            navigation.navigate('Home');
+        } else {
+            Alert.alert('Error', data.error);
+        }
     } catch (error) {
-      Alert.alert('Ocurrió un error al intentar editar el perfil');
+        Alert.alert('Ocurrió un error al intentar editar el perfil');
     }
-  };
+};
 
   return (
     <View style={styles.container}>
@@ -155,15 +152,14 @@ export default function getUser({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.texto}>Editar Perfil</Text>
         <Image source={require('../img/user.png')} style={styles.image} />
-
         <Input
           placeHolder='Nombre Cliente'
-          setValor={nombre}
+          valor={nombre}
           setTextChange={setNombre}
         />
         <Input
           placeHolder='Apellido Cliente'
-          setValor={apellido}
+          valor={apellido}
           setTextChange={setApellido}
         />
         <InputEmail

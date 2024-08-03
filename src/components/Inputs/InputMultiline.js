@@ -1,16 +1,15 @@
-// Importaciones necesarias desde React Native
-import { StyleSheet, Platform, TextInput } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
+import React from 'react';
 
-// Componente InputMultiline que recibe varias props para gestionar el valor, el texto y si es seguro
-export default function InputMultiline({ placeHolder, setValor, contra, valor }) {
+// Componente InputMultiline que recibe varias props para gestionar el valor y los cambios de texto
+export default function InputMultiline({ placeHolder, valor, setTextChange }) {
   return (
     <TextInput
       style={styles.Input}
       placeholder={placeHolder}
       value={valor}
-      onChangeText={setValor}
+      onChangeText={setTextChange}
       placeholderTextColor={'#16537E'}
-      secureTextEntry={contra}
       multiline={true}
       numberOfLines={4}
     />
