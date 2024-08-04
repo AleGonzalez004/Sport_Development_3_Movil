@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList, ScrollView } from 'react-native';
 import { useState, useEffect } from 'react';
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -7,7 +7,7 @@ import ProductoCard from '../components/Productos/ProductoCard';
 import * as Constantes from "../utils/constantes";
 import { navigation } from '@react-navigation/native';
 
-export default function Detalle({ route, navigation, accionBotonProducto }) {
+export default function Detalle({ route, navigation }) {
   const { idProducto } = route.params;
   const ip = Constantes.IP;
   const [modalVisible, setModalVisible] = useState(false);
@@ -81,6 +81,7 @@ export default function Detalle({ route, navigation, accionBotonProducto }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
+        <ScrollView contentContainerStyle={styles.scrollViewStyle}>
       <View style={styles.card}>
         <Image
           source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
@@ -95,8 +96,47 @@ export default function Detalle({ route, navigation, accionBotonProducto }) {
           style={styles.cartButton}
           onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}>
           <FontAwesome name="plus-circle" size={24} color="white" />
-          <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
+          <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
         </TouchableOpacity>
+        <View style={styles.commentsSection}>
+          <Text style={styles.commentsTitle}>Comentarios</Text>
+          <View style={styles.comment}>
+            <Text style={styles.commentAuthor}>Autor del Comentario</Text>
+            <View style={styles.ratingContainer}>
+              {/* Simulando estrellas, puedes reemplazar esto con una implementación de estrellas */}
+              {[...Array(5)].map((_, index) => (
+                <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
+              ))}
+            </View>
+            <Text style={styles.commentText}>
+              Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
+            </Text>
+          </View>
+          <View style={styles.comment}>
+            <Text style={styles.commentAuthor}>Autor del Comentario</Text>
+            <View style={styles.ratingContainer}>
+              {/* Simulando estrellas, puedes reemplazar esto con una implementación de estrellas */}
+              {[...Array(5)].map((_, index) => (
+                <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
+              ))}
+            </View>
+            <Text style={styles.commentText}>
+              Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
+            </Text>
+          </View>
+          <View style={styles.comment}>
+            <Text style={styles.commentAuthor}>Autor del Comentario</Text>
+            <View style={styles.ratingContainer}>
+              {/* Simulando estrellas, puedes reemplazar esto con una implementación de estrellas */}
+              {[...Array(5)].map((_, index) => (
+                <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
+              ))}
+            </View>
+            <Text style={styles.commentText}>
+              Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
+            </Text>
+          </View>
+        </View>
         <SafeAreaView style={styles.containerFlat}>
           <FlatList
             keyExtractor={(item) => item.id_producto}
@@ -116,17 +156,16 @@ export default function Detalle({ route, navigation, accionBotonProducto }) {
           />
         </SafeAreaView>
       </View>
+      </ScrollView>
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: '#fff',
-    marginVertical: 20,
   },
   card: {
     backgroundColor: '#ffffff',
@@ -164,7 +203,8 @@ const styles = StyleSheet.create({
   ButtonVolver: {
     flexDirection: "row",
     marginRight: 310,
-    marginTop: 10,
+    marginVertical: 15,
+    marginTop: 20,
     backgroundColor: "#16537E",
     borderRadius: 8,
     paddingVertical: 12,
@@ -172,18 +212,52 @@ const styles = StyleSheet.create({
   },
   cartButton: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignSelf: 'flex-end',
     backgroundColor: '#16537E',
     borderRadius: 5,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 25, 
     marginVertical: 10,
+    alignItems: 'center', 
   },
   cartButtonText: {
     color: "#FFF",
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "500",
     marginLeft: 10,
+  },
+  commentsSection: {
+    marginTop: 20,
+  },
+  commentsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  comment: {
+    backgroundColor: '#f8f8f8',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  commentAuthor: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    marginBottom: 8,
+  },
+  commentText: {
+    fontSize: 14,
   },
 });
