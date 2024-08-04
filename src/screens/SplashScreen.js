@@ -20,7 +20,6 @@ const SplashScreen = ({ navigation }) => {
         source={require('../img/logo.png')}
         style={styles.image}
       />
-      <Text style={styles.text}>Espere un momento</Text>
       <ActivityIndicator size="large" color="#FFF" />
     </View>
   );
