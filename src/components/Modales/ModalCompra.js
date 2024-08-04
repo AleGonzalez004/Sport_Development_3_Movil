@@ -1,42 +1,64 @@
-// Importaciones necesarias desde React y React Native
 import React from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes';
 
 // Componente ModalCompra que muestra un modal para la compra de productos
-const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModal, cantidad, setCantidad }) => {
-
+const ModalCompra = ({
+  visible,
+  cerrarModal,
+  nombreProductoModal,
+  idProductoModal,
+  cantidad,
+  setCantidad
+}) => {
   const ip = Constantes.IP;
+
+  // Convierte la cantidad a un número y asegura que sea válida
+  const handleCantidadChange = (text) => {
+    const number = parseInt(text, 10);
+    if (!isNaN(number) && number > 0) {
+      setCantidad(number.toString());
+    } else {
+      Alert.alert('Error', 'Ingrese una cantidad válida.');
+    }
+  };
 
   // Función para manejar la creación del detalle de compra
   const handleCreateDetail = async () => {
-    try {
-      if (cantidad <= 0) {  // Cambié la validación para permitir sólo cantidades positivas
-        Alert.alert("Debes llenar todos los campos");
-        return;
-      } else {
-        const formData = new FormData();
-        formData.append('idProducto', idProductoModal);
-        formData.append('cantidadProducto', cantidad);
+    const cantidadProducto = parseInt(cantidad, 10);
 
-        const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=createDetail`, {
+    try {
+      if (cantidadProducto <= 0) {
+        Alert.alert("Error", "La cantidad debe ser mayor a 0.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('idProducto', idProductoModal);
+      formData.append('cantidadProducto', cantidadProducto);
+
+      const response = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/pedido.php?action=createDetail`,
+        {
           method: 'POST',
           body: formData
-        });
-
-        const data = await response.json();
-        console.log("data despues del response", data);
-        if (data.status) {
-          Alert.alert('Datos Guardados correctamente');
-          cerrarModal(false);
-          setCantidad('');  // Limpiar el campo de cantidad
-        } else {
-          Alert.alert('Error', data.error);
         }
+      );
+
+      const data = await response.json();
+      console.log("Datos después del response:", data);
+
+      if (data.status) {
+        Alert.alert('Éxito', 'Producto añadido al carrito correctamente.');
+        cerrarModal(false);
+        setCantidad('');  // Limpiar el campo de cantidad
+      } else {
+        Alert.alert('Error', data.error);
       }
     } catch (error) {
-      Alert.alert('Ocurrió un error al crear detalle');
+      Alert.alert('Error', 'Ocurrió un error al crear el detalle del pedido.');
+      console.error(error);
     }
   };
 
@@ -47,7 +69,6 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
   };
 
   return (
-    // Modal para mostrar la ventana emergente de compra
     <Modal
       visible={visible}
       animationType="slide"
@@ -57,7 +78,6 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
         setCantidad('');  // Limpiar el campo de cantidad
       }}
     >
-      {/* Vista centralizada para el modal */}
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>{nombreProductoModal}</Text>
@@ -65,20 +85,22 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
           <TextInput
             style={styles.input}
             value={cantidad}
-            onChangeText={text => setCantidad(text)}
+            onChangeText={handleCantidadChange}
             keyboardType="numeric"
             placeholder="Ingrese la cantidad"
           />
-          {/* Botón para agregar al carrito */}
-          <Buttons
-            textoBoton='Agregar al carrito'
-            accionBoton={() => handleCreateDetail()}
-          />
-          {/* Botón para cancelar */}
-          <Buttons
-            textoBoton='Cancelar'
-            accionBoton={() => handleCancelCarrito()}
-          />
+          <View style={styles.buttonContainer}>
+            {/* Botón para agregar al carrito */}
+            <Buttons
+              textoBoton='Agregar al carrito'
+              accionBoton={handleCreateDetail}
+            />
+            {/* Botón para cancelar */}
+            <Buttons
+              textoBoton='Cancelar'
+              accionBoton={handleCancelCarrito}
+            />
+          </View>
         </View>
       </View>
     </Modal>

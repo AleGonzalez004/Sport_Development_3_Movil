@@ -1,12 +1,6 @@
-// Importaciones necesarias
-import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, FlatList, Alert } from 'react-native';
-
+import React, { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-// Importa la función useFocusEffect de @react-navigation/native, 
-// que permite ejecutar un efecto cada vez que la pantalla se enfoca.
-
-import Constants from 'expo-constants';
 import * as Constantes from '../utils/constantes';
 import Buttons from '../components/Buttons/Button';
 import CarritoCard from '../components/CarritoCard/CarritoCard';
@@ -31,7 +25,6 @@ const Carrito = ({ navigation }) => {
 
   // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
   useFocusEffect(
-    // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
     React.useCallback(() => {
       getDetalleCarrito(); // Llama a la función getDetalleCarrito.
     }, [])
@@ -48,12 +41,12 @@ const Carrito = ({ navigation }) => {
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        console.log("No hay detalles del carrito disponibles.")
+        console.log("No hay detalles del carrito disponibles.");
         //Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
-      Alert.alert('Error', 'Ocurrió un error al listar las categorias');
+      Alert.alert('Error', 'Ocurrió un error al listar los detalles del carrito.');
     }
   };
 
@@ -65,14 +58,14 @@ const Carrito = ({ navigation }) => {
       });
       const data = await response.json();
       if (data.status) {
-        Alert.alert("Se finalizó la compra correctamente")
+        Alert.alert("Éxito", "Se finalizó la compra correctamente.");
         setDataDetalleCarrito([]); // Limpia la lista de detalles del carrito
         navigation.navigate('TabNavigator', { screen: 'Productos' });
       } else {
         Alert.alert('Error', data.error);
       }
     } catch (error) {
-      Alert.alert('Error', 'Ocurrió un error al finalizar pedido');
+      Alert.alert('Error', 'Ocurrió un error al finalizar el pedido.');
     }
   };
 
@@ -140,6 +133,7 @@ const Carrito = ({ navigation }) => {
     </View>
   );
 };
+
 
 export default Carrito;
 

@@ -1,6 +1,5 @@
-// Importaciones necesarias desde React y React Native
-import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes';
 
@@ -11,15 +10,17 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
 
   // Función para manejar la actualización del detalle del carrito
   const handleUpdateDetalleCarrito = async () => {
+    const cantidadProducto = parseInt(cantidadProductoCarrito, 10);
+
     try {
-      if (cantidadProductoCarrito <= 0) {
-        Alert.alert("La cantidad no puede ser igual o menor a 0");
-        return; // Corrige la lógica aquí
+      if (isNaN(cantidadProducto) || cantidadProducto <= 0) {
+        Alert.alert("La cantidad debe ser un número mayor a 0");
+        return;
       }
 
       const formData = new FormData();
       formData.append('idDetalle', idDetalle);
-      formData.append('cantidadProducto', cantidadProductoCarrito);
+      formData.append('cantidadProducto', cantidadProducto);
 
       const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=updateDetail`, {
         method: 'POST',
@@ -35,7 +36,7 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
       }
       setModalVisible(false);
     } catch (error) {
-      Alert.alert("Error en editar carrito", error);
+      Alert.alert("Error en editar carrito", error.toString());
       setModalVisible(false);
     }
   };
@@ -43,6 +44,11 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
   // Función para cancelar la edición de la cantidad del carrito
   const handleCancelEditarCarrito = () => {
     setModalVisible(false);
+  };
+
+  // Convierte el texto ingresado en el TextInput a una cadena numérica
+  const handleTextChange = (text) => {
+    setCantidadProductoCarrito(text.replace(/[^0-9]/g, '')); // Elimina caracteres no numéricos y actualiza el estado
   };
 
   return (
@@ -62,8 +68,8 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
           <Text style={styles.modalText}>Nueva cantidad:</Text>
           <TextInput
             style={styles.input}
-            value={cantidadProductoCarrito}
-            onChangeText={setCantidadProductoCarrito}
+            value={cantidadProductoCarrito.toString()} // Asegúrate de que el valor sea una cadena
+            onChangeText={handleTextChange}
             keyboardType="numeric"
             placeholder="Ingrese la cantidad"
           />
@@ -117,6 +123,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     width: 200,
+    textAlign: 'center',
   },
   button: {
     backgroundColor: '#16537E',
