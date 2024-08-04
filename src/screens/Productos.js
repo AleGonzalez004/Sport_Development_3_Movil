@@ -1,5 +1,4 @@
-import {
-  StatusBar,StyleSheet,Text,View,TextInput,TouchableOpacity,Alert,FlatList,ScrollView,SafeAreaView,Image,Modal,} from "react-native";
+import { StatusBar,StyleSheet,Text,View,TextInput,TouchableOpacity,Alert,FlatList,ScrollView,SafeAreaView,Image,Modal,} from "react-native";
 import { useState, useEffect, useCallback  } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";

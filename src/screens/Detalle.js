@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
+import RNPickerSelect from "react-native-picker-select";
 import * as Constantes from "../utils/constantes";
+import { useFocusEffect } from '@react-navigation/native';
+import { FontAwesome } from "@expo/vector-icons"; 
+import AntDesign from "@expo/vector-icons/AntDesign";
 
-export default function Detalle({ route }) {
+export default function Detalle({ route, accionBotonProducto}) {
   const { idProducto } = route.params; // Obtener el ID del producto desde las props de navegación
   const ip = Constantes.IP;
   
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const volver = async () => {
+    navigation.navigate("Producto");
+  };
   
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
@@ -52,15 +60,26 @@ export default function Detalle({ route }) {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>{producto.nombre_producto}</Text>
-      <Text>{producto.descripcion_producto}</Text>
-      <Text>Precio: ${producto.precio_producto}</Text>
-      <Text>Existencias: {producto.existencias_producto}</Text>
+        <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
+        <AntDesign name="arrowleft" size={20} color="white" />
+      </TouchableOpacity>
+      <View style={styles.card}>
+        <Image
+          source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
+          style={styles.image}
+          resizeMode="contain"
+        />
+        <Text style={styles.textTitle}>{producto.nombre_producto}</Text>
+        <Text style={styles.text}>{producto.descripcion_producto}</Text>
+        <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
+        <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
+        <TouchableOpacity
+        style={styles.cartButton}
+        onPress={accionBotonProducto}>
+        <FontAwesome name="plus-circle" size={24} color="white" />
+        <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
+      </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -70,6 +89,22 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#fff',
+    marginVertical: 20,
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    padding: 16,
+    marginVertical: 12,
+    marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   image: {
     width: '100%',
@@ -77,9 +112,41 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 16,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  text: {
+    fontSize: 16,
     marginBottom: 8,
+  },
+  textTitle: {
+    fontSize: 16,
+    marginBottom: 8,
+    fontWeight: '500',
+  },
+  textDentro: {
+    fontWeight: '400',
+  },
+  ButtonVolver: {
+    flexDirection: "row",
+    marginRight: 310,
+    marginTop: 10,
+    backgroundColor: "#16537E",
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+  },
+  cartButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#16537E',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
+  cartButtonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "500",
+    marginLeft: 10,
   },
 });
