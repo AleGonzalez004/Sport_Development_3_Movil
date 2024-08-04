@@ -5,6 +5,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import ModalCompra from '../components/Modales/ModalCompra';
 import ProductoCard from '../components/Productos/ProductoCard';
 import * as Constantes from "../utils/constantes";
+import { navigation } from '@react-navigation/native';
 
 export default function Detalle({ route, navigation, accionBotonProducto }) {
   const { idProducto } = route.params;
@@ -17,7 +18,7 @@ export default function Detalle({ route, navigation, accionBotonProducto }) {
   const [loading, setLoading] = useState(true);
 
   const volver = async () => {
-    navigation.navigate("Productos");
+    navigation.navigate("TabNavigator");
   };
 
   const handleCompra = (nombre, id) => {
