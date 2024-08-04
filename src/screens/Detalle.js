@@ -17,7 +17,7 @@ export default function Detalle({ route, navigation, accionBotonProducto }) {
   const [loading, setLoading] = useState(true);
 
   const volver = async () => {
-    navigation.navigate("Home");
+    navigation.navigate("Productos");
   };
 
   const handleCompra = (nombre, id) => {

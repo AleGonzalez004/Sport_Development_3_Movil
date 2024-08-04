@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes';
+import { useNavigation } from '@react-navigation/native'; // Importa el hook useNavigation
 
 // Componente ModalCompra que muestra un modal para la compra de productos
 const ModalCompra = ({
@@ -13,6 +14,7 @@ const ModalCompra = ({
   setCantidad
 }) => {
   const ip = Constantes.IP;
+  const navigation = useNavigation(); // Usa el hook useNavigation
 
   // Convierte la cantidad a un número y asegura que sea válida
   const handleCantidadChange = (text) => {
@@ -53,7 +55,7 @@ const ModalCompra = ({
         Alert.alert('Éxito', 'Producto añadido al carrito correctamente.');
         cerrarModal(false);
         setCantidad(''); 
-        navigation.navigate('Home');
+        navigation.navigate('Home'); // Navegar a la pantalla de inicio
       } else {
         Alert.alert('Error', data.error);
       }
