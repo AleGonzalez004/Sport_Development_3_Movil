@@ -28,10 +28,10 @@ export default function Productos({ navigation }) {
   };
 
    // Función para navegar a la pantalla de inicio
-   const Detalle = async () => {
-    navigation.navigate("Detalle");
+   const Detalle = (idProducto) => {
+    navigation.navigate("Detalle", { idProducto });
   };
-
+  
 
   // Función para manejar la apertura del modal de compra
   const handleCompra = (nombre, id) => {
