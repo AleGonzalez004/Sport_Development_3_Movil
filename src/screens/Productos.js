@@ -153,7 +153,7 @@ export default function Productos({ navigation }) {
                 handleCompra(item.nombre_producto, item.id_producto)
               }
               Detalle={() =>
-                Detalle(item.nombre_producto, item.id_producto)
+                Detalle(item.id_producto)
               }
             />
           )}
