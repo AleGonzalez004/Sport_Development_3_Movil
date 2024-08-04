@@ -52,7 +52,8 @@ const ModalCompra = ({
       if (data.status) {
         Alert.alert('Éxito', 'Producto añadido al carrito correctamente.');
         cerrarModal(false);
-        setCantidad('');  // Limpiar el campo de cantidad
+        setCantidad(''); 
+        navigation.navigate('Home');
       } else {
         Alert.alert('Error', data.error);
       }

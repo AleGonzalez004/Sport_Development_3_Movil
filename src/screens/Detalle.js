@@ -1,22 +1,31 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
-import RNPickerSelect from "react-native-picker-select";
-import * as Constantes from "../utils/constantes";
-import { useFocusEffect } from '@react-navigation/native';
-import { FontAwesome } from "@expo/vector-icons"; 
+import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import ModalCompra from '../components/Modales/ModalCompra';
+import ProductoCard from '../components/Productos/ProductoCard';
+import * as Constantes from "../utils/constantes";
 
-export default function Detalle({ route, accionBotonProducto}) {
-  const { idProducto } = route.params; // Obtener el ID del producto desde las props de navegación
+export default function Detalle({ route, navigation, accionBotonProducto }) {
+  const { idProducto } = route.params;
   const ip = Constantes.IP;
-  
+  const [modalVisible, setModalVisible] = useState(false);
+  const [idProductoModal, setIdProductoModal] = useState("");
+  const [nombreProductoModal, setNombreProductoModal] = useState("");
+  const [cantidad, setCantidad] = useState("");
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const volver = async () => {
-    navigation.navigate("Producto");
+    navigation.navigate("Home");
   };
-  
+
+  const handleCompra = (nombre, id) => {
+    setModalVisible(true);
+    setIdProductoModal(id);
+    setNombreProductoModal(nombre);
+  };
+
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
       try {
@@ -60,9 +69,17 @@ export default function Detalle({ route, accionBotonProducto}) {
 
   return (
     <View style={styles.container}>
-        <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
+      <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
+      <ModalCompra
+        visible={modalVisible}
+        cerrarModal={setModalVisible}
+        nombreProductoModal={nombreProductoModal}
+        idProductoModal={idProductoModal}
+        cantidad={cantidad}
+        setCantidad={setCantidad}
+      />
       <View style={styles.card}>
         <Image
           source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
@@ -74,15 +91,34 @@ export default function Detalle({ route, accionBotonProducto}) {
         <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
         <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
         <TouchableOpacity
-        style={styles.cartButton}
-        onPress={accionBotonProducto}>
-        <FontAwesome name="plus-circle" size={24} color="white" />
-        <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
-      </TouchableOpacity>
+          style={styles.cartButton}
+          onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}>
+          <FontAwesome name="plus-circle" size={24} color="white" />
+          <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
+        </TouchableOpacity>
+        <SafeAreaView style={styles.containerFlat}>
+          <FlatList
+            keyExtractor={(item) => item.id_producto}
+            renderItem={({ item }) => (
+              <ProductoCard
+                ip={ip}
+                imagenProducto={item.imagen_producto}
+                idProducto={item.id_producto}
+                nombreProducto={item.nombre_producto}
+                descripcionProducto={item.descripcion_producto}
+                precioProducto={item.precio_producto}
+                existenciasProducto={item.existencias_producto}
+                accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto)}
+                Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
+              />
+            )}
+          />
+        </SafeAreaView>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
