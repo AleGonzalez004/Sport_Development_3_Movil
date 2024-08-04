@@ -7,25 +7,29 @@ import ProductoCard from '../components/Productos/ProductoCard';
 import * as Constantes from "../utils/constantes";
 
 export default function Detalle({ route, navigation }) {
+  // Parámetro recibido de la navegación
   const { idProducto } = route.params;
-  const ip = Constantes.IP;
-  const [modalVisible, setModalVisible] = useState(false);
-  const [idProductoModal, setIdProductoModal] = useState("");
-  const [nombreProductoModal, setNombreProductoModal] = useState("");
-  const [cantidad, setCantidad] = useState("");
-  const [producto, setProducto] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const ip = Constantes.IP; // IP para el endpoint de la API
+  const [modalVisible, setModalVisible] = useState(false); // Estado para mostrar el modal de compra
+  const [idProductoModal, setIdProductoModal] = useState(""); // ID del producto para el modal
+  const [nombreProductoModal, setNombreProductoModal] = useState(""); // Nombre del producto para el modal
+  const [cantidad, setCantidad] = useState(""); // Cantidad del producto para el modal
+  const [producto, setProducto] = useState(null); // Estado para almacenar los detalles del producto
+  const [loading, setLoading] = useState(true); // Estado para mostrar el indicador de carga
 
+  // Función para volver a la pantalla anterior
   const volver = async () => {
     navigation.navigate("TabNavigator");
   };
 
+  // Función para manejar la compra y mostrar el modal
   const handleCompra = (nombre, id) => {
     setModalVisible(true);
     setIdProductoModal(id);
     setNombreProductoModal(nombre);
   };
 
+  // Efecto para obtener los detalles del producto
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
       try {
@@ -59,10 +63,12 @@ export default function Detalle({ route, navigation }) {
     obtenerDetallesProducto();
   }, [idProducto]);
 
+  // Mostrar indicador de carga mientras se obtiene la información
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
+  // Mostrar mensaje si no se encontraron detalles del producto
   if (!producto) {
     return <Text>No se encontraron detalles para este producto.</Text>;
   }
@@ -72,6 +78,8 @@ export default function Detalle({ route, navigation }) {
       <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
+      
+      {/* Modal de compra */}
       <ModalCompra
         visible={modalVisible}
         cerrarModal={setModalVisible}
@@ -80,93 +88,84 @@ export default function Detalle({ route, navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
-        <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-      <View style={styles.card}>
-        <Image
-          source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
-          style={styles.image}
-          resizeMode="contain"
-        />
-        <Text style={styles.textTitle}>{producto.nombre_producto}</Text>
-        <Text style={styles.text}>{producto.descripcion_producto}</Text>
-        <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
-        <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
-        
-        <View style={styles.ratingContainer}>
-          <Text style={styles.textTitle}>Calificación:</Text>
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star-half-o" size={20} color="#FFD700" />
-        </View>
-        
-        <TouchableOpacity
-          style={styles.cartButton}
-          onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}>
-          <FontAwesome name="plus-circle" size={24} color="white" />
-          <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
-        </TouchableOpacity>
-        
-        <View style={styles.commentsSection}>
-          <Text style={styles.commentsTitle}>Comentarios</Text>
-          <View style={styles.comment}>
-            <Text style={styles.commentAuthor}>Autor del Comentario</Text>
-            <View style={styles.ratingContainer}>
-              {[...Array(5)].map((_, index) => (
-                <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
-              ))}
-            </View>
-            <Text style={styles.commentText}>
-              Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
-            </Text>
-          </View>
-          <View style={styles.comment}>
-            <Text style={styles.commentAuthor}>Autor del Comentario</Text>
-            <View style={styles.ratingContainer}>
-              {[...Array(5)].map((_, index) => (
-                <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
-              ))}
-            </View>
-            <Text style={styles.commentText}>
-              Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
-            </Text>
-          </View>
-          <View style={styles.comment}>
-            <Text style={styles.commentAuthor}>Autor del Comentario</Text>
-            <View style={styles.ratingContainer}>
-              {[...Array(5)].map((_, index) => (
-                <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
-              ))}
-            </View>
-            <Text style={styles.commentText}>
-              Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
-            </Text>
-          </View>
-        </View>
-        <SafeAreaView style={styles.containerFlat}>
-          <FlatList
-            keyExtractor={(item) => item.id_producto}
-            renderItem={({ item }) => (
-              <ProductoCard
-                ip={ip}
-                imagenProducto={item.imagen_producto}
-                idProducto={item.id_producto}
-                nombreProducto={item.nombre_producto}
-                descripcionProducto={item.descripcion_producto}
-                precioProducto={item.precio_producto}
-                existenciasProducto={item.existencias_producto}
-                accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto)}
-                Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
-              />
-            )}
+      
+      {/* Contenedor principal dentro del ScrollView */}
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <View style={styles.card}>
+          {/* Imagen del producto */}
+          <Image
+            source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
+            style={styles.image}
+            resizeMode="contain"
           />
-        </SafeAreaView>
-      </View>
+          <Text style={styles.textTitle}>{producto.nombre_producto}</Text>
+          <Text style={styles.text}>{producto.descripcion_producto}</Text>
+          <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
+          <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
+          
+          {/* Sección de calificación */}
+          <View style={styles.ratingContainer}>
+            <Text style={styles.textTitle}>Calificación:</Text>
+            <FontAwesome name="star" size={20} color="#FFD700" />
+            <FontAwesome name="star" size={20} color="#FFD700" />
+            <FontAwesome name="star" size={20} color="#FFD700" />
+            <FontAwesome name="star" size={20} color="#FFD700" />
+            <FontAwesome name="star-half-o" size={20} color="#FFD700" />
+          </View>
+          
+          {/* Botón para agregar al carrito */}
+          <TouchableOpacity
+            style={styles.cartButton}
+            onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}
+          >
+            <FontAwesome name="plus-circle" size={24} color="white" />
+            <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
+          </TouchableOpacity>
+          
+          {/* Sección de comentarios */}
+          <View style={styles.commentsSection}>
+            <Text style={styles.commentsTitle}>Comentarios</Text>
+            {/* Comentarios de ejemplo */}
+            {[1, 2, 3].map((_, index) => (
+              <View key={index} style={styles.comment}>
+                <Text style={styles.commentAuthor}>Autor del Comentario</Text>
+                <View style={styles.ratingContainer}>
+                  {[...Array(5)].map((_, i) => (
+                    <FontAwesome key={i} name="star" size={20} color={i < 4 ? '#FFD700' : '#ccc'} />
+                  ))}
+                </View>
+                <Text style={styles.commentText}>
+                  Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
+                </Text>
+              </View>
+            ))}
+          </View>
+
+          {/* Lista de productos relacionados */}
+          <SafeAreaView style={styles.containerFlat}>
+            <FlatList
+              keyExtractor={(item) => item.id_producto}
+              renderItem={({ item }) => (
+                <ProductoCard
+                  ip={ip}
+                  imagenProducto={item.imagen_producto}
+                  idProducto={item.id_producto}
+                  nombreProducto={item.nombre_producto}
+                  descripcionProducto={item.descripcion_producto}
+                  precioProducto={item.precio_producto}
+                  existenciasProducto={item.existencias_producto}
+                  accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto)}
+                  Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
+                />
+              )}
+            />
+          </SafeAreaView>
+        </View>
       </ScrollView>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
