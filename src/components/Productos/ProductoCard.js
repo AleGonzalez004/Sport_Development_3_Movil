@@ -23,11 +23,22 @@ export default function ProductoCard({ ip, imagenProducto, idProducto, nombrePro
       <Text style={styles.text}>{descripcionProducto}</Text>
       <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${precioProducto}</Text></Text>
       <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{existenciasProducto} {(existenciasProducto === 1) ? 'Unidad' : 'Unidades'}</Text></Text>
+
+          
+      <View style={styles.ratingContainer}>
+          <Text style={styles.textTitle}>Calificación:</Text>
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star-half-o" size={20} color="#FFD700" />
+        </View>
+
       <TouchableOpacity
         style={styles.cartButton}
         onPress={accionBotonProducto}>
         <FontAwesome name="plus-circle" size={24} color="white" />
-        <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
+        <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.cartButton}
@@ -128,5 +139,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginLeft: 10,
     textAlign: 'center'
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
   },
 });
