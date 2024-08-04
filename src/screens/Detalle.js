@@ -5,7 +5,6 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import ModalCompra from '../components/Modales/ModalCompra';
 import ProductoCard from '../components/Productos/ProductoCard';
 import * as Constantes from "../utils/constantes";
-import { navigation } from '@react-navigation/native';
 
 export default function Detalle({ route, navigation }) {
   const { idProducto } = route.params;
@@ -92,18 +91,28 @@ export default function Detalle({ route, navigation }) {
         <Text style={styles.text}>{producto.descripcion_producto}</Text>
         <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
         <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
+        
+        <View style={styles.ratingContainer}>
+          <Text style={styles.textTitle}>Calificación:</Text>
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star" size={20} color="#FFD700" />
+          <FontAwesome name="star-half-o" size={20} color="#FFD700" />
+        </View>
+        
         <TouchableOpacity
           style={styles.cartButton}
           onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}>
           <FontAwesome name="plus-circle" size={24} color="white" />
           <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
         </TouchableOpacity>
+        
         <View style={styles.commentsSection}>
           <Text style={styles.commentsTitle}>Comentarios</Text>
           <View style={styles.comment}>
             <Text style={styles.commentAuthor}>Autor del Comentario</Text>
             <View style={styles.ratingContainer}>
-              {/* Simulando estrellas, puedes reemplazar esto con una implementación de estrellas */}
               {[...Array(5)].map((_, index) => (
                 <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
               ))}
@@ -115,7 +124,6 @@ export default function Detalle({ route, navigation }) {
           <View style={styles.comment}>
             <Text style={styles.commentAuthor}>Autor del Comentario</Text>
             <View style={styles.ratingContainer}>
-              {/* Simulando estrellas, puedes reemplazar esto con una implementación de estrellas */}
               {[...Array(5)].map((_, index) => (
                 <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
               ))}
@@ -127,7 +135,6 @@ export default function Detalle({ route, navigation }) {
           <View style={styles.comment}>
             <Text style={styles.commentAuthor}>Autor del Comentario</Text>
             <View style={styles.ratingContainer}>
-              {/* Simulando estrellas, puedes reemplazar esto con una implementación de estrellas */}
               {[...Array(5)].map((_, index) => (
                 <FontAwesome key={index} name="star" size={20} color={index < 4 ? '#FFD700' : '#ccc'} />
               ))}
@@ -211,6 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   cartButton: {
+    marginTop: 20,
     flexDirection: 'row',
     alignSelf: 'flex-end',
     backgroundColor: '#16537E',
@@ -232,32 +240,31 @@ const styles = StyleSheet.create({
   commentsTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 10,
   },
   comment: {
-    backgroundColor: '#f8f8f8',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    marginBottom: 15,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   commentAuthor: {
-    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    marginBottom: 8,
+    fontSize: 16,
+    marginBottom: 5,
   },
   commentText: {
     fontSize: 14,
+    color: '#333',
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  containerFlat: {
+    flex: 1,
+  },
+  scrollViewStyle: {
+    flexGrow: 1,
   },
 });
