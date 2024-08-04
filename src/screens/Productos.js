@@ -1,25 +1,14 @@
 import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  FlatList,
-  ScrollView,
-  SafeAreaView,
-  Image,
-  Modal,
-} from "react-native";
-import { useState, useEffect } from "react";
+  StatusBar,StyleSheet,Text,View,TextInput,TouchableOpacity,Alert,FlatList,ScrollView,SafeAreaView,Image,Modal,} from "react-native";
+import { useState, useEffect, useCallback  } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
 import ProductoCard from "../components/Productos/ProductoCard";
 import ModalCompra from "../components/Modales/ModalCompra";
 import RNPickerSelect from "react-native-picker-select";
 import Constants from "expo-constants";
-import { FontAwesome } from "@expo/vector-icons"; // Importamos el ícono
+import { useFocusEffect } from '@react-navigation/native';
+import { FontAwesome } from "@expo/vector-icons"; 
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Productos({ navigation }) {
@@ -109,16 +98,12 @@ export default function Productos({ navigation }) {
     }
   };
 
-  // Uso del React Hook useEffect para cargar los productos y categorías al montar el componente
-  useEffect(() => {
-    getProductos();
-    getCategorias();
-  }, []);
-
-  // Función para navegar a la pantalla de Carrito
-  const irCarrito = () => {
-    navigation.navigate("Carrito");
-  };
+  useFocusEffect(
+    useCallback(() => {
+      getProductos();
+      getCategorias();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
