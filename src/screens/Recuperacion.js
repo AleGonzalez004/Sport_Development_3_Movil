@@ -25,8 +25,8 @@ export default function Recuperacion({ navigation }) {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    accion: 'enviar_codigo',
-                    email: email.trim(), // Asegúrate de enviar los datos correctos
+                    accion: 'enviar_codigo', // Asegúrate de enviar el campo de acción
+                    clienteEmail: email.trim(), // Envía el correo como clienteEmail
                 }),
             });
     
@@ -61,9 +61,9 @@ export default function Recuperacion({ navigation }) {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    accion: 'cambiar_contrasena',
-                    codigo: code.trim(), // Asegúrate de enviar los datos correctos
-                    nueva_contrasena: newPassword.trim(), // Asegúrate de enviar los datos correctos
+                    accion: 'cambiar_contrasena', // Asegúrate de enviar el campo de acción
+                    codigo: code.trim(), // Envía el código
+                    nueva_contrasena: newPassword.trim(), // Envía la nueva contraseña
                 }),
             });
     
