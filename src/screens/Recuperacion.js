@@ -14,36 +14,42 @@ export default function Recuperacion({ navigation }) {
 
     const enviarCodigo = async () => {
         if (!email.trim()) {
-            Alert.alert("Por favor, ingresa un correo electrónico.");
+            Alert.alert("Por favor, ingresa tu correo electrónico.");
             return;
         }
-    
         try {
-            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
+            const formData = new FormData();
+            formData.append('email', email);
+
+            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacionmovil.php`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    accion: 'enviar_codigo', // Asegúrate de enviar el campo de acción
-                    clienteEmail: email.trim(), // Envía el correo como clienteEmail
-                }),
+                body: formData,
             });
-    
-            const textResponse = await response.text();
-    
-            if (textResponse.includes('Código enviado correctamente.')) {
-                Alert.alert('Código enviado', 'Un código de recuperación ha sido enviado a tu correo.');
-                setModalVisible(true); // Muestra el modal para ingresar el código y nueva contraseña
-            } else {
-                Alert.alert('Error', textResponse || 'No se pudo enviar el código.');
+
+            // Leer la respuesta en formato texto
+            const textResponse = await response.text(); 
+
+            console.log('Respuesta del servidor:', textResponse); // Imprimir respuesta para depuración
+
+            // Intentar analizar JSON si la respuesta es JSON
+            try {
+                const result = JSON.parse(textResponse);
+                if (result.status === 1) {
+                    Alert.alert('Pin de seguridad', 'Revise su correo electrónico');
+                } else {
+                    Alert.alert('Error', 'No se pudo enviar el código.');
+                }
+            } catch (jsonError) {
+                // Si no se puede analizar JSON, manejar la respuesta como texto
+                Alert.alert('Error', 'La respuesta del servidor no es JSON válido. Respuesta recibida: ' + textResponse);
+                console.error('Error al analizar JSON:', jsonError);
             }
         } catch (error) {
-            console.error('Error en la solicitud:', error);
-            Alert.alert('Error', 'Ocurrió un error al enviar el código.');
+            console.error(error);
+            Alert.alert('Error', error.toString());
         }
     };
-    
+
     const cambiarContrasena = async () => {
         if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
             Alert.alert("Por favor, completa todos los campos.");
@@ -53,7 +59,7 @@ export default function Recuperacion({ navigation }) {
             Alert.alert("Las contraseñas no coinciden.");
             return;
         }
-    
+
         try {
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
                 method: 'POST',
@@ -61,18 +67,21 @@ export default function Recuperacion({ navigation }) {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    accion: 'cambiar_contrasena', // Asegúrate de enviar el campo de acción
-                    codigo: code.trim(), // Envía el código
-                    nueva_contrasena: newPassword.trim(), // Envía la nueva contraseña
+                    accion: 'cambiar_contrasena',
+                    codigo: code.trim(),
+                    nueva_contrasena: newPassword.trim(),
                 }),
             });
-    
-            const textResponse = await response.text();
-    
+
+            // Leer la respuesta en formato texto
+            const textResponse = await response.text(); 
+
+            console.log('Respuesta del servidor:', textResponse); // Imprimir respuesta para depuración
+
             if (textResponse.includes('Contraseña cambiada correctamente.')) {
                 Alert.alert('Éxito', 'Tu contraseña ha sido cambiada.');
-                setModalVisible(false); // Cierra el modal
-                navigation.navigate('Sesion'); // Navegar a la página de inicio de sesión
+                setModalVisible(false);
+                navigation.navigate('Sesion');
             } else {
                 Alert.alert('Error', textResponse || 'No se pudo cambiar la contraseña.');
             }
