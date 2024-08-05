@@ -9,7 +9,6 @@ import SignUp from './src/screens/SignUp';
 import UpdateUser from './src/screens/UpdateUser';
 import TabNavigator from './src/tabNavigator/TabNavigator';
 import Recuperacion from './src/screens/Recuperacion';
-import Codigo from './src/screens/Codigo';
 import Historial from './src/screens/Historial';
 import Detalle from './src/screens/Detalle';
 import Productos from './src/screens/Productos';
@@ -49,11 +48,6 @@ export default function App() {
         <Stack.Screen
           name='Recuperacion'
           component={Recuperacion}
-          options={{ headerShown: false }}
-        />
-         <Stack.Screen
-          name='Codigo'
-          component={Codigo}
           options={{ headerShown: false }}
         />
          <Stack.Screen
