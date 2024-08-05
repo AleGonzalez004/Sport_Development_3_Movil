@@ -6,49 +6,55 @@ import Constants from 'expo-constants';
 export default function Recuperacion({ navigation }) {
     const ip = Constantes.IP;
 
-    const [email, setEmail] = useState('');
+    const [clienteEmail, setEmail] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [code, setCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const enviarCodigo = async () => {
-        if (!email.trim()) {
-            Alert.alert("Por favor, ingresa tu correo electrónico.");
-            return;
-        }
+   const enviarCodigo = async () => {
+    // Verifica que el campo de correo electrónico no esté vacío
+    if (!clienteEmail.trim()) {
+        Alert.alert("Por favor, ingresa tu correo electrónico.");
+        return;
+    }
+
+    try {
+        // Crea una nueva instancia de FormData
+        const formData = new FormData();
+        formData.append('clienteEmail', clienteEmail.trim()); // Usa el nombre correcto del campo
+
+        // Realiza la solicitud POST al servidor
+        const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacionmovil.php`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        // Lee la respuesta como texto
+        const textResponse = await response.text();
+        console.log('Respuesta del servidor:', textResponse); // Imprime la respuesta para depuración
+
         try {
-            const formData = new FormData();
-            formData.append('email', email);
-
-            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacionmovil.php`, {
-                method: 'POST',
-                body: formData,
-            });
-
-            // Leer la respuesta en formato texto
-            const textResponse = await response.text(); 
-
-            console.log('Respuesta del servidor:', textResponse); // Imprimir respuesta para depuración
-
-            // Intentar analizar JSON si la respuesta es JSON
-            try {
-                const result = JSON.parse(textResponse);
-                if (result.status === 1) {
-                    Alert.alert('Pin de seguridad', 'Revise su correo electrónico');
-                } else {
-                    Alert.alert('Error', 'No se pudo enviar el código.');
-                }
-            } catch (jsonError) {
-                // Si no se puede analizar JSON, manejar la respuesta como texto
-                Alert.alert('Error', 'La respuesta del servidor no es JSON válido. Respuesta recibida: ' + textResponse);
-                console.error('Error al analizar JSON:', jsonError);
+            // Intenta analizar la respuesta como JSON
+            const result = JSON.parse(textResponse);
+            if (result.status === 1) {
+                Alert.alert('Pin de seguridad', 'Revise su correo electrónico');
+            } else {
+                Alert.alert('Error', result.info || 'No se pudo enviar el código.');
             }
-        } catch (error) {
-            console.error(error);
-            Alert.alert('Error', error.toString());
+        } catch (jsonError) {
+            // Manejo de errores en caso de que la respuesta no sea JSON válido
+            Alert.alert('Error', 'La respuesta del servidor no es JSON válido. Respuesta recibida: ' + textResponse);
+            console.error('Error al analizar JSON:', jsonError);
         }
-    };
+    } catch (error) {
+        // Manejo de errores de red o de otros errores
+        console.error(error);
+        Alert.alert('Error', error.toString());
+    }
+};
+
+    
 
     const cambiarContrasena = async () => {
         if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
@@ -97,7 +103,7 @@ export default function Recuperacion({ navigation }) {
             <TextInput
                 style={styles.input}
                 placeholder='Email'
-                value={email}
+                value={clienteEmail}
                 onChangeText={setEmail}
                 keyboardType='email-address'
             />
