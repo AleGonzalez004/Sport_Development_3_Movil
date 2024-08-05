@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Alert, Modal, Pressable, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Alert, Modal, Pressable, TextInput } from 'react-native';
 import * as Constantes from '../utils/constantes';
 import Constants from 'expo-constants';
 
@@ -17,7 +17,7 @@ export default function Recuperacion({ navigation }) {
             Alert.alert("Por favor, ingresa un correo electrónico.");
             return;
         }
-
+    
         try {
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
                 method: 'POST',
@@ -26,12 +26,12 @@ export default function Recuperacion({ navigation }) {
                 },
                 body: new URLSearchParams({
                     accion: 'enviar_codigo',
-                    email: email,
+                    email: email.trim(), // Asegúrate de enviar los datos correctos
                 }),
             });
-
+    
             const textResponse = await response.text();
-
+    
             if (textResponse.includes('Código enviado correctamente.')) {
                 Alert.alert('Código enviado', 'Un código de recuperación ha sido enviado a tu correo.');
                 setModalVisible(true); // Muestra el modal para ingresar el código y nueva contraseña
@@ -43,7 +43,7 @@ export default function Recuperacion({ navigation }) {
             Alert.alert('Error', 'Ocurrió un error al enviar el código.');
         }
     };
-
+    
     const cambiarContrasena = async () => {
         if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
             Alert.alert("Por favor, completa todos los campos.");
@@ -53,7 +53,7 @@ export default function Recuperacion({ navigation }) {
             Alert.alert("Las contraseñas no coinciden.");
             return;
         }
-
+    
         try {
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
                 method: 'POST',
@@ -62,13 +62,13 @@ export default function Recuperacion({ navigation }) {
                 },
                 body: new URLSearchParams({
                     accion: 'cambiar_contrasena',
-                    codigo: code,
-                    nueva_contrasena: newPassword,
+                    codigo: code.trim(), // Asegúrate de enviar los datos correctos
+                    nueva_contrasena: newPassword.trim(), // Asegúrate de enviar los datos correctos
                 }),
             });
-
+    
             const textResponse = await response.text();
-
+    
             if (textResponse.includes('Contraseña cambiada correctamente.')) {
                 Alert.alert('Éxito', 'Tu contraseña ha sido cambiada.');
                 setModalVisible(false); // Cierra el modal
@@ -82,10 +82,6 @@ export default function Recuperacion({ navigation }) {
         }
     };
 
-    const handleLogout = () => {
-        navigation.navigate('Sesion');
-    };
-
     return (
         <View style={styles.container}>
             <Text style={styles.texto}>Recuperar Contraseña</Text>
@@ -94,12 +90,13 @@ export default function Recuperacion({ navigation }) {
                 placeholder='Email'
                 value={email}
                 onChangeText={setEmail}
+                keyboardType='email-address'
             />
             <Pressable style={styles.button} onPress={enviarCodigo}>
                 <Text style={styles.buttonText}>Enviar código</Text>
             </Pressable>
             <Pressable style={styles.button} onPress={() => setModalVisible(true)}>
-                <Text style={styles.buttonText}>Colocar codigo</Text>
+                <Text style={styles.buttonText}>Colocar código</Text>
             </Pressable>
 
             {/* Modal para cambiar contraseña */}
@@ -107,9 +104,7 @@ export default function Recuperacion({ navigation }) {
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}>
+                onRequestClose={() => setModalVisible(false)}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Text style={styles.modalTitle}>Cambiar Contraseña</Text>
@@ -167,7 +162,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         width: '80%',
         paddingHorizontal: 10,
-        color: '#FFF',
+        color: '#16537E',
         backgroundColor: '#FFF',
         borderRadius: 5,
     },
