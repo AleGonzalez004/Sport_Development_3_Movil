@@ -13,48 +13,32 @@ export default function Recuperacion({ navigation }) {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const enviarCodigo = async () => {
-        // Verifica que el campo de correo electrónico no esté vacío
         if (!clienteEmail.trim()) {
             Alert.alert("Por favor, ingresa tu correo electrónico.");
             return;
         }
-    
+
         try {
-            // Crea una nueva instancia de FormData
             const formData = new FormData();
-            formData.append('clienteEmail', clienteEmail.trim()); // Usa el nombre correcto del campo
-    
-            // Realiza la solicitud POST al servidor
+            formData.append('clienteEmail', clienteEmail.trim());
+
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacionmovil.php`, {
                 method: 'POST',
                 body: formData,
             });
-    
-            // Lee la respuesta en formato JSON
-            const textResponse = await response.text();
-            console.log('Respuesta del servidor:', textResponse); // Imprime la respuesta para depuración
-    
-            try {
-                // Intenta analizar la respuesta como JSON
-                const result = JSON.parse(textResponse);
-    
-                // Verifica el estado de la respuesta
-                if (result.status === 1) {
-                    Alert.alert('Pin de seguridad', 'Revise su correo electrónico');
-                } else {
-                    Alert.alert('Error', result.info || 'No se pudo enviar el código.');
-                }
-            } catch (jsonError) {
-                Alert.alert('Codigo enviado', 'Revise su correo electrónico');
+
+            const result = await response.json();
+
+            if (result.status) {
+                Alert.alert('Código enviado', 'Revise su correo electrónico.');
+            } else {
+                Alert.alert('Error', result.message || 'No se pudo enviar el código.');
             }
         } catch (error) {
-            // Manejo de errores de red o de otros errores
-            console.error(error);
-            Alert.alert('Error', error.toString());
+            console.error('Error en la solicitud:', error);
+            Alert.alert('Error', 'Ocurrió un error al enviar el código.');
         }
     };
-    
-    
 
     const cambiarContrasena = async () => {
         if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
@@ -67,29 +51,26 @@ export default function Recuperacion({ navigation }) {
         }
 
         try {
-            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion.php`, {
+            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacionmovil.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    accion: 'cambiar_contrasena',
-                    codigo: code.trim(),
-                    nueva_contrasena: newPassword.trim(),
+                    code: code.trim(),
+                    newPassword: newPassword.trim(),
+                    confirmPassword: confirmPassword.trim(),
                 }),
             });
 
-            // Leer la respuesta en formato texto
-            const textResponse = await response.text(); 
+            const result = await response.json();
 
-            console.log('Respuesta del servidor:', textResponse); // Imprimir respuesta para depuración
-
-            if (textResponse.includes('Contraseña cambiada correctamente.')) {
+            if (result.status) {
                 Alert.alert('Éxito', 'Tu contraseña ha sido cambiada.');
                 setModalVisible(false);
                 navigation.navigate('Sesion');
             } else {
-                Alert.alert('Error', textResponse || 'No se pudo cambiar la contraseña.');
+                Alert.alert('Error', result.message || 'No se pudo cambiar la contraseña.');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
