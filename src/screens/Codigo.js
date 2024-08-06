@@ -7,38 +7,49 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Recuperacion({ navigation }) {
     const ip = Constantes.IP;
-    const [clienteEmail, setEmail] = useState('');
+
+    const [code, setCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const volverInicio = async () => {
-        navigation.navigate("Sesion");
+        navigation.navigate("Recuperacion");
       };
 
-    const enviarCodigo = async () => {
-        if (!clienteEmail.trim()) {
-            Alert.alert("Por favor, ingresa tu correo electrónico.");
+    const cambiarContrasena = async () => {
+        if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
+            Alert.alert("Por favor, completa todos los campos.");
+            return;
+        }
+        if (newPassword !== confirmPassword) {
+            Alert.alert("Las contraseñas no coinciden.");
             return;
         }
 
         try {
-            const formData = new FormData();
-            formData.append('clienteEmail', clienteEmail.trim());
-
-            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion_email.php`, {
+            const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion_contrasena.php`, {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    code: code.trim(),
+                    newPassword: newPassword.trim(),
+                    confirmPassword: confirmPassword.trim(),
+                }),
             });
 
             const result = await response.json();
 
             if (result.status) {
-                Alert.alert('Código enviado', 'Revise su correo electrónico.');
-                navigation.navigate('Codigo'); // Navega a la pantalla "Codigo"
+                Alert.alert('Éxito', 'Tu contraseña ha sido cambiada.');
+                navigation.navigate('Sesion');
             } else {
-                Alert.alert('Error', result.message || 'No se pudo enviar el código.');
+                Alert.alert('Error', result.message || 'No se pudo cambiar la contraseña.');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
-            Alert.alert('Error', 'Ocurrió un error al enviar el código.');
+            Alert.alert('Error', 'Ocurrió un error al cambiar la contraseña.');
         }
     };
 
@@ -47,16 +58,29 @@ export default function Recuperacion({ navigation }) {
               <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
-            <Text style={styles.texto}>Recuperar Contraseña</Text>
+            <Text style={styles.texto}>Cambiar Contraseña</Text>
             <TextInput
                 style={styles.input}
-                placeholder='Email'
-                value={clienteEmail}
-                onChangeText={setEmail}
-                keyboardType='email-address'
+                placeholder='Código'
+                value={code}
+                onChangeText={setCode}
             />
-            <TouchableOpacity style={styles.button} onPress={enviarCodigo}>
-                <Text style={styles.buttonText}>Enviar código</Text>
+            <TextInput
+                style={styles.input}
+                placeholder='Nueva Contraseña'
+                secureTextEntry
+                value={newPassword}
+                onChangeText={setNewPassword}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Confirmar Contraseña'
+                secureTextEntry
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+            />
+            <TouchableOpacity style={styles.button} onPress={cambiarContrasena}>
+                <Text style={styles.buttonText}>Guardar</Text>
             </TouchableOpacity>
         </View>
     );

@@ -12,6 +12,7 @@ import Recuperacion from './src/screens/Recuperacion';
 import Historial from './src/screens/Historial';
 import Detalle from './src/screens/Detalle';
 import Productos from './src/screens/Productos';
+import Codigo from './src/screens/Codigo';
 
 
 const Stack = createNativeStackNavigator();
@@ -63,6 +64,11 @@ export default function App() {
         <Stack.Screen
           name='Productos'
           component={Productos}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='Codigo'
+          component={Codigo}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
