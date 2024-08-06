@@ -16,7 +16,7 @@ export default function Recuperacion({ navigation }) {
         navigation.navigate("Recuperacion");
       };
 
-    const cambiarContrasena = async () => {
+      const cambiarContrasena = async () => {
         if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
             Alert.alert("Por favor, completa todos los campos.");
             return;
@@ -25,7 +25,13 @@ export default function Recuperacion({ navigation }) {
             Alert.alert("Las contraseñas no coinciden.");
             return;
         }
-
+    
+        console.log("Datos a enviar:", {
+            code: code.trim(),
+            newPassword: newPassword.trim(),
+            confirmPassword: confirmPassword.trim(),
+        });
+    
         try {
             const response = await fetch(`${ip}/Sport_Development_3/api/helpers/recuperacion_contrasena.php`, {
                 method: 'POST',
@@ -36,22 +42,31 @@ export default function Recuperacion({ navigation }) {
                     code: code.trim(),
                     newPassword: newPassword.trim(),
                     confirmPassword: confirmPassword.trim(),
-                }),
+                }).toString(), // Asegúrate de convertir a string
             });
-
-            const result = await response.json();
-
-            if (result.status) {
-                Alert.alert('Éxito', 'Tu contraseña ha sido cambiada.');
-                navigation.navigate('Sesion');
-            } else {
-                Alert.alert('Error', result.message || 'No se pudo cambiar la contraseña.');
+    
+            // Verifica el contenido de la respuesta antes de parsearla
+            const text = await response.text();
+            console.log("Respuesta cruda del servidor:", text);
+    
+            try {
+                const result = JSON.parse(text);
+                if (result.status) {
+                    Alert.alert('Éxito', 'Tu contraseña ha sido cambiada.');
+                    navigation.navigate('Sesion');
+                } else {
+                    Alert.alert('Error', result.message || 'No se pudo cambiar la contraseña.');
+                }
+            } catch (jsonError) {
+                console.error('Error al parsear JSON:', jsonError);
+                Alert.alert('Error', 'Ocurrió un error al cambiar la contraseña.');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
             Alert.alert('Error', 'Ocurrió un error al cambiar la contraseña.');
         }
     };
+    
 
     return (
         <View style={styles.container}>
