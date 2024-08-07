@@ -77,14 +77,6 @@ const CarritoCard = ({
       <Text style={styles.itemText}>Fecha de compra: {item.fecha_registro}</Text>
       <Text style={styles.itemText}>Direccion: {item.direccion_pedido}</Text>
       <Text style={styles.itemText}>SubTotal: ${(parseFloat(item.cantidad_producto) * parseFloat(item.precio_producto)).toFixed(2)}</Text>
-      <View style={styles.ratingContainer}>
-          <Text style={styles.textTitle}>Calificación:</Text>
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star" size={20} color="#FFD700" />
-          <FontAwesome name="star-half-o" size={20} color="#FFD700" />
-        </View>
     </View>
   );
 };
