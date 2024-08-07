@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList, ScrollView, TextInput } from 'react-native';
 import { useState, useEffect } from 'react';
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -7,18 +7,21 @@ import ProductoCard from '../components/Productos/ProductoCard';
 import * as Constantes from "../utils/constantes";
 
 export default function Detalle({ route, navigation }) {
-  // Parámetro recibido de la navegación
   const { idProducto } = route.params;
-  const ip = Constantes.IP; // IP para el endpoint de la API
-  const [modalVisible, setModalVisible] = useState(false); // Estado para mostrar el modal de compra
-  const [idProductoModal, setIdProductoModal] = useState(""); // ID del producto para el modal
-  const [nombreProductoModal, setNombreProductoModal] = useState(""); // Nombre del producto para el modal
-  const [cantidad, setCantidad] = useState(""); // Cantidad del producto para el modal
-  const [producto, setProducto] = useState(null); // Estado para almacenar los detalles del producto
-  const [loading, setLoading] = useState(true); // Estado para mostrar el indicador de carga
+  const ip = Constantes.IP;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [idProductoModal, setIdProductoModal] = useState("");
+  const [nombreProductoModal, setNombreProductoModal] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [producto, setProducto] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [comentarios, setComentarios] = useState([]);
+  const [calificacionPromedio, setCalificacionPromedio] = useState(null);
+  const [nuevoComentario, setNuevoComentario] = useState("");
+  const [nuevaCalificacion, setNuevaCalificacion] = useState(0);
 
   // Función para volver a la pantalla anterior
-  const volver = async () => {
+  const volver = () => {
     navigation.navigate("TabNavigator");
   };
 
@@ -35,7 +38,7 @@ export default function Detalle({ route, navigation }) {
       try {
         const formData = new FormData();
         formData.append("idProducto", idProducto);
-        
+
         const response = await fetch(
           `${ip}/Sport_Development_3/api/services/public/producto.php?action=readOne`,
           {
@@ -43,15 +46,15 @@ export default function Detalle({ route, navigation }) {
             body: formData,
           }
         );
-        
+
         const data = await response.json();
-        
+
         if (data.status) {
           setProducto(data.dataset);
         } else {
           Alert.alert("Error", data.error);
         }
-        
+
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener los detalles del producto:", error);
@@ -59,16 +62,97 @@ export default function Detalle({ route, navigation }) {
         setLoading(false);
       }
     };
-    
+
+    const obtenerComentariosYCalificacion = async () => {
+      try {
+        const formData = new FormData();
+        formData.append("idProducto", idProducto);
+
+        // Obtener comentarios
+        const responseComentarios = await fetch(
+          `${ip}/Sport_Development_3/api/services/public/producto.php?action=readComments`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const dataComentarios = await responseComentarios.json();
+
+        if (dataComentarios.status) {
+          setComentarios(dataComentarios.dataset);
+        } else {
+          Alert.alert("Error", dataComentarios.error);
+        }
+
+        // Obtener calificación promedio
+        const responseCalificacion = await fetch(
+          `${ip}/Sport_Development_3/api/services/public/producto.php?action=averageRating`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const dataCalificacion = await responseCalificacion.json();
+
+        if (dataCalificacion.status) {
+          setCalificacionPromedio(dataCalificacion.dataset.promedio);
+        } else {
+          Alert.alert("Error", dataCalificacion.error);
+        }
+      } catch (error) {
+        console.error("Error al obtener los comentarios o calificación:", error);
+        Alert.alert("Error", "Ocurrió un error al obtener los comentarios o calificación.");
+      }
+    };
+
     obtenerDetallesProducto();
+    obtenerComentariosYCalificacion();
   }, [idProducto]);
 
-  // Mostrar indicador de carga mientras se obtiene la información
+  // Función para agregar un nuevo comentario
+  const agregarComentario = async () => {
+    if (!nuevoComentario || nuevaCalificacion === 0) {
+      Alert.alert("Error", "Por favor, ingrese un comentario y calificación.");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("idProducto", idProducto);
+      formData.append("calificacion", nuevaCalificacion);
+      formData.append("comentario_producto", nuevoComentario);
+
+      const response = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/producto.php?action=addComment`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.status) {
+        Alert.alert("Éxito", "Comentario agregado exitosamente.");
+        setNuevoComentario("");
+        setNuevaCalificacion(0);
+        // Actualiza los comentarios y calificación promedio
+        obtenerComentariosYCalificacion();
+      } else {
+        Alert.alert("Error", data.error);
+      }
+    } catch (error) {
+      console.error("Error al agregar el comentario:", error);
+      Alert.alert("Error", "Ocurrió un error al agregar el comentario.");
+    }
+  };
+
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
-  // Mostrar mensaje si no se encontraron detalles del producto
   if (!producto) {
     return <Text>No se encontraron detalles para este producto.</Text>;
   }
@@ -79,7 +163,6 @@ export default function Detalle({ route, navigation }) {
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
       
-      {/* Modal de compra */}
       <ModalCompra
         visible={modalVisible}
         cerrarModal={setModalVisible}
@@ -89,10 +172,8 @@ export default function Detalle({ route, navigation }) {
         setCantidad={setCantidad}
       />
       
-      {/* Contenedor principal dentro del ScrollView */}
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.card}>
-          {/* Imagen del producto */}
           <Image
             source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
             style={styles.image}
@@ -102,18 +183,13 @@ export default function Detalle({ route, navigation }) {
           <Text style={styles.text}>{producto.descripcion_producto}</Text>
           <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
           <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
-          
+
           {/* Sección de calificación */}
           <View style={styles.ratingContainer}>
-            <Text style={styles.textTitle}>Calificación:</Text>
-            <FontAwesome name="star" size={20} color="#FFD700" />
-            <FontAwesome name="star" size={20} color="#FFD700" />
-            <FontAwesome name="star" size={20} color="#FFD700" />
-            <FontAwesome name="star" size={20} color="#FFD700" />
-            <FontAwesome name="star-half-o" size={20} color="#FFD700" />
+            <Text style={styles.textTitle}>Calificación Promedio:</Text>
+            <Text style={styles.text}>{calificacionPromedio !== null ? calificacionPromedio.toFixed(1) : "No disponible"}</Text>
           </View>
           
-          {/* Botón para agregar al carrito */}
           <TouchableOpacity
             style={styles.cartButton}
             onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}
@@ -125,26 +201,50 @@ export default function Detalle({ route, navigation }) {
           {/* Sección de comentarios */}
           <View style={styles.commentsSection}>
             <Text style={styles.commentsTitle}>Comentarios</Text>
-            {/* Comentarios de ejemplo */}
-            {[1, 2, 3].map((_, index) => (
-              <View key={index} style={styles.comment}>
-                <Text style={styles.commentAuthor}>Autor del Comentario</Text>
-                <View style={styles.ratingContainer}>
-                  {[...Array(5)].map((_, i) => (
-                    <FontAwesome key={i} name="star" size={20} color={i < 4 ? '#FFD700' : '#ccc'} />
-                  ))}
+
+            {comentarios.length === 0 ? (
+              <Text>No hay comentarios para este producto.</Text>
+            ) : (
+              comentarios.map((comentario, index) => (
+                <View key={index} style={styles.comment}>
+                  <Text style={styles.commentAuthor}>Autor del Comentario</Text>
+                  <View style={styles.ratingContainer}>
+                    {[...Array(5)].map((_, i) => (
+                      <FontAwesome
+                        key={i}
+                        name="star"
+                        size={20}
+                        color={i < comentario.calificacion_producto ? '#FFD700' : '#ccc'}
+                      />
+                    ))}
+                  </View>
+                  <Text style={styles.commentText}>{comentario.comentario_producto}</Text>
                 </View>
-                <Text style={styles.commentText}>
-                  Este es un comentario de ejemplo. El texto del comentario debe ser lo suficientemente largo para mostrar cómo se ve el diseño.
-                </Text>
-              </View>
-            ))}
+              ))
+            )}
+
+            <TextInput
+              style={styles.textInput}
+              placeholder="Escribe tu comentario"
+              value={nuevoComentario}
+              onChangeText={setNuevoComentario}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Calificación (1-5)"
+              keyboardType="numeric"
+              value={nuevaCalificacion.toString()}
+              onChangeText={(text) => setNuevaCalificacion(Number(text))}
+            />
+            <TouchableOpacity style={styles.cartButton} onPress={agregarComentario}>
+              <Text style={styles.cartButtonText}>Agregar Comentario</Text>
+            </TouchableOpacity>
           </View>
 
           {/* Lista de productos relacionados */}
           <SafeAreaView style={styles.containerFlat}>
             <FlatList
-              keyExtractor={(item) => item.id_producto}
+              keyExtractor={(item) => item.id_producto.toString()}
               renderItem={({ item }) => (
                 <ProductoCard
                   ip={ip}
@@ -158,6 +258,7 @@ export default function Detalle({ route, navigation }) {
                   Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
                 />
               )}
+              data={producto.relacionados} // Asumiendo que el producto tiene un campo relacionados
             />
           </SafeAreaView>
         </View>
@@ -165,7 +266,6 @@ export default function Detalle({ route, navigation }) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -265,5 +365,12 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     flexGrow: 1,
+  },
+  textInput: {
+    height: 40,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 8,
   },
 });
