@@ -1,5 +1,5 @@
-import { StatusBar,StyleSheet,Text,View,TextInput,TouchableOpacity,Alert,FlatList,ScrollView,SafeAreaView,Image,Modal,} from "react-native";
-import { useState, useEffect, useCallback  } from "react";
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Image, Modal } from "react-native";
+import { useState, useEffect, useCallback } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
 import ProductoCard from "../components/Productos/ProductoCard";
@@ -12,7 +12,6 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Productos({ navigation }) {
   const ip = Constantes.IP;
-  // Estados para almacenar los datos de los productos y categorías
   const [dataProductos, setDataProductos] = useState([]);
   const [dataCategorias, setDataCategorias] = useState([]);
   const [selectedValue, setSelectedValue] = useState(null);
@@ -21,34 +20,29 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState("");
   const [nombreProductoModal, setNombreProductoModal] = useState("");
 
-  // Función para navegar a la pantalla de inicio
   const volverInicio = async () => {
     navigation.navigate("Home");
   };
 
-   // Función para navegar a la pantalla de inicio
-   const Detalle = (idProducto) => {
+  const Detalle = (idProducto) => {
     navigation.navigate("Detalle", { idProducto });
   };
-  
 
-  // Función para manejar la apertura del modal de compra
   const handleCompra = (nombre, id) => {
     setModalVisible(true);
     setIdProductoModal(id);
     setNombreProductoModal(nombre);
   };
 
-  // Función para obtener los productos por categoría
   const getProductos = async (idCategoriaSelect = 1) => {
     try {
       if (idCategoriaSelect <= 0) {
-        // Validar que se haya seleccionado una categoría
         return;
       }
+
       const formData = new FormData();
       formData.append("idCategoria", idCategoriaSelect);
-      //utilizar la direccion IP del servidor y no localhost
+
       const response = await fetch(
         `${ip}/Sport_Development_3/api/services/public/producto.php?action=readProductosCategoria`,
         {
@@ -59,12 +53,31 @@ export default function Productos({ navigation }) {
 
       const data = await response.json();
       console.log("data al obtener productos  \n", data);
+
       if (data.status) {
-        console.log("trae datos el dataset", data);
-        setDataProductos(data.dataset);
+        const productosConCalificacion = await Promise.all(data.dataset.map(async (producto) => {
+          const formDataCalificacion = new FormData();
+          formDataCalificacion.append("idProducto", producto.id_producto);
+
+          const responseCalificacion = await fetch(
+            `${ip}/Sport_Development_3/api/services/public/producto.php?action=averageRating`,
+            {
+              method: "POST",
+              body: formDataCalificacion,
+            }
+          );
+
+          const dataCalificacion = await responseCalificacion.json();
+
+          return {
+            ...producto,
+            calificacionPromedio: dataCalificacion.status ? dataCalificacion.dataset.promedio : 0,
+          };
+        }));
+
+        setDataProductos(productosConCalificacion);
       } else {
         console.log("Data en el ELSE error productos", data);
-        // Alert the user about the error
         Alert.alert("Error productos", data.error);
       }
     } catch (error) {
@@ -73,10 +86,8 @@ export default function Productos({ navigation }) {
     }
   };
 
-  // Función para obtener las categorías
   const getCategorias = async () => {
     try {
-
       const response = await fetch(
         `${ip}/Sport_Development_3/api/services/public/categoria.php?action=readAll`,
         {
@@ -89,7 +100,6 @@ export default function Productos({ navigation }) {
         setDataCategorias(data.dataset);
       } else {
         console.log(data);
-        // Alert the user about the error
         Alert.alert("Error categorias", data.error);
       }
     } catch (error) {
@@ -137,9 +147,7 @@ export default function Productos({ navigation }) {
         <FlatList
           data={dataProductos}
           keyExtractor={(item) => item.id_producto}
-          renderItem={(
-            { item }
-          ) => (
+          renderItem={({ item }) => (
             <ProductoCard
               ip={ip}
               imagenProducto={item.imagen_producto}
@@ -148,6 +156,7 @@ export default function Productos({ navigation }) {
               descripcionProducto={item.descripcion_producto}
               precioProducto={item.precio_producto}
               existenciasProducto={item.existencias_producto}
+              calificacionPromedio={item.calificacionPromedio} // Añadir calificación promedio aquí
               accionBotonProducto={() =>
                 handleCompra(item.nombre_producto, item.id_producto)
               }
