@@ -42,7 +42,6 @@ export default function Home({ navigation }) {
     navigation.navigate('Historial');
   };
 
-  // Función para obtener los datos del usuario
   const getUser = async () => {
     try {
       // Enviar una solicitud HTTP al servidor para obtener los datos del usuario
@@ -50,18 +49,21 @@ export default function Home({ navigation }) {
         method: 'GET'
       });
       const data = await response.json();
-      if (data.status) {
-        // Si la solicitud es exitosa, actualizar el estado con el nombre del usuario
-        setNombre(data.name.nombre_cliente);
+      console.log('Data received:', data); // Agrega esta línea para ver la respuesta completa
+  
+      if (data.status === 1) { // Verifica el estado
+        // Usar el campo 'name' que ya contiene el nombre completo
+        setNombre(data.name || 'Nombre no disponible');
       } else {
         // Si hay un error, mostrar una alerta
-        Alert.alert('Error', data.error);
+        Alert.alert('Error', data.error || 'Error desconocido');
       }
     } catch (error) {
       // Si hay un error de red, mostrar una alerta
-      Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
+      Alert.alert('Error', 'Ocurrió un error al obtener los datos del usuario');
     }
   };
+  
 
   // Uso del React Hook useEffect para cargar los datos del usuario al montar el componente
   useEffect(() => {
