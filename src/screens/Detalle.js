@@ -20,19 +20,16 @@ export default function Detalle({ route, navigation }) {
   const [nuevoComentario, setNuevoComentario] = useState("");
   const [nuevaCalificacion, setNuevaCalificacion] = useState(0);
 
-  // Función para volver a la pantalla anterior
   const volver = () => {
     navigation.navigate("TabNavigator");
   };
 
-  // Función para manejar la compra y mostrar el modal
   const handleCompra = (nombre, id) => {
     setModalVisible(true);
     setIdProductoModal(id);
     setNombreProductoModal(nombre);
   };
 
-  // Efecto para obtener los detalles del producto
   useEffect(() => {
     const obtenerDetallesProducto = async () => {
       try {
@@ -111,7 +108,6 @@ export default function Detalle({ route, navigation }) {
     obtenerComentariosYCalificacion();
   }, [idProducto]);
 
-  // Función para agregar un nuevo comentario
   const agregarComentario = async () => {
     if (!nuevoComentario || nuevaCalificacion === 0) {
       Alert.alert("Error", "Por favor, ingrese un comentario y calificación.");
@@ -138,8 +134,7 @@ export default function Detalle({ route, navigation }) {
         Alert.alert("Éxito", "Comentario agregado exitosamente.");
         setNuevoComentario("");
         setNuevaCalificacion(0);
-        // Actualiza los comentarios y calificación promedio
-        obtenerComentariosYCalificacion();
+        obtenerComentariosYCalificacion(); // Actualiza los comentarios y calificación promedio
       } else {
         Alert.alert("Error", data.error);
       }
@@ -147,6 +142,16 @@ export default function Detalle({ route, navigation }) {
       console.error("Error al agregar el comentario:", error);
       Alert.alert("Error", "Ocurrió un error al agregar el comentario.");
     }
+  };
+
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <FontAwesome key={i} name="star" size={20} color={i < rating ? '#000' : '#ddd'} />
+      );
+    }
+    return stars;
   };
 
   if (loading) {
@@ -184,10 +189,13 @@ export default function Detalle({ route, navigation }) {
           <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
           <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
 
-          {/* Sección de calificación */}
+          {/* Sección de calificación promedio */}
           <View style={styles.ratingContainer}>
             <Text style={styles.textTitle}>Calificación Promedio:</Text>
-            <Text style={styles.text}>{calificacionPromedio !== null ? calificacionPromedio.toFixed(1) : "No disponible"}</Text>
+            <View style={styles.ratingStars}>
+              {renderStars(calificacionPromedio || 0)}
+            </View>
+            <Text style={styles.textDentro}> {calificacionPromedio !== null ? calificacionPromedio.toFixed(1) : "No disponible"}</Text>
           </View>
           
           <TouchableOpacity
@@ -207,16 +215,10 @@ export default function Detalle({ route, navigation }) {
             ) : (
               comentarios.map((comentario, index) => (
                 <View key={index} style={styles.comment}>
-                  <Text style={styles.commentAuthor}>Autor del Comentario</Text>
+                  <Text style={styles.commentAuthor}>{comentario.nombre_cliente}</Text>
+                  <Text style={styles.commentDate}>{comentario.fecha_comentario}</Text>
                   <View style={styles.ratingContainer}>
-                    {[...Array(5)].map((_, i) => (
-                      <FontAwesome
-                        key={i}
-                        name="star"
-                        size={20}
-                        color={i < comentario.calificacion_producto ? '#FFD700' : '#ccc'}
-                      />
-                    ))}
+                    {renderStars(comentario.calificacion_producto)}
                   </View>
                   <Text style={styles.commentText}>{comentario.comentario_producto}</Text>
                 </View>
@@ -352,6 +354,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
   },
+  commentDate: {
+    fontSize: 12,
+    color: '#888',
+    marginBottom: 5,
+  },
   commentText: {
     fontSize: 14,
     color: '#333',
@@ -359,6 +366,9 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     marginVertical: 5,
+  },
+  ratingStars: {
+    flexDirection: 'row',
   },
   containerFlat: {
     flex: 1,
