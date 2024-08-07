@@ -1,10 +1,11 @@
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList, ScrollView, TextInput } from 'react-native';
-import { useState, useEffect } from 'react';
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ModalCompra from '../components/Modales/ModalCompra';
 import ProductoCard from '../components/Productos/ProductoCard';
 import * as Constantes from "../utils/constantes";
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Detalle({ route, navigation }) {
   const { idProducto } = route.params;
@@ -30,83 +31,78 @@ export default function Detalle({ route, navigation }) {
     setNombreProductoModal(nombre);
   };
 
-  useEffect(() => {
-    const obtenerDetallesProducto = async () => {
-      try {
-        const formData = new FormData();
-        formData.append("idProducto", idProducto);
+  const obtenerDetallesProducto = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("idProducto", idProducto);
 
-        const response = await fetch(
-          `${ip}/Sport_Development_3/api/services/public/producto.php?action=readOne`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
-        const data = await response.json();
-
-        if (data.status) {
-          setProducto(data.dataset);
-        } else {
-          Alert.alert("Error", data.error);
+      const response = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/producto.php?action=readOne`,
+        {
+          method: "POST",
+          body: formData,
         }
+      );
 
-        setLoading(false);
-      } catch (error) {
-        console.error("Error al obtener los detalles del producto:", error);
-        Alert.alert("Error", "Ocurrió un error al obtener los detalles del producto.");
-        setLoading(false);
+      const data = await response.json();
+
+      if (data.status) {
+        setProducto(data.dataset);
+      } else {
+        Alert.alert("Error", data.error);
       }
-    };
 
-    const obtenerComentariosYCalificacion = async () => {
-      try {
-        const formData = new FormData();
-        formData.append("idProducto", idProducto);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error al obtener los detalles del producto:", error);
+      Alert.alert("Error", "Ocurrió un error al obtener los detalles del producto.");
+      setLoading(false);
+    }
+  };
 
-        // Obtener comentarios
-        const responseComentarios = await fetch(
-          `${ip}/Sport_Development_3/api/services/public/producto.php?action=readComments`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+  const obtenerComentariosYCalificacion = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("idProducto", idProducto);
 
-        const dataComentarios = await responseComentarios.json();
-
-        if (dataComentarios.status) {
-          setComentarios(dataComentarios.dataset);
-        } else {
-          Alert.alert("Error", dataComentarios.error);
+      // Obtener comentarios
+      const responseComentarios = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/producto.php?action=readComments`,
+        {
+          method: "POST",
+          body: formData,
         }
+      );
 
-        // Obtener calificación promedio
-        const responseCalificacion = await fetch(
-          `${ip}/Sport_Development_3/api/services/public/producto.php?action=averageRating`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+      const dataComentarios = await responseComentarios.json();
 
-        const dataCalificacion = await responseCalificacion.json();
-
-        if (dataCalificacion.status) {
-          setCalificacionPromedio(dataCalificacion.dataset.promedio);
-        } else {
-          Alert.alert("Error", dataCalificacion.error);
-        }
-      } catch (error) {
-        console.error("Error al obtener los comentarios o calificación:", error);
-        Alert.alert("Error", "Ocurrió un error al obtener los comentarios o calificación.");
+      if (dataComentarios.status) {
+        setComentarios(dataComentarios.dataset);
+      } else {
+        Alert.alert("Error", dataComentarios.error);
       }
-    };
 
-    obtenerDetallesProducto();
-    obtenerComentariosYCalificacion();
-  }, [idProducto]);
+      // Obtener calificación promedio
+      const responseCalificacion = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/producto.php?action=averageRating`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const dataCalificacion = await responseCalificacion.json();
+
+      if (dataCalificacion.status) {
+        setCalificacionPromedio(dataCalificacion.dataset.promedio);
+      } else {
+        Alert.alert("Error", dataCalificacion.error);
+      }
+    } catch (error) {
+      console.error("Error al obtener los comentarios o calificación:", error);
+      Alert.alert("Error", "Ocurrió un error al obtener los comentarios o calificación.");
+    }
+  };
 
   const agregarComentario = async () => {
     if (!nuevoComentario || nuevaCalificacion === 0) {
@@ -139,20 +135,29 @@ export default function Detalle({ route, navigation }) {
         Alert.alert("Error", data.error);
       }
     } catch (error) {
-      console.error("Error al agregar el comentario:", error);
-      Alert.alert("Error", "Ocurrió un error al agregar el comentario.");
+      console.error("Éxito", "Comentario agregado exitosamente.");
+      Alert.alert("Éxito", "Comentario agregado exitosamente.");
     }
   };
 
-  const renderStars = (rating) => {
+  const renderStars = (rating, onPress) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <FontAwesome key={i} name="star" size={20} color={i < rating ? '#000' : '#ddd'} />
+        <TouchableOpacity key={i} onPress={() => onPress(i + 1)}>
+          <FontAwesome name="star" size={20} color={i < rating ? '#000' : '#ddd'} />
+        </TouchableOpacity>
       );
     }
     return stars;
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      obtenerDetallesProducto();
+      obtenerComentariosYCalificacion();
+    }, [idProducto])
+  );
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -210,13 +215,29 @@ export default function Detalle({ route, navigation }) {
           <View style={styles.commentsSection}>
             <Text style={styles.commentsTitle}>Comentarios</Text>
 
+            {/* Botón para agregar comentario */}
+            <View style={styles.addCommentSection}>
+            <View style={styles.ratingStars}>
+            {renderStars(nuevaCalificacion, setNuevaCalificacion)}
+            </View>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Escribe tu comentario"
+                value={nuevoComentario}
+                onChangeText={setNuevoComentario}
+              />
+              <TouchableOpacity style={styles.cartButton} onPress={agregarComentario}>
+                <Text style={styles.cartButtonText}>Agregar Comentario</Text>
+              </TouchableOpacity>
+            </View>
+
             {comentarios.length === 0 ? (
               <Text>No hay comentarios para este producto.</Text>
             ) : (
               comentarios.map((comentario, index) => (
                 <View key={index} style={styles.comment}>
-                  <Text style={styles.commentAuthor}>{comentario.nombre_cliente}</Text>
-                  <Text style={styles.commentDate}>{comentario.fecha_comentario}</Text>
+                  <Text style={styles.commentAuthor}>{comentario.nombre_cliente} {comentario.apellido_cliente}</Text>
+                  <Text style={styles.commentDate}>{comentario.fecha_valoracion}</Text>
                   <View style={styles.ratingContainer}>
                     {renderStars(comentario.calificacion_producto)}
                   </View>
@@ -224,23 +245,6 @@ export default function Detalle({ route, navigation }) {
                 </View>
               ))
             )}
-
-            <TextInput
-              style={styles.textInput}
-              placeholder="Escribe tu comentario"
-              value={nuevoComentario}
-              onChangeText={setNuevoComentario}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Calificación (1-5)"
-              keyboardType="numeric"
-              value={nuevaCalificacion.toString()}
-              onChangeText={(text) => setNuevaCalificacion(Number(text))}
-            />
-            <TouchableOpacity style={styles.cartButton} onPress={agregarComentario}>
-              <Text style={styles.cartButtonText}>Agregar Comentario</Text>
-            </TouchableOpacity>
           </View>
 
           {/* Lista de productos relacionados */}
@@ -250,7 +254,6 @@ export default function Detalle({ route, navigation }) {
               renderItem={({ item }) => (
                 <ProductoCard
                   ip={ip}
-                  imagenProducto={item.imagen_producto}
                   idProducto={item.id_producto}
                   nombreProducto={item.nombre_producto}
                   descripcionProducto={item.descripcion_producto}
@@ -338,6 +341,9 @@ const styles = StyleSheet.create({
   commentsSection: {
     marginTop: 20,
   },
+  addCommentSection: {
+    marginBottom: 20,
+  },
   commentsTitle: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -382,5 +388,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 8,
+    marginTop: 10,
   },
 });
