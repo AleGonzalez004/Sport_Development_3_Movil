@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
   containerFlat: {
     flex: 1,
     paddingTop: Constants.statusBarHeight,
+    width: 350,
   },
   container: {
     flex: 1,
@@ -271,13 +272,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginVertical: 5,
     marginHorizontal: 5,
-    color: "#FFF", // Brown color for the title
+    color: "#FFF", 
   },
   pickerContainer: {
     alignItems: "left",
-    borderColor: "#16537E", // Color del borde
+    borderColor: "#16537E", 
     borderRadius: 5,
-    backgroundColor: "#16537E", // Color de fondo
+    backgroundColor: "#16537E", 
     color: "#FFF",
   },
   picker: {
