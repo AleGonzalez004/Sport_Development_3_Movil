@@ -16,22 +16,22 @@ https://github.com/AleGonzalez004/Sport_Development_3_Movil
 
 ## Dependencias
 
--npm install
--npm install @react-navigation/stack
--npm i @react-navigation/native
--npm i @react-navigation/native-stack
--npm install @react-native-community/datetimepicker --save
--npm install react-native-picker-select
--npm install react-native-vector-icons
--npm install @expo/vector-icons
--npm install react-native-masked-text
--npm install @react-navigation/bottom-tabs
--npm install @expo/vector-icons
--npm install @react-native-community/datetimepicker@8.0.1
--npm install expo-status-bar@~1.12.1
--npm install expo-web-browser@~13.0.3
--npm install react-native@0.74.3
--npx expo start
+npm install
+npm install @react-navigation/stack
+npm i @react-navigation/native
+npm i @react-navigation/native-stack
+npm install @react-native-community/datetimepicker --save
+npm install react-native-picker-select
+npm install react-native-vector-icons
+npm install @expo/vector-icons
+npm install react-native-masked-text
+npm install @react-navigation/bottom-tabs
+npm install @expo/vector-icons
+npm install @react-native-community/datetimepicker@8.0.1
+npm install expo-status-bar@~1.12.1
+npm install expo-web-browser@~13.0.3
+npm install react-native@0.74.3
+npx expo start
 
 ## Si el proyecto no corre en los dispositivos ejecutar el siguiente comando:
 
