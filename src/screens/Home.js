@@ -81,16 +81,8 @@ export default function Home({ navigation }) {
         {nombre ? nombre : 'No hay Nombre para mostrar'}
       </Text>
       <Buttons
-        textoBoton='Ver Productos'
-        accionBoton={irActualizar}
-      />
-      <Buttons
         textoBoton='Editar Usuario'
         accionBoton={EditUser}
-      />
-       <Buttons
-        textoBoton='Historial de compras'
-        accionBoton={Historial}
       />
       <Buttons
         textoBoton='Cerrar Sesión'
