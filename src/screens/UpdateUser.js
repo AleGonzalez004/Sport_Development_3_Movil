@@ -88,9 +88,11 @@ export default function UserProfile({ navigation }) {
         setClaveActual(data.name.clave_cliente);
       } else {
         Alert.alert('Error', data.error);
+        console.log(error);
       }
     } catch (error) {
       Alert.alert('Error', 'Ocurrió un error al obtener los datos del usuario');
+      console.log(error);
     }
   };
 
@@ -117,7 +119,7 @@ export default function UserProfile({ navigation }) {
       formData.append('direccionCliente', direccion);
       formData.append('nacimientoCliente', fechaNacimiento);
 
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=readProfile`, {
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=editProfile`, {
         method: 'POST',
         body: formData
       });
