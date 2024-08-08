@@ -135,7 +135,6 @@ export default function Detalle({ route, navigation }) {
         Alert.alert("Error", data.error);
       }
     } catch (error) {
-      console.error("Éxito", "Comentario agregado exitosamente.");
       Alert.alert("Éxito", "Comentario agregado exitosamente.");
     }
   };
