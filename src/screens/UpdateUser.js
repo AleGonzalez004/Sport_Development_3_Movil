@@ -180,10 +180,10 @@ export default function UserProfile({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
           <AntDesign name="arrowleft" size={20} color="white" />
         </TouchableOpacity>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <Text style={styles.texto}>Editar Perfil</Text>
         <Image source={require('../img/user.png')} style={styles.image} />
         <Text style={styles.label}>Nombre:</Text>
@@ -316,6 +316,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginRight: 310,
     marginTop: 10,
+    marginBottom: 15,
     backgroundColor: "#16537E",
     borderRadius: 20,
     paddingHorizontal: 15,
@@ -343,7 +344,7 @@ const styles = StyleSheet.create({
     width: 350,
     height: 45,
     borderRadius: 20,
-    padding: 10,
+    padding: 12,
     marginVertical: 10
   },
   fechaSeleccionar: {

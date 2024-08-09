@@ -9,6 +9,7 @@ import Buttons from '../components/Buttons/Button';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 import InputEmail from '../components/Inputs/InputEmail';
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function SignUp({ navigation }) {
     const ip = Constantes.IP;
@@ -51,10 +52,6 @@ export default function SignUp({ navigation }) {
 
     const showDatepicker = () => {
         showMode('date');
-    };
-
-    const handleLogout = async () => {
-        navigation.navigate('Sesion');
     };
 
     const handleCreate = async () => {
@@ -104,8 +101,16 @@ export default function SignUp({ navigation }) {
         }
     };
 
+    const volverInicio = () => {
+        navigation.navigate("Sesion");
+      };
+    
+
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
+          <AntDesign name="arrowleft" size={20} color="white" />
+        </TouchableOpacity>
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
                 <View style={styles.offscroll}></View>
                 <Text style={styles.texto}>Registrar Usuario</Text>
@@ -168,11 +173,6 @@ export default function SignUp({ navigation }) {
                     textoBoton='Registrar Usuario'
                     accionBoton={handleCreate}
                 />
-
-                <Buttons
-                    textoBoton='Ir al Login'
-                    accionBoton={handleLogout}
-                />
             </ScrollView>
         </View>
     );
@@ -186,6 +186,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    ButtonVolver: {
+        flexDirection: "row",
+        marginRight: 310,
+        marginTop: 10,
+        marginBottom: 15,
+        backgroundColor: "#16537E",
+        borderRadius: 20,
+        paddingHorizontal: 15,
+      },
     scrollViewStyle: {
         backgroundColor: '#16537E',
         alignItems: 'center',
@@ -212,7 +221,7 @@ const styles = StyleSheet.create({
         width: 350,
         height: 45,
         borderRadius: 20,
-        padding: 15,
+        padding: 12,
         marginVertical: 10
     },
     image: {
