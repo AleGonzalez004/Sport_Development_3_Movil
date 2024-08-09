@@ -53,7 +53,7 @@ const Carrito = ({ navigation }) => {
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        console.log("No hay detalles del carrito disponibles.")
+        console.log("No hay detalles del historial disponibles.")
         //Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
