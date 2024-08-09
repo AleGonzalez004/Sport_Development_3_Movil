@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginRight: 310,
     marginTop: 10,
-    marginBottom: 15,
+    marginBottom: 25,
     backgroundColor: "#16537E",
     borderRadius: 20,
     paddingHorizontal: 15,
