@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginVertical: 8,
     backgroundColor: '#fff',
-    borderRadius: 8,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   modifyButton: {
     borderWidth: 1,
     borderColor: '#16537E',
-    borderRadius: 8,
+    borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
     backgroundColor: '#16537E',
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     borderWidth: 1,
     borderColor: '#000000',
-    borderRadius: 8,
+    borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
     backgroundColor: '#000000',
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   finalButton: {
     backgroundColor: '#16537E',
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 20,
     marginVertical: 8,
   },
   finalButtonText: {
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   image: {
     width: '65%',
     height: 150,
-    borderRadius: 8,
+    borderRadius: 20,
     marginBottom: 12,
   },
   imageContainer: {

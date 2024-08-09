@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#ffffff',
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -83,13 +83,13 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 20,
     padding: 8,
     marginLeft: 8,
   },
   button: {
     backgroundColor: '#AF8260',
-    borderRadius: 5,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   image: {
     width: '65%',
     height: 150,
-    borderRadius: 8,
+    borderRadius: 20,
     marginBottom: 12,
   },
   imageContainer: {

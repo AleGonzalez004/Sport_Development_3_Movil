@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         width: 350,
         height: 45,
-        borderRadius: 5,
+        borderRadius: 20,
         padding: 10,
         marginVertical: 10
     },

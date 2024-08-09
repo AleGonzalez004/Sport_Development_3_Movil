@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "black",
     width: 100,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: "#FFF"
   },
 

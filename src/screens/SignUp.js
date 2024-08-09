@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#16537E',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5,
+        borderRadius: 20,
         padding: 15,
     },
     texto: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
         color: "#16537E", fontWeight: '500',
         width: 350,
         height: 45,
-        borderRadius: 5,
+        borderRadius: 20,
         padding: 15,
         marginVertical: 10
     },

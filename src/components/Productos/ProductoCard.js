@@ -59,7 +59,7 @@ export default function ProductoCard({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffff',
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 16,
     marginVertical: 12,
     marginHorizontal: 16,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   image: {
     width: '65%',
     height: 150,
-    borderRadius: 8,
+    borderRadius: 20,
     marginBottom: 12,
   },
   imageContainer: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#16537E',
-    borderRadius: 5,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginVertical: 10,

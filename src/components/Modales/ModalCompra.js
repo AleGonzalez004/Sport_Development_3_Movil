@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 20,
     padding: 10,
     marginBottom: 20,
     width: 200,

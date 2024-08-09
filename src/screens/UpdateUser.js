@@ -317,14 +317,14 @@ const styles = StyleSheet.create({
     marginRight: 310,
     marginTop: 10,
     backgroundColor: "#16537E",
-    borderRadius: 8,
+    borderRadius: 20,
     paddingHorizontal: 15,
   },
   scrollViewStyle: {
     backgroundColor: '#16537E',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 20,
     padding: 15,
   },
   texto: {
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 350,
     height: 45,
-    borderRadius: 5,
+    borderRadius: 20,
     padding: 10,
     marginVertical: 10
   },
@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: 'white',
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: 'center'
   },
   modalTitle: {
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 20,
     marginBottom: 15,
     paddingHorizontal: 10
   },
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#16537E',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 20,
     alignItems: 'center',
     marginVertical: 5
   },

@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#ffffff',
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 16,
     marginVertical: 12,
     marginHorizontal: 16,
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    borderRadius: 8,
+    borderRadius: 20,
     marginBottom: 16,
   },
   text: {
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginTop: 20,
     backgroundColor: "#16537E",
-    borderRadius: 8,
+    borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 15,
   },
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     backgroundColor: '#16537E',
-    borderRadius: 5,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 25, 
     marginVertical: 10,
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 10,
     marginTop: 15,
-    borderRadius: 8,
+    borderRadius: 20,
     textAlignVertical: 'top', 
   }
 });
