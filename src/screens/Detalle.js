@@ -128,14 +128,13 @@ export default function Detalle({ route, navigation }) {
 
       if (data.status) {
         Alert.alert("Éxito", "Comentario agregado exitosamente.");
-        setNuevoComentario("");
-        setNuevaCalificacion(0);
-        obtenerComentariosYCalificacion(); // Actualiza los comentarios y calificación promedio
-      } else {
+      
         Alert.alert("Error", data.error);
       }
     } catch (error) {
-      Alert.alert("Éxito", "Comentario agregado exitosamente.");
+      setNuevoComentario("");
+      setNuevaCalificacion(0);
+      obtenerComentariosYCalificacion(); 
     }
   };
 
@@ -378,12 +377,14 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   textInput: {
-    height: 80,
+    height: 80, 
     borderColor: '#ddd',
     borderWidth: 1,
     marginBottom: 1,
     paddingHorizontal: 8,
+    paddingVertical: 10,
     marginTop: 15,
     borderRadius: 8,
-  },
+    textAlignVertical: 'top', 
+  }
 });
