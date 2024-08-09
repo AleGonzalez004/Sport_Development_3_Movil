@@ -194,7 +194,7 @@ export default function Detalle({ route, navigation }) {
   
           {/* Sección de calificación promedio */}
           <View style={styles.ratingContainer}>
-            <Text style={styles.textTitle}>Calificación Promedio:</Text>
+            <Text style={styles.textTitle}>Calificación: </Text>
             <View style={styles.ratingStars}>
               {renderStars(calificacionPromedio || 0)}
             </View>
@@ -307,22 +307,22 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 324,
-    marginVertical: 10,
+    marginRight: 320,
+    marginVertical: 20,
     marginTop: 20,
     backgroundColor: "#16537E",
     borderRadius: 20,
     paddingVertical: 12,
-    paddingHorizontal: 15,
+    paddingHorizontal: 19,
   },
   cartButton: {
     marginTop: 20,
     flexDirection: 'row',
     alignSelf: 'flex-end',
     backgroundColor: '#16537E',
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 25, 
+    borderRadius: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 20, 
     marginVertical: 10,
     alignItems: 'center', 
   },
