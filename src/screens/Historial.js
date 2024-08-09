@@ -90,9 +90,6 @@ const Carrito = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-        <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
-        <AntDesign name="arrowleft" size={20} color="white" />
-      </TouchableOpacity>
       {/* Componente de modal para editar cantidad */}
       <ModalEditarCantidad
         setModalVisible={setModalVisible}

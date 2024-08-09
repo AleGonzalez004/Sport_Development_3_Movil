@@ -47,15 +47,9 @@ export default function ProductoCard({
 
       <TouchableOpacity
         style={styles.cartButton}
-        onPress={accionBotonProducto}>
-        <FontAwesome name="plus-circle" size={24} color="white" />
-        <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.cartButton}
         onPress={Detalle}>
         <FontAwesome name="address-card" size={24} color="white" />
-        <Text style={styles.cartButtonText}>Ver detalle</Text>
+        <Text style={styles.cartButtonText}>Ver mas</Text>
       </TouchableOpacity>
     </View>
   );

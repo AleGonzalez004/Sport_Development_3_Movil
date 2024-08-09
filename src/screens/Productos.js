@@ -129,7 +129,7 @@ export default function Productos({ navigation }) {
       />
       <View>
         <Text style={styles.subtitle}>
-          //////////////////////////////////////////////////////////////////////////////////////
+          ///////////////////////////////////////////////////////////////////
         </Text>
         <View style={styles.pickerContainer}>
           <RNPickerSelect
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#16537E",
     borderRadius: 8,
     paddingVertical: 12,
-    paddingHorizontal: 12,
+    paddingHorizontal: 11,
   },
   cartButtonText: {
     color: "#FFF",
@@ -279,7 +279,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     fontWeight: "500",
-    marginVertical: 5,
     marginHorizontal: 5,
     color: "#FFF", 
   },
