@@ -69,12 +69,12 @@ export default function UserProfile({ navigation }) {
 
   const getUser = async () => {
     try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`, {
+      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/cliente.php?action=readProfile`, {
         method: 'GET'
       });
-      console.log('Fetch response:', response);  // Verifica la respuesta
+      console.log('Fetch response:', response);  
       const data = await response.json();
-      console.log('Fetch data:', data);  // Verifica los datos recibidos
+      console.log('Fetch data:', data);  
       if (data.status) {
         setNombre(data.name.nombre_cliente);
         setApellido(data.name.apellido_cliente);
@@ -88,9 +88,11 @@ export default function UserProfile({ navigation }) {
         setClaveActual(data.name.clave_cliente);
       } else {
         Alert.alert('Error', data.error);
+        console.log(error);
       }
     } catch (error) {
       Alert.alert('Error', 'Ocurrió un error al obtener los datos del usuario');
+      console.log(error);
     }
   };
 

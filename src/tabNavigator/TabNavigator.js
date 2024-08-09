@@ -7,6 +7,7 @@ import { Platform } from 'react-native';
 import Productos from '../screens/Productos';
 import Home from '../screens/Home';
 import Carrito from '../screens/Carrito';
+import Historial from '../screens/Historial';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,9 @@ const TabNavigator = () => {
                 iconName = focused ? 'football' : 'football-outline';
               } else if (route.name === 'Carrito') {
                 iconName = focused ? 'cart' : 'cart-outline';
-              }
+              } else if (route.name === 'Historial') {
+                iconName = focused ? 'time' : 'time-outline';
+              }   
               return <Ionicons name={iconName} color={color} size={size} />;
             },
           })}
@@ -48,6 +51,11 @@ const TabNavigator = () => {
         name="Carrito"
         component={Carrito}
         options={{ title: 'Carrito' }}
+      />
+      <Tab.Screen
+        name="Historial"
+        component={Historial}
+        options={{ title: 'Historial' }}
       />
     </Tab.Navigator>
     );
