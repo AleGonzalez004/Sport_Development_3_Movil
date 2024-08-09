@@ -192,7 +192,7 @@ export default function Detalle({ route, navigation }) {
           <Text style={styles.text}>{producto.descripcion_producto}</Text>
           <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
           <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
-
+  
           {/* Sección de calificación promedio */}
           <View style={styles.ratingContainer}>
             <Text style={styles.textTitle}>Calificación Promedio:</Text>
@@ -206,19 +206,18 @@ export default function Detalle({ route, navigation }) {
             style={styles.cartButton}
             onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}
           >
-
             <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
           </TouchableOpacity>
           
           {/* Sección de comentarios */}
           <View style={styles.commentsSection}>
             <Text style={styles.commentsTitle}>Comentarios</Text>
-
+  
             {/* Botón para agregar comentario */}
             <View style={styles.addCommentSection}>
-            <View style={styles.ratingStars}>
-            {renderStars(nuevaCalificacion, setNuevaCalificacion)}
-            </View>
+              <View style={styles.ratingStars}>
+                {renderStars(nuevaCalificacion, setNuevaCalificacion)}
+              </View>
               <TextInput
                 style={styles.textInput}
                 placeholder="Escribe tu comentario"
@@ -229,7 +228,7 @@ export default function Detalle({ route, navigation }) {
                 <Text style={styles.cartButtonText}>Agregar Comentario</Text>
               </TouchableOpacity>
             </View>
-
+  
             {comentarios.length === 0 ? (
               <Text>No hay comentarios para este producto.</Text>
             ) : (
@@ -245,26 +244,23 @@ export default function Detalle({ route, navigation }) {
               ))
             )}
           </View>
-
+  
           {/* Lista de productos relacionados */}
-          <SafeAreaView style={styles.containerFlat}>
-            <FlatList
-              keyExtractor={(item) => item.id_producto.toString()}
-              renderItem={({ item }) => (
-                <ProductoCard
-                  ip={ip}
-                  idProducto={item.id_producto}
-                  nombreProducto={item.nombre_producto}
-                  descripcionProducto={item.descripcion_producto}
-                  precioProducto={item.precio_producto}
-                  existenciasProducto={item.existencias_producto}
-                  accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto)}
-                  Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
-                />
-              )}
-              data={producto.relacionados} // Asumiendo que el producto tiene un campo relacionados
-            />
-          </SafeAreaView>
+          <View style={styles.containerFlat}>
+            {producto.relacionados && producto.relacionados.map((item) => (
+              <ProductoCard
+                key={item.id_producto}
+                ip={ip}
+                idProducto={item.id_producto}
+                nombreProducto={item.nombre_producto}
+                descripcionProducto={item.descripcion_producto}
+                precioProducto={item.precio_producto}
+                existenciasProducto={item.existencias_producto}
+                accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto)}
+                Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>

@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginTop: 5,
+    marginBottom: 10
   },
   texto: {
     color: '#16537E', fontWeight: '500',
