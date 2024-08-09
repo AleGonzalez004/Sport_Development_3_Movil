@@ -1,4 +1,15 @@
-import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Image, Modal } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  FlatList,
+  SafeAreaView,
+  Image,
+  Modal,
+} from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
@@ -6,8 +17,8 @@ import ProductoCard from "../components/Productos/ProductoCard";
 import ModalCompra from "../components/Modales/ModalCompra";
 import RNPickerSelect from "react-native-picker-select";
 import Constants from "expo-constants";
-import { useFocusEffect } from '@react-navigation/native';
-import { FontAwesome } from "@expo/vector-icons"; 
+import { useFocusEffect } from "@react-navigation/native";
+import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Productos({ navigation }) {
@@ -55,25 +66,29 @@ export default function Productos({ navigation }) {
       console.log("data al obtener productos  \n", data);
 
       if (data.status) {
-        const productosConCalificacion = await Promise.all(data.dataset.map(async (producto) => {
-          const formDataCalificacion = new FormData();
-          formDataCalificacion.append("idProducto", producto.id_producto);
+        const productosConCalificacion = await Promise.all(
+          data.dataset.map(async (producto) => {
+            const formDataCalificacion = new FormData();
+            formDataCalificacion.append("idProducto", producto.id_producto);
 
-          const responseCalificacion = await fetch(
-            `${ip}/Sport_Development_3/api/services/public/producto.php?action=averageRating`,
-            {
-              method: "POST",
-              body: formDataCalificacion,
-            }
-          );
+            const responseCalificacion = await fetch(
+              `${ip}/Sport_Development_3/api/services/public/producto.php?action=averageRating`,
+              {
+                method: "POST",
+                body: formDataCalificacion,
+              }
+            );
 
-          const dataCalificacion = await responseCalificacion.json();
+            const dataCalificacion = await responseCalificacion.json();
 
-          return {
-            ...producto,
-            calificacionPromedio: dataCalificacion.status ? dataCalificacion.dataset.promedio : 0,
-          };
-        }));
+            return {
+              ...producto,
+              calificacionPromedio: dataCalificacion.status
+                ? dataCalificacion.dataset.promedio
+                : 0,
+            };
+          })
+        );
 
         setDataProductos(productosConCalificacion);
       } else {
@@ -125,17 +140,17 @@ export default function Productos({ navigation }) {
         setCantidad={setCantidad}
       />
       <View>
-      <View style={styles.pickerWrapper}>
-        <RNPickerSelect
-          style={pickerSelectStyles}
-          onValueChange={(value) => getProductos(value)}
-          placeholder={{ label: "Selecciona una categoría...", value: null }}
-          items={dataCategorias.map((categoria) => ({
-            label: categoria.nombre,
-            value: categoria.id_categoria,
-          }))}
-        />
-      </View>
+        <View style={styles.pickerWrapper}>
+          <RNPickerSelect
+            style={pickerSelectStyles}
+            onValueChange={(value) => getProductos(value)}
+            placeholder={{ label: "Selecciona una categoría...", value: null }}
+            items={dataCategorias.map((categoria) => ({
+              label: categoria.nombre,
+              value: categoria.id_categoria,
+            }))}
+          />
+        </View>
       </View>
       <SafeAreaView style={styles.containerFlat}>
         <FlatList
@@ -154,9 +169,7 @@ export default function Productos({ navigation }) {
               accionBotonProducto={() =>
                 handleCompra(item.nombre_producto, item.id_producto)
               }
-              Detalle={() =>
-                Detalle(item.id_producto)
-              }
+              Detalle={() => Detalle(item.id_producto)}
             />
           )}
         />
@@ -169,7 +182,7 @@ const styles = StyleSheet.create({
   containerFlat: {
     flex: 1,
     paddingTop: Constants.statusBarHeight,
-    width: '100%', 
+    width: "100%",
   },
   container: {
     flex: 1,
@@ -179,13 +192,13 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   pickerWrapper: {
-    width: '100%',
+    width: "100%",
     paddingHorizontal: 10,
     marginVertical: 15,
     borderRadius: 20,
-    backgroundColor: "#16537E", 
-    borderColor: "#16537E", 
-    borderWidth: 1, 
+    backgroundColor: "#16537E",
+    borderColor: "#16537E",
+    borderWidth: 1,
   },
   card: {
     backgroundColor: "#FFF",
@@ -283,18 +296,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     marginHorizontal: 5,
-    color: "#FFF", 
+    color: "#FFF",
   },
   pickerContainer: {
-    
     alignItems: "left",
-    borderColor: "#16537E", 
+    borderColor: "#16537E",
     borderRadius: 20,
-    backgroundColor: "#16537E", 
+    backgroundColor: "#16537E",
     color: "#FFF",
   },
   picker: {
-    
     color: "#FFF",
   },
 });
@@ -302,10 +313,10 @@ const styles = StyleSheet.create({
 const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 16,
-    paddingVertical: 12,  
-    paddingHorizontal: 175, 
-    color: '#FFF',
+    paddingVertical: 12,
+    paddingHorizontal: 175,
+    color: "#FFF",
     borderRadius: 1000,
-    backgroundColor: 'transparent', 
+    backgroundColor: "transparent",
   },
 });
