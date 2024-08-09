@@ -206,7 +206,7 @@ export default function Detalle({ route, navigation }) {
             style={styles.cartButton}
             onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}
           >
-            <FontAwesome name="plus-circle" size={24} color="white" />
+
             <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
           </TouchableOpacity>
           
@@ -312,8 +312,8 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 310,
-    marginVertical: 15,
+    marginRight: 324,
+    marginVertical: 10,
     marginTop: 20,
     backgroundColor: "#16537E",
     borderRadius: 8,
@@ -382,11 +382,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   textInput: {
-    height: 40,
+    height: 80,
     borderColor: '#ddd',
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 1,
     paddingHorizontal: 8,
-    marginTop: 10,
+    marginTop: 15,
+    borderRadius: 8,
   },
 });

@@ -116,9 +116,6 @@ export default function Productos({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
-        <AntDesign name="arrowleft" size={20} color="white" />
-      </TouchableOpacity>
       <ModalCompra
         visible={modalVisible}
         cerrarModal={setModalVisible}
