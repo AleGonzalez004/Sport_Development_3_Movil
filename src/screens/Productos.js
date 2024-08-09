@@ -125,20 +125,17 @@ export default function Productos({ navigation }) {
         setCantidad={setCantidad}
       />
       <View>
-        <Text style={styles.subtitle}>
-          ///////////////////////////////////////////////////////////////////
-        </Text>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            style={{ inputAndroid: styles.picker }}
-            onValueChange={(value) => getProductos(value)}
-            placeholder={{ label: "Selecciona una categoría...", value: null }}
-            items={dataCategorias.map((categoria) => ({
-              label: categoria.nombre,
-              value: categoria.id_categoria,
-            }))}
-          />
-        </View>
+      <View style={styles.pickerWrapper}>
+        <RNPickerSelect
+          style={pickerSelectStyles}
+          onValueChange={(value) => getProductos(value)}
+          placeholder={{ label: "Selecciona una categoría...", value: null }}
+          items={dataCategorias.map((categoria) => ({
+            label: categoria.nombre,
+            value: categoria.id_categoria,
+          }))}
+        />
+      </View>
       </View>
       <SafeAreaView style={styles.containerFlat}>
         <FlatList
@@ -172,7 +169,7 @@ const styles = StyleSheet.create({
   containerFlat: {
     flex: 1,
     paddingTop: Constants.statusBarHeight,
-    width: 350,
+    width: '100%', 
   },
   container: {
     flex: 1,
@@ -180,6 +177,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
+  },
+  pickerWrapper: {
+    width: '100%',
+    paddingHorizontal: 10,
+    marginVertical: 15,
+    borderRadius: 15,
+    backgroundColor: "#16537E", 
+    borderColor: "#16537E", 
+    borderWidth: 1, 
   },
   card: {
     backgroundColor: "#FFF",
@@ -233,7 +239,7 @@ const styles = StyleSheet.create({
   image: {
     width: "65%",
     height: 150,
-    borderRadius: 8,
+    borderRadius: 1,
     marginBottom: 12,
   },
   imageContainer: {
@@ -280,6 +286,7 @@ const styles = StyleSheet.create({
     color: "#FFF", 
   },
   pickerContainer: {
+    
     alignItems: "left",
     borderColor: "#16537E", 
     borderRadius: 5,
@@ -287,6 +294,18 @@ const styles = StyleSheet.create({
     color: "#FFF",
   },
   picker: {
+    
     color: "#FFF",
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputAndroid: {
+    fontSize: 16,
+    paddingVertical: 12,  
+    paddingHorizontal: 175, 
+    color: '#FFF',
+    borderRadius: 1000,
+    backgroundColor: 'transparent', 
   },
 });
