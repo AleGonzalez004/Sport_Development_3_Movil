@@ -106,7 +106,7 @@ export default function Sesion({ navigation }) {
       <Text style={styles.texto}>Iniciar Sesión</Text>
       <View style={styles.containerlog}>
         <InputEmail
-          placeHolder='Usuario'
+          placeHolder='Correo'
           valor={usuario}
           setTextChange={setUsuario}
         />
