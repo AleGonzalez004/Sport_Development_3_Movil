@@ -1,17 +1,24 @@
 // Importaciones necesarias
-import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList, Alert, TouchableOpacity,} from 'react-native';
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-import { useFocusEffect } from '@react-navigation/native';
-// Importa la función useFocusEffect de @react-navigation/native, 
+import { useFocusEffect } from "@react-navigation/native";
+// Importa la función useFocusEffect de @react-navigation/native,
 // que permite ejecutar un efecto cada vez que la pantalla se enfoca.
 
-import Constants from 'expo-constants';
-import * as Constantes from '../utils/constantes';
-import Buttons from '../components/Buttons/Button';
-import HistorialCard from '../components/HistorialCard/HistorialCard';
-import ModalEditarCantidad from '../components/Modales/ModalEditarCantidad';
+import Constants from "expo-constants";
+import * as Constantes from "../utils/constantes";
+import Buttons from "../components/Buttons/Button";
+import HistorialCard from "../components/HistorialCard/HistorialCard";
+import ModalEditarCantidad from "../components/Modales/ModalEditarCantidad";
 
 const Carrito = ({ navigation }) => {
   // Estado para almacenar los detalles del carrito
@@ -27,7 +34,7 @@ const Carrito = ({ navigation }) => {
 
   // Función para navegar hacia atrás a la pantalla de productos
   const backProducts = () => {
-    navigation.navigate('Productos');
+    navigation.navigate("Productos");
   };
 
   const volverInicio = async () => {
@@ -45,23 +52,25 @@ const Carrito = ({ navigation }) => {
   // Función para obtener los detalles del carrito desde el servidor
   const getDetalleCarrito = async () => {
     try {
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/order.php?action=readDetail`, {
-        method: 'GET',
-      });
+      const response = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/order.php?action=readDetail`,
+        {
+          method: "GET",
+        }
+      );
       const data = await response.json();
-      console.log(data, "Data desde getDetalleCarrito")
+      console.log(data, "Data desde getDetalleCarrito");
       if (data.status) {
         setDataDetalleCarrito(data.dataset);
       } else {
-        console.log("No hay detalles del historial disponibles.")
+        console.log("No hay detalles del historial disponibles.");
         //Alert.alert('ADVERTENCIA', data.error);
       }
     } catch (error) {
       console.error(error, "Error desde Catch");
-      Alert.alert('Error', 'Ocurrió un error al listar las categorias');
+      Alert.alert("Error", "Ocurrió un error al listar las categorias");
     }
   };
-
 
   // Función para manejar la modificación de un detalle del carrito
   const handleEditarDetalle = (idDetalle, cantidadDetalle) => {
@@ -112,9 +121,10 @@ const Carrito = ({ navigation }) => {
           keyExtractor={(item) => item.id_detalle.toString()}
         />
       ) : (
-        <Text style={styles.titleDetalle}>No hay productos en el Historial :(</Text>
+        <Text style={styles.titleDetalle}>
+          No hay productos en el Historial :(
+        </Text>
       )}
-
     </View>
   );
 };
@@ -125,28 +135,28 @@ export default Carrito;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     paddingTop: 50,
     paddingHorizontal: 16,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginVertical: 16,
-    color: '#000000',
+    color: "#000000",
   },
   titleDetalle: {
     fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
+    fontWeight: "600",
+    textAlign: "center",
     marginVertical: 16,
-    color: '#000000',
+    color: "#000000",
   },
   containerButtons: {
     marginVertical: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   ButtonVolver: {
     flexDirection: "row",

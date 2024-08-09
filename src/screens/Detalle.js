@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList, ScrollView, TextInput } from 'react-native';
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ActivityIndicator,
+  Alert,
+  TouchableOpacity,
+  SafeAreaView,
+  FlatList,
+  ScrollView,
+  TextInput,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import ModalCompra from '../components/Modales/ModalCompra';
-import ProductoCard from '../components/Productos/ProductoCard';
+import ModalCompra from "../components/Modales/ModalCompra";
+import ProductoCard from "../components/Productos/ProductoCard";
 import * as Constantes from "../utils/constantes";
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Detalle({ route, navigation }) {
   const { idProducto } = route.params;
@@ -55,7 +67,10 @@ export default function Detalle({ route, navigation }) {
       setLoading(false);
     } catch (error) {
       console.error("Error al obtener los detalles del producto:", error);
-      Alert.alert("Error", "Ocurrió un error al obtener los detalles del producto.");
+      Alert.alert(
+        "Error",
+        "Ocurrió un error al obtener los detalles del producto."
+      );
       setLoading(false);
     }
   };
@@ -100,7 +115,10 @@ export default function Detalle({ route, navigation }) {
       }
     } catch (error) {
       console.error("Error al obtener los comentarios o calificación:", error);
-      Alert.alert("Error", "Ocurrió un error al obtener los comentarios o calificación.");
+      Alert.alert(
+        "Error",
+        "Ocurrió un error al obtener los comentarios o calificación."
+      );
     }
   };
 
@@ -128,13 +146,13 @@ export default function Detalle({ route, navigation }) {
 
       if (data.status) {
         Alert.alert("Éxito", "Comentario agregado exitosamente.");
-      
+
         Alert.alert("Error", data.error);
       }
     } catch (error) {
       setNuevoComentario("");
       setNuevaCalificacion(0);
-      obtenerComentariosYCalificacion(); 
+      obtenerComentariosYCalificacion();
     }
   };
 
@@ -143,7 +161,11 @@ export default function Detalle({ route, navigation }) {
     for (let i = 0; i < 5; i++) {
       stars.push(
         <TouchableOpacity key={i} onPress={() => onPress(i + 1)}>
-          <FontAwesome name="star" size={20} color={i < rating ? '#000' : '#ddd'} />
+          <FontAwesome
+            name="star"
+            size={20}
+            color={i < rating ? "#000" : "#ddd"}
+          />
         </TouchableOpacity>
       );
     }
@@ -170,7 +192,7 @@ export default function Detalle({ route, navigation }) {
       <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
-      
+
       <ModalCompra
         visible={modalVisible}
         cerrarModal={setModalVisible}
@@ -179,39 +201,57 @@ export default function Detalle({ route, navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
-      
+
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.card}>
           <Image
-            source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}` }}
+            source={{
+              uri: `${ip}/Sport_Development_3/api/images/productos/${producto.imagen_producto}`,
+            }}
             style={styles.image}
             resizeMode="contain"
           />
           <Text style={styles.textTitle}>{producto.nombre_producto}</Text>
           <Text style={styles.text}>{producto.descripcion_producto}</Text>
-          <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${producto.precio_producto}</Text></Text>
-          <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{producto.existencias_producto} {producto.existencias_producto === 1 ? 'Unidad' : 'Unidades'}</Text></Text>
-  
+          <Text style={styles.textTitle}>
+            Precio:{" "}
+            <Text style={styles.textDentro}>${producto.precio_producto}</Text>
+          </Text>
+          <Text style={styles.textTitle}>
+            Existencias:{" "}
+            <Text style={styles.textDentro}>
+              {producto.existencias_producto}{" "}
+              {producto.existencias_producto === 1 ? "Unidad" : "Unidades"}
+            </Text>
+          </Text>
+
           {/* Sección de calificación promedio */}
           <View style={styles.ratingContainer}>
             <Text style={styles.textTitle}>Calificación Promedio:</Text>
             <View style={styles.ratingStars}>
               {renderStars(calificacionPromedio || 0)}
             </View>
-            <Text style={styles.textDentro}> {calificacionPromedio !== null ? calificacionPromedio.toFixed(1) : "No disponible"}</Text>
+            <Text style={styles.textDentro}>
+              {" "}
+              {calificacionPromedio !== null
+                ? calificacionPromedio.toFixed(1)
+                : "No disponible"}
+            </Text>
           </View>
-          
+
           <TouchableOpacity
             style={styles.cartButton}
-            onPress={() => handleCompra(producto.nombre_producto, producto.id_producto)}
+            onPress={() =>
+              handleCompra(producto.nombre_producto, producto.id_producto)
+            }
           >
             <Text style={styles.cartButtonText}>Agregar al Carrito</Text>
           </TouchableOpacity>
-          
+
           {/* Sección de comentarios */}
           <View style={styles.commentsSection}>
             <Text style={styles.commentsTitle}>Comentarios</Text>
-  
+
             {/* Botón para agregar comentario */}
             <View style={styles.addCommentSection}>
               <View style={styles.ratingStars}>
@@ -223,42 +263,58 @@ export default function Detalle({ route, navigation }) {
                 value={nuevoComentario}
                 onChangeText={setNuevoComentario}
               />
-              <TouchableOpacity style={styles.cartButton} onPress={agregarComentario}>
+              <TouchableOpacity
+                style={styles.cartButton}
+                onPress={agregarComentario}
+              >
                 <Text style={styles.cartButtonText}>Agregar Comentario</Text>
               </TouchableOpacity>
             </View>
-  
+
             {comentarios.length === 0 ? (
               <Text>No hay comentarios para este producto.</Text>
             ) : (
               comentarios.map((comentario, index) => (
                 <View key={index} style={styles.comment}>
-                  <Text style={styles.commentAuthor}>{comentario.nombre_cliente} {comentario.apellido_cliente}</Text>
-                  <Text style={styles.commentDate}>{comentario.fecha_valoracion}</Text>
+                  <Text style={styles.commentAuthor}>
+                    {comentario.nombre_cliente} {comentario.apellido_cliente}
+                  </Text>
+                  <Text style={styles.commentDate}>
+                    {comentario.fecha_valoracion}
+                  </Text>
                   <View style={styles.ratingContainer}>
                     {renderStars(comentario.calificacion_producto)}
                   </View>
-                  <Text style={styles.commentText}>{comentario.comentario_producto}</Text>
+                  <Text style={styles.commentText}>
+                    {comentario.comentario_producto}
+                  </Text>
                 </View>
               ))
             )}
           </View>
-  
+
           {/* Lista de productos relacionados */}
           <View style={styles.containerFlat}>
-            {producto.relacionados && producto.relacionados.map((item) => (
-              <ProductoCard
-                key={item.id_producto}
-                ip={ip}
-                idProducto={item.id_producto}
-                nombreProducto={item.nombre_producto}
-                descripcionProducto={item.descripcion_producto}
-                precioProducto={item.precio_producto}
-                existenciasProducto={item.existencias_producto}
-                accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto)}
-                Detalle={() => navigation.navigate("Detalle", { idProducto: item.id_producto })}
-              />
-            ))}
+            {producto.relacionados &&
+              producto.relacionados.map((item) => (
+                <ProductoCard
+                  key={item.id_producto}
+                  ip={ip}
+                  idProducto={item.id_producto}
+                  nombreProducto={item.nombre_producto}
+                  descripcionProducto={item.descripcion_producto}
+                  precioProducto={item.precio_producto}
+                  existenciasProducto={item.existencias_producto}
+                  accionBotonProducto={() =>
+                    handleCompra(item.nombre_producto, item.id_producto)
+                  }
+                  Detalle={() =>
+                    navigation.navigate("Detalle", {
+                      idProducto: item.id_producto,
+                    })
+                  }
+                />
+              ))}
           </View>
         </View>
       </ScrollView>
@@ -270,15 +326,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 20,
     padding: 16,
     marginVertical: 12,
     marginHorizontal: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -288,7 +344,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
     borderRadius: 20,
     marginBottom: 16,
@@ -300,10 +356,10 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 16,
     marginBottom: 8,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   textDentro: {
-    fontWeight: '400',
+    fontWeight: "400",
   },
   ButtonVolver: {
     flexDirection: "row",
@@ -317,14 +373,14 @@ const styles = StyleSheet.create({
   },
   cartButton: {
     marginTop: 20,
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-    backgroundColor: '#16537E',
+    flexDirection: "row",
+    alignSelf: "flex-end",
+    backgroundColor: "#16537E",
     borderRadius: 20,
     paddingVertical: 10,
-    paddingHorizontal: 25, 
+    paddingHorizontal: 25,
     marginVertical: 10,
-    alignItems: 'center', 
+    alignItems: "center",
   },
   cartButtonText: {
     color: "#FFF",
@@ -340,35 +396,35 @@ const styles = StyleSheet.create({
   },
   commentsTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   comment: {
     marginBottom: 15,
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: "#ddd",
   },
   commentAuthor: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 16,
     marginBottom: 5,
   },
   commentDate: {
     fontSize: 12,
-    color: '#888',
+    color: "#888",
     marginBottom: 5,
   },
   commentText: {
     fontSize: 14,
-    color: '#333',
+    color: "#333",
   },
   ratingContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 5,
   },
   ratingStars: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   containerFlat: {
     flex: 1,
@@ -377,14 +433,14 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   textInput: {
-    height: 80, 
-    borderColor: '#ddd',
+    height: 80,
+    borderColor: "#ddd",
     borderWidth: 1,
     marginBottom: 1,
     paddingHorizontal: 8,
     paddingVertical: 10,
     marginTop: 15,
     borderRadius: 20,
-    textAlignVertical: 'top', 
-  }
+    textAlignVertical: "top",
+  },
 });
