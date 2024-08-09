@@ -1,17 +1,31 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
-import { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+} from "react-native";
+import { useState } from "react";
 
-
-export default function SelectProduct({ ip, imagenProducto, idProducto, nombreProducto, descripcionProducto
-  , precioProducto, existenciasProducto, accionBotonProducto
+export default function SelectProduct({
+  ip,
+  imagenProducto,
+  idProducto,
+  nombreProducto,
+  descripcionProducto,
+  precioProducto,
+  existenciasProducto,
+  accionBotonProducto,
 }) {
-
   return (
-
     <View style={styles.card}>
       <View style={styles.imageContainer}>
         <Image
-          source={{ uri: `${ip}/Sport_Development_3/api/images/productos/${imagenProducto}` }}
+          source={{
+            uri: `${ip}/Sport_Development_3/api/images/productos/${imagenProducto}`,
+          }}
           style={styles.image}
           resizeMode="contain"
         />
@@ -19,8 +33,16 @@ export default function SelectProduct({ ip, imagenProducto, idProducto, nombrePr
       <Text style={styles.text}>{idProducto}</Text>
       <Text style={styles.textTitle}>{nombreProducto}</Text>
       <Text style={styles.text}>{descripcionProducto}</Text>
-      <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${precioProducto}</Text></Text>
-      <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{existenciasProducto} {(existenciasProducto === 1) ? 'Unidad' : 'Unidades'}</Text></Text>
+      <Text style={styles.textTitle}>
+        Precio: <Text style={styles.textDentro}>${precioProducto}</Text>
+      </Text>
+      <Text style={styles.textTitle}>
+        Existencias:{" "}
+        <Text style={styles.textDentro}>
+          {existenciasProducto}{" "}
+          {existenciasProducto === 1 ? "Unidad" : "Unidades"}
+        </Text>
+      </Text>
       <TouchableOpacity style={styles.button} onPress={accionBotonProducto}>
         <Text style={styles.buttonText}>Seleccionar Producto</Text>
       </TouchableOpacity>
@@ -29,15 +51,13 @@ export default function SelectProduct({ ip, imagenProducto, idProducto, nombrePr
         <TextInput
           style={styles.input}
           value={cantidad}
-          onChangeText={text => setCantidad(text)}
+          onChangeText={(text) => setCantidad(text)}
           keyboardType="numeric"
         />
       </View>
     </View>
-
   );
 }
-
 
 const styles = StyleSheet.create({
   containerFlat: {
@@ -46,18 +66,18 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#16537E',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#16537E",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: StatusBar.currentHeight || 0,
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 20,
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -72,104 +92,104 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 16,
-    marginBottom: 8, fontWeight: '700'
+    marginBottom: 8,
+    fontWeight: "700",
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 20,
     padding: 8,
     marginLeft: 8,
   },
   button: {
-    backgroundColor: '#AF8260',
+    backgroundColor: "#AF8260",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 16,
-    fontWeight: '500'
+    fontWeight: "500",
   },
   image: {
-    width: '65%',
+    width: "65%",
     height: 150,
     borderRadius: 20,
     marginBottom: 12,
   },
   imageContainer: {
-    alignItems: 'center',
-  }, textDentro: {
-    fontWeight: '400'
-  }
+    alignItems: "center",
+  },
+  textDentro: {
+    fontWeight: "400",
+  },
 });
 
-fetch('https://jsonplaceholder.typicode.com/posts')
-  .then(response => {
+fetch("https://jsonplaceholder.typicode.com/posts")
+  .then((response) => {
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     return response.json();
   })
-  .then(data => {
+  .then((data) => {
     console.log(data);
   })
-  .catch(error => {
-    console.error('Hubo un problema con la solicitud Fetch:', error);
+  .catch((error) => {
+    console.error("Hubo un problema con la solicitud Fetch:", error);
   });
 
-
-fetch('https://jsonplaceholder.typicode.com/posts', {
-  method: 'POST',
+fetch("https://jsonplaceholder.typicode.com/posts", {
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    title: 'foo',
-    body: 'bar',
-    userId: 1
-  })
+    title: "foo",
+    body: "bar",
+    userId: 1,
+  }),
 })
-  .then(response => {
+  .then((response) => {
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     return response.json();
   })
-  .then(data => {
+  .then((data) => {
     console.log(data);
   })
-  .catch(error => {
-    console.error('Hubo un problema con la solicitud Fetch:', error);
+  .catch((error) => {
+    console.error("Hubo un problema con la solicitud Fetch:", error);
   });
 
-
-
-axios.get('https://jsonplaceholder.typicode.com/posts')
-  .then(response => {
+axios
+  .get("https://jsonplaceholder.typicode.com/posts")
+  .then((response) => {
     console.log(response.data);
   })
-  .catch(error => {
-    console.error('Error al realizar la solicitud:', error);
+  .catch((error) => {
+    console.error("Error al realizar la solicitud:", error);
   });
 
-
-axios.post('https://jsonplaceholder.typicode.com/posts', {
-  title: 'foo',
-  body: 'bar',
-  userId: 1
-})
-  .then(response => {
+axios
+  .post("https://jsonplaceholder.typicode.com/posts", {
+    title: "foo",
+    body: "bar",
+    userId: 1,
+  })
+  .then((response) => {
     console.log(response.data);
   })
-  .catch(error => {
-    console.error('Error al realizar la solicitud:', error);
+  .catch((error) => {
+    console.error("Error al realizar la solicitud:", error);
   });

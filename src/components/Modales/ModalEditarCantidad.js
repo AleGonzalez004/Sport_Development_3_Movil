@@ -1,11 +1,17 @@
-import React from 'react';
-import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
-import Buttons from '../Buttons/Button';
-import * as Constantes from '../../utils/constantes';
+import React from "react";
+import { View, Text, Modal, StyleSheet, TextInput, Alert } from "react-native";
+import Buttons from "../Buttons/Button";
+import * as Constantes from "../../utils/constantes";
 
 // Componente ModalEditarCantidad para editar la cantidad de un producto en el carrito
-const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCantidadProductoCarrito, cantidadProductoCarrito, getDetalleCarrito }) => {
-
+const ModalEditarCantidad = ({
+  setModalVisible,
+  modalVisible,
+  idDetalle,
+  setCantidadProductoCarrito,
+  cantidadProductoCarrito,
+  getDetalleCarrito,
+}) => {
   const ip = Constantes.IP;
 
   // Función para manejar la actualización del detalle del carrito
@@ -19,20 +25,23 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
       }
 
       const formData = new FormData();
-      formData.append('idDetalle', idDetalle);
-      formData.append('cantidadProducto', cantidadProducto);
+      formData.append("idDetalle", idDetalle);
+      formData.append("cantidadProducto", cantidadProducto);
 
-      const response = await fetch(`${ip}/Sport_Development_3/api/services/public/pedido.php?action=updateDetail`, {
-        method: 'POST',
-        body: formData
-      });
+      const response = await fetch(
+        `${ip}/Sport_Development_3/api/services/public/pedido.php?action=updateDetail`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
       if (data.status) {
-        Alert.alert('Se actualizó el detalle del producto');
+        Alert.alert("Se actualizó el detalle del producto");
         getDetalleCarrito();
       } else {
-        Alert.alert('Error al editar detalle carrito', data.error);
+        Alert.alert("Error al editar detalle carrito", data.error);
       }
       setModalVisible(false);
     } catch (error) {
@@ -48,7 +57,7 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
 
   // Convierte el texto ingresado en el TextInput a una cadena numérica
   const handleTextChange = (text) => {
-    setCantidadProductoCarrito(text.replace(/[^0-9]/g, '')); // Elimina caracteres no numéricos y actualiza el estado
+    setCantidadProductoCarrito(text.replace(/[^0-9]/g, "")); // Elimina caracteres no numéricos y actualiza el estado
   };
 
   return (
@@ -64,7 +73,9 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
       {/* Vista centralizada para el modal */}
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>Cantidad actual: {cantidadProductoCarrito}</Text>
+          <Text style={styles.modalText}>
+            Cantidad actual: {cantidadProductoCarrito}
+          </Text>
           <Text style={styles.modalText}>Nueva cantidad:</Text>
           <TextInput
             style={styles.input}
@@ -75,12 +86,12 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
           />
           {/* Botón para editar la cantidad */}
           <Buttons
-            textoBoton='Editar cantidad'
+            textoBoton="Editar cantidad"
             accionBoton={handleUpdateDetalleCarrito}
           />
           {/* Botón para cancelar */}
           <Buttons
-            textoBoton='Cancelar'
+            textoBoton="Cancelar"
             accionBoton={handleCancelEditarCarrito}
           />
         </View>
@@ -93,16 +104,16 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalView: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -114,28 +125,28 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 10,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 20,
     padding: 10,
     marginBottom: 20,
     width: 200,
-    textAlign: 'center',
+    textAlign: "center",
   },
   button: {
-    backgroundColor: '#16537E',
+    backgroundColor: "#16537E",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

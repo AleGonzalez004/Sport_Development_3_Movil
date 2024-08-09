@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
-import Buttons from '../Buttons/Button';
-import * as Constantes from '../../utils/constantes';
-import { useNavigation } from '@react-navigation/native'; // Importa el hook useNavigation
+import React from "react";
+import { View, Text, Modal, StyleSheet, TextInput, Alert } from "react-native";
+import Buttons from "../Buttons/Button";
+import * as Constantes from "../../utils/constantes";
+import { useNavigation } from "@react-navigation/native"; // Importa el hook useNavigation
 
 // Componente ModalCompra que muestra un modal para la compra de productos
 const ModalCompra = ({
@@ -11,7 +11,7 @@ const ModalCompra = ({
   nombreProductoModal,
   idProductoModal,
   cantidad,
-  setCantidad
+  setCantidad,
 }) => {
   const ip = Constantes.IP;
   const navigation = useNavigation(); // Usa el hook useNavigation
@@ -22,7 +22,7 @@ const ModalCompra = ({
     if (!isNaN(number) && number > 0) {
       setCantidad(number.toString());
     } else {
-      Alert.alert('Error', 'Ingrese una cantidad válida.');
+      Alert.alert("Error", "Ingrese una cantidad válida.");
     }
   };
 
@@ -37,14 +37,14 @@ const ModalCompra = ({
       }
 
       const formData = new FormData();
-      formData.append('idProducto', idProductoModal);
-      formData.append('cantidadProducto', cantidadProducto);
+      formData.append("idProducto", idProductoModal);
+      formData.append("cantidadProducto", cantidadProducto);
 
       const response = await fetch(
         `${ip}/Sport_Development_3/api/services/public/pedido.php?action=createDetail`,
         {
-          method: 'POST',
-          body: formData
+          method: "POST",
+          body: formData,
         }
       );
 
@@ -52,15 +52,15 @@ const ModalCompra = ({
       console.log("Datos después del response:", data);
 
       if (data.status) {
-        Alert.alert('Éxito', 'Producto añadido al carrito correctamente.');
+        Alert.alert("Éxito", "Producto añadido al carrito correctamente.");
         cerrarModal(false);
-        setCantidad(''); 
-        navigation.navigate('Home'); // Navegar a la pantalla de inicio
+        setCantidad("");
+        navigation.navigate("Home"); // Navegar a la pantalla de inicio
       } else {
-        Alert.alert('Error', data.error);
+        Alert.alert("Error", data.error);
       }
     } catch (error) {
-      Alert.alert('Error', 'Ocurrió un error al crear el detalle del pedido.');
+      Alert.alert("Error", "Ocurrió un error al crear el detalle del pedido.");
       console.error(error);
     }
   };
@@ -68,7 +68,7 @@ const ModalCompra = ({
   // Función para cancelar la acción de agregar al carrito
   const handleCancelCarrito = () => {
     cerrarModal(false);
-    setCantidad('');  // Limpiar el campo de cantidad
+    setCantidad(""); // Limpiar el campo de cantidad
   };
 
   return (
@@ -78,7 +78,7 @@ const ModalCompra = ({
       transparent={true}
       onRequestClose={() => {
         cerrarModal(false);
-        setCantidad('');  // Limpiar el campo de cantidad
+        setCantidad(""); // Limpiar el campo de cantidad
       }}
     >
       <View style={styles.centeredView}>
@@ -95,14 +95,11 @@ const ModalCompra = ({
           <View style={styles.buttonContainer}>
             {/* Botón para agregar al carrito */}
             <Buttons
-              textoBoton='Agregar al carrito'
+              textoBoton="Agregar al carrito"
               accionBoton={handleCreateDetail}
             />
             {/* Botón para cancelar */}
-            <Buttons
-              textoBoton='Cancelar'
-              accionBoton={handleCancelCarrito}
-            />
+            <Buttons textoBoton="Cancelar" accionBoton={handleCancelCarrito} />
           </View>
         </View>
       </View>
@@ -114,16 +111,16 @@ const ModalCompra = ({
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalView: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -135,16 +132,16 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 10,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 20,
     padding: 10,
     marginBottom: 20,
     width: 200,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 
