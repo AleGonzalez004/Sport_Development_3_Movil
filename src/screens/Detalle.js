@@ -135,7 +135,7 @@ export default function Detalle({ route, navigation }) {
       formData.append("comentario_producto", nuevoComentario);
 
       const response = await fetch(
-        `${ip}/Sport_Development_3/api/services/public/producto.php?action=addComment`,
+        `${ip}/Sport_Development_3/api/services/public/producto.php?action=addCommentmovil`,
         {
           method: "POST",
           body: formData,
