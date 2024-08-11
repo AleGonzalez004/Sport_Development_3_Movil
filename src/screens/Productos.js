@@ -1,15 +1,4 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
-  FlatList,
-  SafeAreaView,
-  Image,
-  Modal,
-} from "react-native";
+import {StatusBar,StyleSheet,Text,View,TouchableOpacity,Alert,FlatList,SafeAreaView,Image,Modal,} from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
@@ -20,6 +9,7 @@ import Constants from "expo-constants";
 import { useFocusEffect } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Productos({ navigation }) {
   const ip = Constantes.IP;
@@ -139,8 +129,7 @@ export default function Productos({ navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
-      <SafeAreaView style={styles.containerFlat}>
-      <View>
+      <SafeAreaView style={styles.container}>
         <View style={styles.pickerWrapper}>
           <RNPickerSelect
             style={pickerSelectStyles}
@@ -152,7 +141,6 @@ export default function Productos({ navigation }) {
             }))}
           />
         </View>
-      </View>
         <FlatList
           data={dataProductos}
           keyExtractor={(item) => item.id_producto}
@@ -183,13 +171,17 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Constants.statusBarHeight,
     width: "100%",
+    borderRadius: 20,
+    marginVertical: 5,
     alignItems: "center",
+    
   },
   container: {
     flex: 1,
     backgroundColor: "#FFF0",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 20,
     paddingTop: Constants.statusBarHeight,
   },
   pickerWrapper: {
@@ -296,13 +288,27 @@ const styles = StyleSheet.create({
     color: "#FFF",
     borderRadius: 20,
   },
+  linearGradient: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 120,
+    zIndex: 0,
+    borderRadius: 20,
+  },
+  SafeAreaView:{
+    borderRadius: 20000,
+  }
 });
 
 const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 15,
+    borderRadius: 20,
     paddingHorizontal: 175,
-    backgroundColor: "transparent",
+    paddingBottom: 15,
+    backgroundColor: "16537E",
     color: "#FFF",
     alignItems: "center",
   },

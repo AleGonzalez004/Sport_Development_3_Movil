@@ -26,11 +26,11 @@ npm install react-native-vector-icons
 npm install @expo/vector-icons
 npm install react-native-masked-text
 npm install @react-navigation/bottom-tabs
-npm install @expo/vector-icons
 npm install @react-native-community/datetimepicker@8.0.1
 npm install expo-status-bar@~1.12.1
 npm install expo-web-browser@~13.0.3
 npm install react-native@0.74.3
+npm install expo-linear-gradient
 npx expo start
 
 ## Si el proyecto no corre en los dispositivos ejecutar el siguiente comando:
