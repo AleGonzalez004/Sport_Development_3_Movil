@@ -135,7 +135,7 @@ export default function Detalle({ route, navigation }) {
       formData.append("comentario_producto", nuevoComentario);
 
       const response = await fetch(
-        `${ip}/Sport_Development_3/api/services/public/producto.php?action=addCommentmovil`,
+        `${ip}/Sport_Development_3/api/services/public/producto.php?action=addComment`,
         {
           method: "POST",
           body: formData,
@@ -144,10 +144,12 @@ export default function Detalle({ route, navigation }) {
 
       const data = await response.json();
 
-      if (data.status) {
-        Alert.alert("Éxito", "Comentario agregado exitosamente.");
-
-        Alert.alert("Error", data.error);
+      if (DATA.status) {
+        sweetAlert(1, DATA.message, false);
+      } else if (DATA.session) {
+        sweetAlert(2, DATA.error, false);
+      } else {
+        sweetAlert(3, DATA.error, true);
       }
     } catch (error) {
       setNuevoComentario("");
@@ -373,12 +375,12 @@ const styles = StyleSheet.create({
   },
   cartButton: {
     marginTop: 20,
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-    backgroundColor: '#16537E',
+    flexDirection: "row",
+    alignSelf: "flex-end",
+    backgroundColor: "#16537E",
     borderRadius: 15,
     paddingVertical: 15,
-    paddingHorizontal: 20, 
+    paddingHorizontal: 20,
     marginVertical: 10,
     alignItems: "center",
   },
