@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ActivityIndicator,
-  Alert,
-  TouchableOpacity,
-  SafeAreaView,
-  FlatList,
-  ScrollView,
-  TextInput,
-} from "react-native";
+import {StyleSheet,Text,View,Image,ActivityIndicator,Alert,TouchableOpacity,SafeAreaView,FlatList,ScrollView,TextInput,} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ModalCompra from "../components/Modales/ModalCompra";
@@ -366,7 +354,7 @@ const styles = StyleSheet.create({
   ButtonVolver: {
     flexDirection: "row",
     marginRight: 320,
-    marginVertical: 20,
+    marginVertical: 10,
     marginTop: 20,
     backgroundColor: "#16537E",
     borderRadius: 20,
@@ -388,7 +376,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 15,
     fontWeight: "500",
-    marginLeft: 10,
+    alignItems: "center",
   },
   commentsSection: {
     marginTop: 20,
@@ -427,6 +415,7 @@ const styles = StyleSheet.create({
   },
   ratingStars: {
     flexDirection: "row",
+    marginVertical: 5,
   },
   containerFlat: {
     flex: 1,
