@@ -148,13 +148,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   containerlog: {
-    backgroundColor: "#16537E",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#16537E",
     borderRadius: 20,
     padding: 10,
-    marginTop: 5,
-    marginBottom: 10,
   },
   texto: {
     color: "#16537E",

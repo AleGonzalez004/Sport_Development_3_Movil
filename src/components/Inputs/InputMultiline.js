@@ -18,14 +18,16 @@ export default function InputMultiline({ placeHolder, valor, setTextChange }) {
 
 // Estilos para el componente InputMultiline
 const styles = StyleSheet.create({
-  Input: {
+   Input: {
     backgroundColor: "#FFF",
     color: "#16537E",
     fontWeight: "500",
-    width: 350,
+    width: 320,
     height: 45,
     borderRadius: 15,
     padding: 10,
     marginVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
