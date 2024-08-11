@@ -151,9 +151,12 @@ export default Carrito;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFF0",
     paddingTop: 50,
-    paddingHorizontal: 16,
+  },
+  scrollViewStyle: {
+    flexGrow: 1,
+    width: "auto",
   },
   title: {
     fontSize: 24,
@@ -173,5 +176,9 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     justifyContent: "center",
     alignItems: "center",
+  },
+  CarritoCard: {
+  paddingHorizontal: 500,
+  marginVertical: 16,
   },
 });

@@ -139,6 +139,7 @@ export default function Productos({ navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
+      <SafeAreaView style={styles.containerFlat}>
       <View>
         <View style={styles.pickerWrapper}>
           <RNPickerSelect
@@ -152,7 +153,6 @@ export default function Productos({ navigation }) {
           />
         </View>
       </View>
-      <SafeAreaView style={styles.containerFlat}>
         <FlatList
           data={dataProductos}
           keyExtractor={(item) => item.id_producto}
@@ -183,27 +183,23 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Constants.statusBarHeight,
     width: "100%",
+    alignItems: "center",
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFF0",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
   },
   pickerWrapper: {
     width: "100%",
-    paddingHorizontal: 10,
-    marginVertical: 15,
     borderRadius: 20,
     backgroundColor: "#16537E",
-    borderColor: "#16537E",
-    borderWidth: 1,
   },
   card: {
     backgroundColor: "#FFF",
-    borderRadius: 20,
-    padding: 10,
+    borderRadius: 15,
     marginVertical: 5,
     marginHorizontal: 15,
     shadowColor: "#000",
@@ -277,15 +273,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginVertical: 10,
   },
-  ButtonVolver: {
-    flexDirection: "row",
-    marginRight: 310,
-    marginTop: 10,
-    backgroundColor: "#16537E",
-    borderRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 11,
-  },
   cartButtonText: {
     color: "#FFF",
     fontSize: 16,
@@ -299,7 +286,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
   },
   pickerContainer: {
-    alignItems: "left",
+    alignItems: "center",
     borderColor: "#16537E",
     borderRadius: 20,
     backgroundColor: "#16537E",
@@ -307,16 +294,16 @@ const styles = StyleSheet.create({
   },
   picker: {
     color: "#FFF",
+    borderRadius: 20,
   },
 });
 
 const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
-    fontSize: 16,
-    paddingVertical: 12,
+    fontSize: 15,
     paddingHorizontal: 175,
-    color: "#FFF",
-    borderRadius: 1000,
     backgroundColor: "transparent",
+    color: "#FFF",
+    alignItems: "center",
   },
 });

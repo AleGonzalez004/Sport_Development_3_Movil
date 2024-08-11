@@ -135,9 +135,13 @@ export default Carrito;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFF0",
     paddingTop: 50,
-    paddingHorizontal: 16,
+    width: "auto",
+  },
+  scrollViewStyle: {
+    flexGrow: 1,
+    width: "auto",
   },
   title: {
     fontSize: 24,

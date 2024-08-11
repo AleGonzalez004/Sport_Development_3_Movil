@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    padding: 15,
+    padding: 0,
   },
   texto: {
     color: "#FFF",
@@ -377,7 +377,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 350,
     height: 45,
-    borderRadius: 20,
+    borderRadius: 15,
     padding: 12,
     marginVertical: 10,
   },
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
   modalButton: {
     width: "100%",
     backgroundColor: "#16537E",
-    padding: 10,
+    paddingbo: 10,
     borderRadius: 20,
     alignItems: "center",
     marginVertical: 5,

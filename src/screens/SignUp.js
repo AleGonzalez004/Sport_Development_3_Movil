@@ -206,9 +206,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#16537E",
-    paddingTop: 55,
+    paddingTop: 30,
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
   ButtonVolver: {
     flexDirection: "row",
@@ -224,7 +225,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    padding: 15,
   },
   texto: {
     color: "#FFF",
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     width: 350,
     height: 45,
-    borderRadius: 20,
+    borderRadius: 15,
     padding: 12,
     marginVertical: 10,
   },

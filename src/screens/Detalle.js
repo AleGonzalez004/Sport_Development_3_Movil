@@ -315,8 +315,7 @@ export default function Detalle({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff0",
   },
   card: {
     backgroundColor: "#ffffff",
@@ -335,9 +334,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200,
-    borderRadius: 20,
-    marginBottom: 16,
+    height: 250,
+    borderRadius: 200,
+    marginBottom: 15,
   },
   text: {
     fontSize: 16,
@@ -353,13 +352,12 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 320,
-    marginVertical: 10,
+    marginRight: 295,
     marginTop: 20,
     backgroundColor: "#16537E",
     borderRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 19,
+    paddingVertical: 15,
+    paddingHorizontal:20,
   },
   cartButton: {
     marginTop: 20,
@@ -422,6 +420,7 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     flexGrow: 1,
+    width: "auto",
   },
   textInput: {
     height: 80,

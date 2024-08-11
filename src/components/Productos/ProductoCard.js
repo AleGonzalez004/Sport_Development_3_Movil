@@ -89,11 +89,12 @@ export default function ProductoCard({
 // Estilos para el componente ProductoCard
 const styles = StyleSheet.create({
   card: {
+    width: 330,
     backgroundColor: "#ffffff",
     borderRadius: 20,
-    padding: 16,
+    padding: 25,
     marginVertical: 12,
-    marginHorizontal: 16,
+    marginHorizontal: 15,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -113,10 +114,10 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   image: {
-    width: "65%",
-    height: 150,
-    borderRadius: 20,
-    marginBottom: 12,
+    width: 200,
+    height: 200,
+    borderRadius: 60,
+    marginBottom: 15,
   },
   imageContainer: {
     alignItems: "center",
