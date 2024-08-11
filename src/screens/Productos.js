@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginVertical: 5,
     alignItems: "center",
-    
   },
   container: {
     flex: 1,
@@ -188,6 +187,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
     backgroundColor: "#16537E",
+    marginBottom: 10,
   },
   card: {
     backgroundColor: "#FFF",
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   SafeAreaView:{
-    borderRadius: 20000,
+    borderRadius: 20,
   }
 });
 
