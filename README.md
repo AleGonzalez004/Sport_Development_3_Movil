@@ -1,4 +1,6 @@
-﻿* Dennis Alejandro Gonzalez Carrillo / 20220440
+﻿## Integrantes
+
+* Dennis Alejandro Gonzalez Carrillo / 20220440
 * Fernando Antonio Molina Paniagua / 20220418
 * Edgar Enrique Sarco Garcia / 20220082
 
