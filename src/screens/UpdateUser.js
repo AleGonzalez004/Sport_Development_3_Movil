@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 12,
     marginVertical: 10,
-},
+  },
   fechaSeleccionar: {
     fontSize: 14,
     color: "#16537E",
