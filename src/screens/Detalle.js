@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {StyleSheet,Text,View,Image,ActivityIndicator,Alert,TouchableOpacity,SafeAreaView,FlatList,ScrollView,TextInput,} from "react-native";
+import { StyleSheet, Text, View, Image, ActivityIndicator, Alert, TouchableOpacity, SafeAreaView, FlatList, ScrollView, TextInput, } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ModalCompra from "../components/Modales/ModalCompra";
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#16537E",
     borderRadius: 20,
     paddingVertical: 15,
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
   },
   cartButton: {
     marginTop: 20,
