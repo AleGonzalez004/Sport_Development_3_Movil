@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 295,
+    marginRight: "84%",
     marginTop: 20,
     backgroundColor: "#16537E",
     borderRadius: 20,

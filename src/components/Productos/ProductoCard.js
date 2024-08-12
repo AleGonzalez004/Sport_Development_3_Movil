@@ -89,7 +89,7 @@ export default function ProductoCard({
 // Estilos para el componente ProductoCard
 const styles = StyleSheet.create({
   card: {
-    width: 330,
+    width: "92%",
     backgroundColor: "#ffffff",
     borderRadius: 20,
     padding: 25,

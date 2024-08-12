@@ -173,13 +173,11 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
     marginVertical: 5,
-    alignItems: "center",
+
   },
   container: {
     flex: 1,
     backgroundColor: "#FFF0",
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: 20,
     paddingTop: Constants.statusBarHeight,
   },

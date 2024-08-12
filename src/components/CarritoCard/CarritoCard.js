@@ -117,7 +117,7 @@ export default CarritoCard;
 // Estilos para el componente CarritoCard
 const styles = StyleSheet.create({
   itemContainer: {
-    width: 330,
+    width: "92%",
     backgroundColor: "#ffffff",
     borderRadius: 20,
     padding: 25,
