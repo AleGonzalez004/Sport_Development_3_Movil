@@ -177,8 +177,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  CarritoCard: {
-  paddingHorizontal: 500,
-  marginVertical: 16,
-  },
+ 
 });

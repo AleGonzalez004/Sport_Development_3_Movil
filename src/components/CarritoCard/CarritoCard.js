@@ -116,29 +116,18 @@ export default CarritoCard;
 
 // Estilos para el componente CarritoCard
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#EAD8C0",
-    paddingTop: Constants.statusBarHeight,
-    paddingHorizontal: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginVertical: 16,
-    color: "#5C3D2E",
-  },
   itemContainer: {
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: "#fff",
+    width: 330,
+    backgroundColor: "#ffffff",
     borderRadius: 20,
+    padding: 25,
+    marginVertical: 12,
+    marginHorizontal: 15,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 2,
+    elevation: 5,
   },
   itemText: {
     fontSize: 16,
@@ -148,7 +137,7 @@ const styles = StyleSheet.create({
   modifyButton: {
     borderWidth: 1,
     borderColor: "#16537E",
-    borderRadius: 20,
+    borderRadius: 15,
     paddingVertical: 8,
     paddingHorizontal: 16,
     backgroundColor: "#16537E",
@@ -157,7 +146,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     borderWidth: 1,
     borderColor: "#000000",
-    borderRadius: 20,
+    borderRadius: 15,
     paddingVertical: 8,
     paddingHorizontal: 16,
     backgroundColor: "#000000",
