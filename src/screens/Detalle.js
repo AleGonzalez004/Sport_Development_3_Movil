@@ -179,9 +179,7 @@ export default function Detalle({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
-        <AntDesign name="arrowleft" size={20} color="white" />
-      </TouchableOpacity>
+      
 
       <ModalCompra
         visible={modalVisible}
@@ -193,6 +191,9 @@ export default function Detalle({ route, navigation }) {
       />
 
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <TouchableOpacity style={styles.ButtonVolver} onPress={volver}>
+        <AntDesign name="arrowleft" size={20} color="white" />
+      </TouchableOpacity>
         <View style={styles.card}>
           <Image
             source={{
@@ -356,7 +357,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: "5%",
     backgroundColor: "#16537E",
-    borderRadius: 20,
+    borderRadius: 15,
     paddingVertical: 15,
     paddingHorizontal: 18,
   },
