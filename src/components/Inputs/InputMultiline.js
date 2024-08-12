@@ -18,7 +18,7 @@ export default function InputMultiline({ placeHolder, valor, setTextChange }) {
 
 // Estilos para el componente InputMultiline
 const styles = StyleSheet.create({
-   Input: {
+  Input: {
     backgroundColor: "#FFF",
     color: "#16537E",
     fontWeight: "500",
