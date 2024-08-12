@@ -1,4 +1,4 @@
-import {StatusBar,StyleSheet,Text,View,TouchableOpacity,Alert,FlatList,SafeAreaView,Image,Modal,} from "react-native";
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Image, Modal, } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
     borderRadius: 20,
   },
-  SafeAreaView:{
+  SafeAreaView: {
     borderRadius: 20,
   }
 });
