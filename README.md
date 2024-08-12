@@ -11,10 +11,6 @@ Colocar la ip segun el equipo
 iniciar las dependencias tal cual el orden 
 
 
-## Repositorio
-
-https://github.com/AleGonzalez004/Sport_Development_3_Movil
-
 ## Dependencias
 
 * npm install
