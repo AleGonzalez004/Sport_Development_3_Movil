@@ -352,12 +352,13 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: "84%",
+    marginRight: "79%",
     marginTop: 20,
+    marginLeft: "5%",
     backgroundColor: "#16537E",
     borderRadius: 20,
     paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
   },
   cartButton: {
     marginTop: 20,

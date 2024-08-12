@@ -440,6 +440,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     marginBottom: 5,
     alignSelf: "flex-start",
-    marginLeft: 50,
+    marginLeft: "8%",
   },
 });
