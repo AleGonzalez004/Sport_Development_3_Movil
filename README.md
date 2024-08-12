@@ -8,7 +8,7 @@ Iniciar Base de datos que esta en el proyecto
 
 Colocar la ip segun el equipo 
 
-iniciar las dependencias tal cual el orden 
+Iniciar las dependencias tal cual el orden 
 
 
 ## Dependencias
@@ -32,7 +32,7 @@ iniciar las dependencias tal cual el orden
 
 ## Si el proyecto no corre en los dispositivos ejecutar el siguiente comando:
 
-npx expo install expo@latest
+* npx expo install expo@latest
 
 ## Licencia
 
