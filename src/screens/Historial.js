@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF0",
-    paddingTop: 50,
+    marginTop: Constants.statusBarHeight,
     width: "auto",
   },
   scrollViewStyle: {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 16,
+    marginVertical: 10,
     color: "#000000",
   },
   titleDetalle: {

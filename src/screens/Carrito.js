@@ -5,6 +5,7 @@ import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
 import CarritoCard from "../components/CarritoCard/CarritoCard";
 import ModalEditarCantidad from "../components/Modales/ModalEditarCantidad";
+import Constants from "expo-constants";
 
 const Carrito = ({ navigation }) => {
   // Estado para almacenar los detalles del carrito
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF0",
-    paddingTop: 50,
+    marginTop: Constants.statusBarHeight,
   },
   scrollViewStyle: {
     flexGrow: 1,
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 16,
+    marginVertical: 10,
     color: "#000000",
   },
   titleDetalle: {
@@ -173,9 +174,12 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
   containerButtons: {
-    marginVertical: 16,
+    backgroundColor: "#1245",
+    marginVertical: 15,
+    marginHorizontal: 76,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 15,
   },
 
 });

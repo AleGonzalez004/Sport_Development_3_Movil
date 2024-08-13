@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Image, Modal, } from "react-native";
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Image, Modal, ScrollView } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import * as Constantes from "../utils/constantes";
 import Buttons from "../components/Buttons/Button";
@@ -130,22 +130,21 @@ export default function Productos({ navigation }) {
         setCantidad={setCantidad}
       />
       <SafeAreaView style={styles.container}>
-        <View style={styles.pickerWrapper}>
-          <RNPickerSelect
-            style={pickerSelectStyles}
-            onValueChange={(value) => getProductos(value)}
-            placeholder={{ label: "Selecciona una categoría...", value: null }}
-            items={dataCategorias.map((categoria) => ({
-              label: categoria.nombre,
-              value: categoria.id_categoria,
-            }))}
-          />
-        </View>
-        <FlatList
-          data={dataProductos}
-          keyExtractor={(item) => item.id_producto}
-          renderItem={({ item }) => (
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.pickerWrapper}>
+            <RNPickerSelect
+              style={pickerSelectStyles}
+              onValueChange={(value) => getProductos(value)}
+              placeholder={{ label: "Selecciona una categoría...", value: null }}
+              items={dataCategorias.map((categoria) => ({
+                label: categoria.nombre,
+                value: categoria.id_categoria,
+              }))}
+            />
+          </View>
+          {dataProductos.map((item) => (
             <ProductoCard
+              key={item.id_producto}
               ip={ip}
               imagenProducto={item.imagen_producto}
               idProducto={item.id_producto}
@@ -159,13 +158,12 @@ export default function Productos({ navigation }) {
               }
               Detalle={() => Detalle(item.id_producto)}
             />
-          )}
-        />
+          ))}
+        </ScrollView>
       </SafeAreaView>
     </View>
   );
-}
-
+};
 const styles = StyleSheet.create({
   containerFlat: {
     flex: 1,
@@ -173,19 +171,17 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
     marginVertical: 5,
-
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFF0",
-    borderRadius: 20,
-    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#fff0",
   },
   pickerWrapper: {
     width: "100%",
     borderRadius: 20,
     backgroundColor: "#16537E",
     marginBottom: 10,
+    marginTop: Constants.statusBarHeight,
   },
   card: {
     backgroundColor: "#FFF",
@@ -286,28 +282,25 @@ const styles = StyleSheet.create({
     color: "#FFF",
     borderRadius: 20,
   },
-  linearGradient: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 120,
-    zIndex: 0,
-    borderRadius: 20,
-  },
-  SafeAreaView: {
-    borderRadius: 20,
-  }
 });
 
 const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 15,
     borderRadius: 20,
-    paddingHorizontal: 175,
-    paddingBottom: 15,
-    backgroundColor: "16537E",
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    backgroundColor: "#16537E",
     color: "#FFF",
-    alignItems: "center",
+  },
+  placeholder: {
+    color: '#FFF',
+    fontSize: 15,
+  },
+  viewContainer: {
+    borderRadius: 20,
+    backgroundColor: "#16537E",
+    paddingHorizontal: 12,
+    paddingVertical: 1,
   },
 });

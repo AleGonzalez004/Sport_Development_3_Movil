@@ -6,6 +6,7 @@ import ModalCompra from "../components/Modales/ModalCompra";
 import ProductoCard from "../components/Productos/ProductoCard";
 import * as Constantes from "../utils/constantes";
 import { useFocusEffect } from "@react-navigation/native";
+import Constants from "expo-constants";
 
 export default function Detalle({ route, navigation }) {
   const { idProducto } = route.params;
