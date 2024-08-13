@@ -79,7 +79,7 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/logo_azul.png")}
+        source={require("../../assets/user.png")}
         style={styles.image}
       />
       <Text style={styles.title}>Bienvenid@</Text>
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    marginBottom: 10,
   },
   button: {
     borderWidth: 2,
