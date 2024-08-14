@@ -378,8 +378,10 @@ const styles = StyleSheet.create({
     width: 320,
     height: 45,
     borderRadius: 15,
-    padding: 12,
+    padding: 10,
     marginVertical: 10,
+    borderWidth: 3,
+    borderColor: "#16537E",
   },
   fechaSeleccionar: {
     fontSize: 14,

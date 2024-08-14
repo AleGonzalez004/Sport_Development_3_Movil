@@ -10,7 +10,6 @@ export default function InputMultiline({ placeHolder, valor, setTextChange }) {
       value={valor}
       onChangeText={setTextChange}
       placeholderTextColor={"#16537E"}
-      multiline={true}
       numberOfLines={4}
     />
   );
@@ -29,5 +28,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 3,
+    borderColor: "#16537E",
   },
 });
