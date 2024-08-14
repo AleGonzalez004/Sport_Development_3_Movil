@@ -112,11 +112,12 @@ const styles = StyleSheet.create({
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 310,
-    marginTop: 10,
+    marginRight: "80%",
+    marginTop: 30,
+    marginLeft: "5%",
     backgroundColor: "#16537E",
-    borderRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 12,
+    borderRadius: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 18,
   },
 });
