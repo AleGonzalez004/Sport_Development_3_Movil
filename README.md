@@ -16,6 +16,9 @@ Iniciar las dependencias tal cual el orden
 ## Dependencias
 
 * npm install
+* expo build:android
+* npm install -g expo-cli
+* npm install -g eas-cli
 * npm install @react-navigation/stack
 * npm i @react-navigation/native
 * npm i @react-navigation/native-stack
@@ -35,6 +38,19 @@ Iniciar las dependencias tal cual el orden
 ## Si el proyecto no corre en los dispositivos ejecutar el siguiente comando:
 
 * npx expo install expo@latest
+
+## Comando crear link apk:
+
+* npx eas-cli build --platform android (este me dio una app punto .aab supongo que es para desarrollo)
+
+* eas build --platform android --profile preview (este es para una apk una vista previa)
+
+
+## Enlace de descarga:
+
+https://expo.dev/artifacts/eas/ahcJUrzwmcuji4QzCBD5tr.aab (.aab)
+
+https://expo.dev/accounts/alegonzalez002/projects/cliente-app-sport-development/builds/5271f732-3cd7-4e55-b6c2-50e52b3c2ea9 (.apk)
 
 ## Licencia
 

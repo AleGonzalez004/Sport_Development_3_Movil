@@ -13,18 +13,25 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],        
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alegonzalez002.clienteappsportdevelopment"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo_azul.png",
         "backgroundColor": "#FFF"
-      }
+      },
+      "package": "com.alegonzalez002.clienteappsportdevelopment"
     },
     "web": {
       "favicon": "./assets/logo_azul.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "962cb177-881e-4918-bd5d-092dfa058043"
+      }
     }
   }
 }
