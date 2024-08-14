@@ -45,7 +45,6 @@ Iniciar las dependencias tal cual el orden
 
 * eas build --platform android --profile preview (este es para una apk una vista previa)
 
-
 ## Enlace de descarga:
 
 https://expo.dev/artifacts/eas/ahcJUrzwmcuji4QzCBD5tr.aab (.aab)

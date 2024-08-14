@@ -318,6 +318,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff0",
+    paddingTop: Constants.statusBarHeight,
   },
   card: {
     backgroundColor: "#ffffff",

@@ -129,7 +129,7 @@ export default function Productos({ navigation }) {
         cantidad={cantidad}
         setCantidad={setCantidad}
       />
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.pickerWrapper}>
             <RNPickerSelect
@@ -167,7 +167,6 @@ export default function Productos({ navigation }) {
 const styles = StyleSheet.create({
   containerFlat: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight,
     width: "100%",
     borderRadius: 20,
     marginVertical: 5,
@@ -175,13 +174,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff0",
+    paddingTop: Constants.statusBarHeight,
   },
   pickerWrapper: {
     width: "100%",
     borderRadius: 20,
     backgroundColor: "#16537E",
     marginBottom: 10,
-    marginTop: Constants.statusBarHeight,
+    marginTop: 20,
   },
   card: {
     backgroundColor: "#FFF",
