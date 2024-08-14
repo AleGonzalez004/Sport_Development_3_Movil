@@ -177,11 +177,12 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   pickerWrapper: {
-    width: "100%",
+    width: "90%",
     borderRadius: 20,
     backgroundColor: "#16537E",
     marginBottom: 10,
     marginTop: 20,
+    marginLeft: 17,
   },
   card: {
     backgroundColor: "#FFF",
@@ -288,7 +289,7 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 15,
     borderRadius: 20,
-    paddingHorizontal: 12,
+    paddingHorizontal: 15,
     paddingVertical: 5,
     backgroundColor: "#16537E",
     color: "#FFF",
@@ -300,7 +301,7 @@ const pickerSelectStyles = StyleSheet.create({
   viewContainer: {
     borderRadius: 20,
     backgroundColor: "#16537E",
-    paddingHorizontal: 12,
+    paddingHorizontal: 15,
     paddingVertical: 1,
   },
 });

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Alert, Image } from "react-native";
 import Buttons from "../components/Buttons/Button";
 import * as Constantes from "../utils/constantes";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Home({ navigation }) {
   const [nombre, setNombre] = useState(null);
@@ -72,9 +73,11 @@ export default function Home({ navigation }) {
   };
 
   // Uso del React Hook useEffect para cargar los datos del usuario al montar el componente
-  useEffect(() => {
-    getUser();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getUser();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
