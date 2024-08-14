@@ -64,6 +64,7 @@ export default function Recuperacion({ navigation }) {
         value={clienteEmail}
         onChangeText={setEmail}
         keyboardType="email-address"
+        placeholderTextColor="#16537E"
       />
       <TouchableOpacity style={styles.button} onPress={enviarCodigo}>
         <Text style={styles.buttonText}>Enviar código</Text>

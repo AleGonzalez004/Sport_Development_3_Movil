@@ -91,6 +91,7 @@ export default function Recuperacion({ navigation }) {
         placeholder="Código"
         value={code}
         onChangeText={setCode}
+        placeholderTextColor="#16537E"
       />
       <TextInput
         style={styles.input}
@@ -98,6 +99,7 @@ export default function Recuperacion({ navigation }) {
         secureTextEntry
         value={newPassword}
         onChangeText={setNewPassword}
+        placeholderTextColor="#16537E"
       />
       <TextInput
         style={styles.input}
@@ -105,6 +107,7 @@ export default function Recuperacion({ navigation }) {
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
+        placeholderTextColor="#16537E"
       />
       <TouchableOpacity style={styles.button} onPress={cambiarContrasena}>
         <Text style={styles.buttonText}>Guardar</Text>

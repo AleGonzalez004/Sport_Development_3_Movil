@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   containerlog: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#16537E",
+    
     borderRadius: 20,
     padding: 10,
   },
@@ -168,6 +168,6 @@ const styles = StyleSheet.create({
   image: {
     width: 75,
     height: 75,
-    marginBottom: 10,
+    marginBottom: 15,
   },
 });

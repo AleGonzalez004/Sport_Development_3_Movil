@@ -28,5 +28,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 3,
+    borderColor: "#16537E",
   },
 });
