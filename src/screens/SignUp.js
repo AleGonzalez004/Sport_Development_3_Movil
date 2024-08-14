@@ -18,6 +18,7 @@ import MaskedInputTelefono from "../components/Inputs/MaskedInputTelefono";
 import MaskedInputDui from "../components/Inputs/MaskedInputDui";
 import InputEmail from "../components/Inputs/InputEmail";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Constants from "expo-constants";
 
 export default function SignUp({ navigation }) {
   const ip = Constantes.IP;
@@ -127,10 +128,10 @@ export default function SignUp({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
       <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.offscroll}></View>
         <Text style={styles.texto}>Registrar Usuario</Text>
         <Image source={require("../img/logo.png")} style={styles.image} />
@@ -195,8 +196,9 @@ export default function SignUp({ navigation }) {
           setValor={confirmarClave}
           setTextChange={setConfirmarClave}
         />
-
+        <View style={styles.espacio}></View>
         <Buttons textoBoton="Registrar Usuario" accionBoton={handleCreate} />
+        <View style={styles.espacio}></View>
       </ScrollView>
     </View>
   );
@@ -206,17 +208,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#16537E",
-    paddingTop: 20,
     width: "100%",
+    paddingTop: Constants.statusBarHeight,
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 310,
-    marginTop: 15,
-    marginBottom: 20,
+    marginRight: "80%",
+    marginTop: 30,
+    marginLeft: "5%",
     backgroundColor: "#16537E",
-    borderRadius: 20,
-    paddingHorizontal: 15,
+    borderRadius: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 18,
   },
   scrollViewStyle: {
     backgroundColor: "#16537E",
@@ -254,4 +257,7 @@ const styles = StyleSheet.create({
     height: 75,
     marginBottom: 1,
   },
+  espacio: {
+    marginVertical: 10,
+  }
 });

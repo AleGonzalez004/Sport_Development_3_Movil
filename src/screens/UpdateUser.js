@@ -19,6 +19,7 @@ import MaskedInputTelefono from "../components/Inputs/MaskedInputTelefono";
 import MaskedInputDui from "../components/Inputs/MaskedInputDui";
 import InputEmail from "../components/Inputs/InputEmail";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Constants from "expo-constants";
 
 export default function UserProfile({ navigation }) {
   const ip = Constantes.IP;
@@ -208,10 +209,10 @@ export default function UserProfile({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
       <TouchableOpacity style={styles.ButtonVolver} onPress={volverInicio}>
         <AntDesign name="arrowleft" size={20} color="white" />
       </TouchableOpacity>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <Text style={styles.texto}>Editar Perfil</Text>
         <Image source={require("../img/user.png")} style={styles.image} />
         <Text style={styles.label}>Nombre:</Text>
@@ -271,14 +272,14 @@ export default function UserProfile({ navigation }) {
 
         <Text style={styles.label}>Teléfono:</Text>
         <MaskedInputTelefono telefono={telefono} setTelefono={setTelefono} />
-
+        <View style={styles.espacio}></View>
         <Buttons textoBoton="Editar perfil" accionBoton={handleEdit} />
-
+        <View style={styles.espacio}></View>
         <Buttons
           textoBoton="Cambiar contraseña"
           accionBoton={() => setModalVisible(true)}
         />
-
+         <View style={styles.espacio}></View>
         {/* Modal para cambiar la contraseña */}
         <Modal
           transparent={true}
@@ -340,16 +341,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#16537E",
-    paddingTop: 35,
+    paddingTop: Constants.statusBarHeight,
   },
   ButtonVolver: {
     flexDirection: "row",
-    marginRight: 310,
-    marginTop: 15,
-    marginBottom: 20,
+    marginRight: "80%",
+    marginTop: 30,
+    marginLeft: "5%",
     backgroundColor: "#16537E",
-    borderRadius: 20,
-    paddingHorizontal: 15,
+    borderRadius: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 18,
   },
   scrollViewStyle: {
     backgroundColor: "#16537E",
@@ -442,4 +444,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginLeft: "8%",
   },
+  espacio: {
+    marginVertical: 10,
+  }
 });

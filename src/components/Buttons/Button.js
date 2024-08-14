@@ -15,8 +15,8 @@ export default function Buttons({ textoBoton, accionBoton }) {
 // Estilos para el componente de botón
 const styles = StyleSheet.create({
   button: {
-    borderWidth: 1,
-    borderColor: "#16537E",
+    borderWidth: 2,
+    borderColor: "#FFF",
     width: Platform.OS === "ios" ? 200 : 200,
     borderRadius: 15,
     backgroundColor: "#16537E",
