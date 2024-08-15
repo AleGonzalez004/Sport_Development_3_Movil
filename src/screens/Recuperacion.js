@@ -60,7 +60,7 @@ export default function Recuperacion({ navigation }) {
       <Text style={styles.texto}>Recuperar Contraseña</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="Correo:"
         value={clienteEmail}
         onChangeText={setEmail}
         keyboardType="email-address"

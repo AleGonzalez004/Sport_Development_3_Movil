@@ -20,6 +20,7 @@ import MaskedInputDui from "../components/Inputs/MaskedInputDui";
 import InputEmail from "../components/Inputs/InputEmail";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Constants from "expo-constants";
+import LinearGradient from "react-native-linear-gradient";
 
 export default function UserProfile({ navigation }) {
   const ip = Constantes.IP;
@@ -227,9 +228,9 @@ export default function UserProfile({ navigation }) {
           valor={apellido}
           setTextChange={setApellido}
         />
-        <Text style={styles.label}>Email:</Text>
+        <Text style={styles.label}>Correo:</Text>
         <InputEmail
-          placeHolder="Email Cliente"
+          placeHolder="Correo Cliente"
           valor={email}
           setTextChange={setEmail}
         />
