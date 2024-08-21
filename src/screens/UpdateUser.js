@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     marginBottom: 5,
     alignSelf: "flex-start",
-    marginLeft: "8%",
+    marginLeft: "12%",
   },
   espacio: {
     marginVertical: 10,
