@@ -23,6 +23,7 @@ export default function Recuperacion({ navigation }) {
     navigation.navigate("Recuperacion");
   };
 
+  //Metodo para cambiar la contraseña
   const cambiarContrasena = async () => {
     if (!code.trim() || !newPassword.trim() || !confirmPassword.trim()) {
       Alert.alert("Por favor, completa todos los campos.");

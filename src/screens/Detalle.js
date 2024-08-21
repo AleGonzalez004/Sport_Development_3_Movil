@@ -32,6 +32,7 @@ export default function Detalle({ route, navigation }) {
     setNombreProductoModal(nombre);
   };
 
+  //Metodo para obtener los detalles de un solo producto
   const obtenerDetallesProducto = async () => {
     try {
       const formData = new FormData();
@@ -64,6 +65,7 @@ export default function Detalle({ route, navigation }) {
     }
   };
 
+  //Metodo para obtener los comentarios y la calificacion de el producto
   const obtenerComentariosYCalificacion = async () => {
     try {
       const formData = new FormData();
@@ -111,6 +113,7 @@ export default function Detalle({ route, navigation }) {
     }
   };
 
+  //Metodo para agregar comentario
   const agregarComentario = async () => {
     if (!nuevoComentario || nuevaCalificacion === 0) {
       Alert.alert("Error", "Por favor, ingrese un comentario y calificación.");

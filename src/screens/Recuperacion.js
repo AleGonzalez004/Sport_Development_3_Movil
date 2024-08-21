@@ -20,6 +20,7 @@ export default function Recuperacion({ navigation }) {
     navigation.navigate("Sesion");
   };
 
+  //Metodo para enviar codigo de recuperacion
   const enviarCodigo = async () => {
     if (!clienteEmail.trim()) {
       Alert.alert("Por favor, ingresa tu correo electrónico.");

@@ -78,6 +78,7 @@ export default function UserProfile({ navigation }) {
     showMode("date");
   };
 
+  //Metodo par obtener el usuario y leer sus datos
   const getUser = async () => {
     try {
       const response = await fetch(
@@ -110,6 +111,7 @@ export default function UserProfile({ navigation }) {
     }
   };
 
+  //Metodo para editar los datos de el usuario
   const handleEdit = async () => {
     try {
       if (

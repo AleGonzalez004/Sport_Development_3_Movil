@@ -19,10 +19,6 @@ const Carrito = ({ navigation }) => {
   // IP del servidor
   const ip = Constantes.IP;
 
-  // Función para navegar hacia atrás a la pantalla de productos
-  const backProducts = () => {
-    navigation.navigate("Productos");
-  };
 
   // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
   useFocusEffect(
@@ -176,7 +172,7 @@ const styles = StyleSheet.create({
   containerButtons: {
     backgroundColor: "#1245",
     marginVertical: 15,
-    marginHorizontal: 76,
+    marginHorizontal: "25%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
