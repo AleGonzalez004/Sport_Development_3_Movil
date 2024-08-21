@@ -47,7 +47,7 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require("../img/logo.png")} style={styles.image} />
-      <ActivityIndicator size="large" color="#FFF" />
+      <ActivityIndicator size={{ width: 150, height: 150 }} color="#FFF" />
     </View>
   );
 };
