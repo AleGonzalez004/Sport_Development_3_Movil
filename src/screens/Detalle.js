@@ -22,6 +22,7 @@ export default function Detalle({ route, navigation }) {
   const [nuevoComentario, setNuevoComentario] = useState("");
   const [nuevaCalificacion, setNuevaCalificacion] = useState(0);
 
+  //Navegacion para volver
   const volver = () => {
     navigation.navigate("TabNavigator");
   };

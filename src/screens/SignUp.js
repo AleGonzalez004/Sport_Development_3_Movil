@@ -113,7 +113,7 @@ export default function SignUp({ navigation }) {
       const data = await response.json();
       if (data.status) {
         Alert.alert("Datos Guardados correctamente");
-        navigation.navigate("Sesion");
+        navigation.navigate("SignIn");
       } else {
         Alert.alert("Error", data.error);
       }
@@ -122,8 +122,9 @@ export default function SignUp({ navigation }) {
     }
   };
 
+  //Navegacion para volver
   const volverInicio = () => {
-    navigation.navigate("Sesion");
+    navigation.navigate("SignIn");
   };
 
   return (

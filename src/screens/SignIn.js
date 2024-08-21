@@ -14,7 +14,7 @@ import Buttons from "../components/Buttons/Button";
 import * as Constantes from "../utils/constantes";
 import { useFocusEffect } from "@react-navigation/native";
 
-export default function Sesion({ navigation }) {
+export default function SignIn({ navigation }) {
   const ip = Constantes.IP;
 
   // Estado para controlar la visibilidad de la contraseña

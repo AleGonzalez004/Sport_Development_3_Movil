@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
       const data = await response.json();
       if (data.status) {
         // Si la solicitud es exitosa, navegar a la pantalla de Sesión
-        navigation.navigate("Sesion");
+        navigation.navigate("SignIn");
       } else {
         // Si hay un error, mostrar una alerta
         Alert.alert("Error", data.error);
@@ -32,18 +32,9 @@ export default function Home({ navigation }) {
     }
   };
 
-  // Función para navegar a la pantalla de Productos
-  const irActualizar = () => {
-    navigation.navigate("Productos");
-  };
-
   // Función para navegar a la pantalla de Editar Usuario
   const EditUser = () => {
     navigation.navigate("UpdateUser");
-  };
-
-  const Historial = () => {
-    navigation.navigate("Historial");
   };
 
   const getUser = async () => {
@@ -94,6 +85,7 @@ export default function Home({ navigation }) {
     </View>
   );
 }
+
 //Estilos
 const styles = StyleSheet.create({
   container: {

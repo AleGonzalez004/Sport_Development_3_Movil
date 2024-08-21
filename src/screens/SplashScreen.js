@@ -12,7 +12,7 @@ const SplashScreen = ({ navigation }) => {
       validarSesion(); // Llama a la función validarSesion
     // Simular una carga o proceso
       // Navegar a la siguiente pantalla después de cierto tiempo
-    }, 5000); // Tiempo de carga simulado en milisegundos (3 segundos en este caso)
+    }, 3000); // Tiempo de carga simulado en milisegundos (3 segundos en este caso)
 
     // El return en useEffect se usa para limpiar efectos secundarios, aunque en este caso no es necesario
   }, [navigation]);
@@ -34,7 +34,7 @@ const SplashScreen = ({ navigation }) => {
       navigation.navigate("TabNavigator");
       console.log("Se ingresa con la sesión activa");
     } else {
-      navigation.navigate("Sesion");
+      navigation.navigate("SignIn");
       console.log("No hay sesión activa");
       return;
     }

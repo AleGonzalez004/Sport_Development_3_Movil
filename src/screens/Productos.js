@@ -21,10 +21,6 @@ export default function Productos({ navigation }) {
   const [idProductoModal, setIdProductoModal] = useState("");
   const [nombreProductoModal, setNombreProductoModal] = useState("");
 
-  const volverInicio = async () => {
-    navigation.navigate("Home");
-  };
-
   const Detalle = (idProducto) => {
     navigation.navigate("Detalle", { idProducto });
   };
@@ -35,6 +31,7 @@ export default function Productos({ navigation }) {
     setNombreProductoModal(nombre);
   };
 
+  //Metodo para obtener todos los productos
   const getProductos = async (idCategoriaSelect = 1) => {
     try {
       if (idCategoriaSelect <= 0) {

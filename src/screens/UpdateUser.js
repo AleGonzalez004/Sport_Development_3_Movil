@@ -70,6 +70,7 @@ export default function UserProfile({ navigation }) {
     setMode(currentMode);
   };
 
+  //Navegacion para volver
   const volverInicio = () => {
     navigation.navigate("Home");
   };

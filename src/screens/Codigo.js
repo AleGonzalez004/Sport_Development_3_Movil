@@ -19,6 +19,7 @@ export default function Recuperacion({ navigation }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  //Navegacion para regresar
   const volverInicio = async () => {
     navigation.navigate("Recuperacion");
   };
@@ -64,7 +65,7 @@ export default function Recuperacion({ navigation }) {
         const result = JSON.parse(text);
         if (result.status) {
           Alert.alert("Éxito", "Tu contraseña ha sido cambiada.");
-          navigation.navigate("Sesion");
+          navigation.navigate("SignIn");
         } else {
           Alert.alert(
             "Error",

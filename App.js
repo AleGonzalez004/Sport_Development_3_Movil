@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Importa las pantallas necesarias
 import SplashScreen from './src/screens/SplashScreen';
-import Sesion from './src/screens/Sesion';
+import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
 import UpdateUser from './src/screens/UpdateUser';
 import TabNavigator from './src/tabNavigator/TabNavigator';
@@ -27,8 +27,8 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name='Sesion'
-          component={Sesion}
+          name='SignIn'
+          component={SignIn}
           options={{ headerShown: false }}
         />
         <Stack.Screen
