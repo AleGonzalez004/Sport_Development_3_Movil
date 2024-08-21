@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './src/screens/SplashScreen';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
-import UpdateUser from './src/screens/UpdateUser';
+import EditUser from './src/screens/EditUser';
 import TabNavigator from './src/tabNavigator/TabNavigator';
 import Recuperacion from './src/screens/Recuperacion';
 import Historial from './src/screens/Historial';
@@ -37,8 +37,8 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name='UpdateUser'
-          component={UpdateUser}
+          name='EditUser'
+          component={EditUser}
           options={{ headerShown: false }}
         />
         <Stack.Screen

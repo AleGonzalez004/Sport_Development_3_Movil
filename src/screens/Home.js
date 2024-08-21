@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
 
   // Función para navegar a la pantalla de Editar Usuario
   const EditUser = () => {
-    navigation.navigate("UpdateUser");
+    navigation.navigate("EditUser");
   };
 
   const getUser = async () => {

@@ -449,7 +449,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     marginBottom: 5,
     alignSelf: "flex-start",
-    marginLeft: "12%",
+    marginLeft: "10%",
   },
   espacio: {
     marginVertical: 10,
