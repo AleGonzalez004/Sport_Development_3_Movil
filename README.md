@@ -15,23 +15,23 @@ Iniciar las dependencias tal cual el orden
 
 ## Dependencias
 
-* npm install
-* npm install -g expo-cli
-* npm install -g eas-cli
-* npm install @react-navigation/stack
+* npm i
+* npm i -g expo-cli
+* npm i -g eas-cli
+* npm i react-native@0.74.3
+* npm i @expo/vector-icons
+* npm i expo-linear-gradient
+* npm i expo-status-bar@~1.12.1
+* npm i expo-web-browser@~13.0.3
+* npm i react-native-masked-text
+* npm i react-native-vector-icons
+* npm i react-native-picker-select
+* npm i @react-navigation/stack
 * npm i @react-navigation/native
+* npm i @react-navigation/bottom-tabs
 * npm i @react-navigation/native-stack
-* npm install @react-native-community/datetimepicker --save
-* npm install react-native-picker-select
-* npm install react-native-vector-icons
-* npm install @expo/vector-icons
-* npm install react-native-masked-text
-* npm install @react-navigation/bottom-tabs
-* npm install @react-native-community/datetimepicker@8.0.1
-* npm install expo-status-bar@~1.12.1
-* npm install expo-web-browser@~13.0.3
-* npm install react-native@0.74.3
-* npm install expo-linear-gradient
+* npm i @react-native-community/datetimepicker@8.0.1
+* npm i @react-native-community/datetimepicker --save
 * npx expo start
 
 ## Si el proyecto no corre en los dispositivos ejecutar el siguiente comando:
@@ -60,21 +60,21 @@ Puedes utilizar, modificar y compartir este trabajo de acuerdo con los términos
 
 ## Dependencias para copiar y pegar
 
-npm install
-npm install -g expo-cli
-npm install -g eas-cli
-npm install @react-navigation/stack
+npm i
+npm i -g expo-cli
+npm i -g eas-cli
+npm i react-native@0.74.3
+npm i @expo/vector-icons
+npm i expo-linear-gradient
+npm i expo-status-bar@~1.12.1
+npm i expo-web-browser@~13.0.3
+npm i react-native-masked-text
+npm i react-native-vector-icons
+npm i react-native-picker-select
+npm i @react-navigation/stack
 npm i @react-navigation/native
+npm i @react-navigation/bottom-tabs
 npm i @react-navigation/native-stack
-npm install @react-native-community/datetimepicker --save
-npm install react-native-picker-select
-npm install react-native-vector-icons
-npm install @expo/vector-icons
-npm install react-native-masked-text
-npm install @react-navigation/bottom-tabs
-npm install @react-native-community/datetimepicker@8.0.1
-npm install expo-status-bar@~1.12.1
-npm install expo-web-browser@~13.0.3
-npm install react-native@0.74.3
-npm install expo-linear-gradient
+npm i @react-native-community/datetimepicker@8.0.1
+npm i @react-native-community/datetimepicker --save
 npx expo start
