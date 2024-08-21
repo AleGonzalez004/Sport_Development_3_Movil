@@ -26,8 +26,6 @@ export default function Sesion({ navigation }) {
   // Efecto para validar la sesión al cargar la pantalla o al enfocarse en ella
   useFocusEffect(
     React.useCallback(() => {
-      validarSesion(); // Llama a la función validarSesion
-
       // Limpia los campos cuando se desenfoca la pantalla
       return () => {
         setUsuario("");
@@ -35,32 +33,6 @@ export default function Sesion({ navigation }) {
       };
     }, [])
   );
-
-  // Función para validar la sesión del usuario
-  const validarSesion = async () => {
-    try {
-      const response = await fetch(
-        `${ip}/Sport_Development_3/api/services/public/cliente.php?action=getUser`,
-        {
-          method: "GET",
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.status === 1) {
-        // Si hay una sesión activa, navegar a la pantalla TabNavigator
-        navigation.navigate("TabNavigator");
-        console.log("Se ingresa con la sesión activa");
-      } else {
-        console.log("No hay sesión activa");
-        return;
-      }
-    } catch (error) {
-      console.error(error);
-      Alert.alert("Error", "Ocurrió un error al validar la sesión");
-    }
-  };
 
   // Función para manejar el inicio de sesión
   const handlerLogin = async () => {
