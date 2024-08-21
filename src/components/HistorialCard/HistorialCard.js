@@ -13,30 +13,30 @@ import Constants from "expo-constants";
 import * as Constantes from "../../utils/constantes";
 import { FontAwesome } from "@expo/vector-icons";
 
-// Componente CarritoCard que recibe varias props para gestionar los elementos del carrito
-const CarritoCard = ({
+// Componente HistorialCard que recibe varias props para gestionar los elementos del Historial
+const HistorialCard = ({
   item,
   imagenProducto,
   cargarCategorias,
   modalVisible,
   setModalVisible,
-  cantidadProductoCarrito,
-  setCantidadProductoCarrito,
+  cantidadProductoHistorial,
+  setCantidadProductoHistorial,
   accionBotonDetalle,
   idDetalle,
   setIdDetalle,
-  getDetalleCarrito,
-  updateDataDetalleCarrito,
+  getDetalleHistorial,
+  updateDataDetalleHistorial,
 }) => {
   const ip = Constantes.IP;
 
-  // Función para manejar la eliminación de un detalle del carrito
-  const handleDeleteDetalleCarrito = async (idDetalle) => {
+  // Función para manejar la eliminación de un detalle del Historial
+  const handleDeleteDetalleHistorial = async (idDetalle) => {
     try {
       // Mostrar un mensaje de confirmación antes de eliminar
       Alert.alert(
         "Confirmación",
-        "¿Estás seguro de que deseas eliminar este elemento del carrito?",
+        "¿Estás seguro de que deseas eliminar este elemento del Historial?",
         [
           {
             text: "Cancelar",
@@ -56,20 +56,20 @@ const CarritoCard = ({
               );
               const data = await response.json();
               if (data.status) {
-                Alert.alert("Datos eliminados correctamente del carrito");
+                Alert.alert("Datos eliminados correctamente del Historial");
                 // Llamar a la función de actualización para actualizar la lista
-                updateDataDetalleCarrito((prevData) =>
+                updateDataDetalleHistorial((prevData) =>
                   prevData.filter((item) => item.id_detalle !== idDetalle)
                 );
               } else {
-                Alert.alert("Error al eliminar del carrito", data.error);
+                Alert.alert("Error al eliminar del Historial", data.error);
               }
             },
           },
         ]
       );
     } catch (error) {
-      Alert.alert("Error al eliminar del carrito");
+      Alert.alert("Error al eliminar del Historial");
     }
   };
 
@@ -101,9 +101,9 @@ const CarritoCard = ({
   );
 };
 
-export default CarritoCard;
+export default HistorialCard;
 
-// Estilos para el componente CarritoCard
+// Estilos para el componente HistorialCard
 const styles = StyleSheet.create({
   container: {
     flex: 1,

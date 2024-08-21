@@ -162,6 +162,7 @@ export default function UserProfile({ navigation }) {
     }
   };
 
+  //Metodo para cambiar contraseña
   const handleChangePassword = async () => {
     if (claveNueva !== confirmarClave) {
       Alert.alert("Las contraseñas nuevas no coinciden");
