@@ -16,8 +16,9 @@ export default function Recuperacion({ navigation }) {
   const ip = Constantes.IP;
   const [clienteEmail, setEmail] = useState("");
 
-  const volverInicio = async () => {
-    navigation.navigate("SingIn");
+  //Navegacion para volver
+  const volverInicio = () => {
+    navigation.navigate("SignIn");
   };
 
   //Metodo para enviar codigo de recuperacion
