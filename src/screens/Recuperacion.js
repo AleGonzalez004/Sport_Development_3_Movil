@@ -17,7 +17,7 @@ export default function Recuperacion({ navigation }) {
   const [clienteEmail, setEmail] = useState("");
 
   const volverInicio = async () => {
-    navigation.navigate("Sesion");
+    navigation.navigate("SingIn");
   };
 
   //Metodo para enviar codigo de recuperacion
