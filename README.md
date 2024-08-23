@@ -4,6 +4,12 @@
 * Fernando Antonio Molina Paniagua / 20220418
 * Edgar Enrique Sarco Garcia / 20220082
 
+## Proyecto
+
+Descripción:
+
+Sport_Development es una innovadora aplicación móvil diseñada para los amantes del deporte que buscan productos de alta calidad y las mejores marcas deportivas en un solo lugar. Con una interfaz intuitiva y fácil de usar, esta aplicación permite a los usuarios explorar, comparar y comprar artículos deportivos desde la comodidad de su dispositivo móvil.
+
 ## Pasos
 
 Iniciar Base de datos que esta en el proyecto
