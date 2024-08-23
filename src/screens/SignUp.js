@@ -63,6 +63,7 @@ export default function SignUp({ navigation }) {
     showMode("date");
   };
 
+  //Metodo crear cuenta
   const handleCreate = async () => {
     try {
       const fechaMinima = new Date();
