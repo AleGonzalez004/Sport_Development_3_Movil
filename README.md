@@ -52,11 +52,11 @@ Iniciar las dependencias tal cual el orden
 
 * npx eas build:configure
 
-* npx eas build --p android --profile preview (este es para una apk una vista previa)
+* npx eas build --platform android --profile preview (este es para una apk una vista previa android)
 
 ## Enlace de descarga:
 
-https://expo.dev/accounts/alegonzalez002/projects/cliente-app-sport-development/builds/5271f732-3cd7-4e55-b6c2-50e52b3c2ea9 (.apk)
+https://expo.dev/accounts/alegonzalez002/projects/cliente-app-sport-development/builds/a7286ed7-d61a-42c9-b6d1-eea2c4b11483 (.apk)
 
 ## Licencia
 
