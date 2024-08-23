@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   containerButtons: {
     backgroundColor: "#1245",
     marginVertical: 15,
-    marginHorizontal: "25%",
+    marginHorizontal: "21%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,

@@ -278,7 +278,7 @@ export default function UserProfile({ navigation }) {
         <Text style={styles.label}>Teléfono:</Text>
         <MaskedInputTelefono telefono={telefono} setTelefono={setTelefono} />
         <View style={styles.espacio}></View>
-        <Buttons textoBoton="Editar perfil" accionBoton={handleEdit} />
+        <Buttons textoBoton="Guardar cambios" accionBoton={handleEdit} />
         <View style={styles.espacio}></View>
         <Buttons
           textoBoton="Cambiar contraseña"
